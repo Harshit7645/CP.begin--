@@ -1,0 +1,1 @@
+{"name":"Local: 828C","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\828C.cpp","tests":[{"id":1665931077667,"input":"6\n5 r\nrggry\n1 g\ng\n3 r\nrrg\n5 y\nyrrgy\n7 r\nrgrgyrg\n9 y\nrrrgyyygy\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\828C.cpp","group":"local","local":true}

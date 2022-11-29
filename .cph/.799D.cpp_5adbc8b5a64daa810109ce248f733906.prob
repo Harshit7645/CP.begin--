@@ -1,0 +1,1 @@
+{"name":"Local: 799D","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\799D.cpp","tests":[{"id":1665037507729,"input":"6\n03:12 360\n00:00 1\n13:22 2\n15:15 10\n11:11 1440\n22:30 27","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\799D.cpp","group":"local","local":true}
