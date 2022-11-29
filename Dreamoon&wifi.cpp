@@ -27,21 +27,36 @@ int main()
     string s1,s2;
     cin>>s1>>s2;
     ll n=s1.length();
-    double p1=0,n1=0,p2=0,n2=0,q=0,prob=0;
+    ll p1=0,n1=0,p2=0,n2=0,q=0;
     rep(i,0,n)
     {
         if(s1[i]=='+')
         p1++;
-        if(s1[i]=='-')
+        else if(s1[i]=='-')
         n1++;
         if(s2[i]=='+')
         p2++;
-        if(s2[i]=='-')
+        else if(s2[i]=='-')
         n2++;
-        if(s2[i]=='?')
+        else if(s2[i]=='?')
         q++;
     }
-    double temp1=abs(p2-p1)-abs(n2-n1);
-    prob=(nCr(q,temp1))*fact(q-temp1)/pow(2,q);
-    cout<<prob<<" "<<endl;
+    ll net1=(p1-n1),net2=(p2-n2);
+    ll diff=(net1-net2);
+    double ans=0;
+    if((q+diff)%2!=0 || (abs(diff))>q)
+    {
+        ans=0;
+    }
+    else
+    {
+        ll m = (q+abs(diff))/2 ;
+        int c = 1 ;
+        for(int i=0;i<m;i++)
+            c *= q-i ;
+        for(int i=2;i<=m;i++)
+            c /= i ;
+        ans = (double)c/pow(2,q);
+    }
+    printf("%0.12f\n" ,ans);
 }
