@@ -13,17 +13,20 @@ int main()
     cin>>t;
     while(t--)
     {
-        ll n;
-        cin>>n;
-        ll arr[n];
-        rep(i,0,n)
+        string s;
+        cin>>s;
+        ll n=s.length();
+        if(n%2==0)
         {
-            cin>>arr[i];
+            string s1,s2;
+            s1=s.substr(0,n/2);
+            s2=s.substr(n/2,n/2);
+            if(s1==s2)
+            PYES;
+            else
+            PNO;
         }
-        
-        rep(i,1,10e9)
-        {
-
-        }
-    }
+        else
+        PNO;
+    }    
 }

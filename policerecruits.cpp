@@ -9,21 +9,27 @@ typedef long long ll;
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
+    ll n;
+    cin>>n;
+    ll arr[n];
+    rep(i,0,n)
     {
-        ll n;
-        cin>>n;
-        ll arr[n];
-        rep(i,0,n)
+        cin>>arr[i];
+    }
+    ll s=0,ans=0;
+    rep(i,0,n)
+    {
+        if(arr[i]>0)
+        s+=arr[i];
+        else if(arr[i]<0 && s>0)
         {
-            cin>>arr[i];
+            s+=arr[i];
         }
-        
-        rep(i,1,10e9)
+        else
         {
-
+            s=0;
+            ans++;
         }
     }
+    cout<<ans<<endl;
 }

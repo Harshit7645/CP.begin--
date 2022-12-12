@@ -15,15 +15,19 @@ int main()
     {
         ll n;
         cin>>n;
-        ll arr[n];
+        ll arr[n],maxdiff=0;
+        map<ll,ll>m;
         rep(i,0,n)
         {
             cin>>arr[i];
+            m[arr[i]]++;
         }
-        
-        rep(i,1,10e9)
+        sort(arr,arr+n);
+        if(m.size()==1)
         {
-
+            cout<<n*(n-1)<<endl;
         }
-    }
+        else
+        cout<<m[arr[0]]*m[arr[n-1]]*2<<endl;
+    }    
 }
