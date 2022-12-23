@@ -20,6 +20,7 @@ ll nCr(ll n,ll r)
 {
     return (fact(n)/((fact (r))*(fact(n-r))));
 }
+
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -27,6 +28,31 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        if(n==1 || n==2)
+        {
+            cout<<n<<endl;
+            continue;
+        }
+        else
+        {
+            char ch='\0';
+            ch=s[n/2];
+            ll ans=0;
+            rep(i,n/2,n)
+            {
+                if(s[i]==ch)
+                ans++;
+                else
+                break;
+            }
+            if(n%2==1)
+            cout<<2*ans-1<<endl;
+            else
+            cout<<2*ans<<endl;
+        }
     }
 }

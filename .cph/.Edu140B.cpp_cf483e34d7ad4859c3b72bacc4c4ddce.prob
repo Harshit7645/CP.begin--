@@ -1,0 +1,1 @@
+{"name":"Local: Edu140B","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\Edu140B.cpp","tests":[{"id":1671202635086,"input":"4\n3\n1 2 3\n3\n1 2 2\n2\n1 1000000000\n10\n3 8 6 7 4 1 2 4 10 1\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\Edu140B.cpp","group":"local","local":true}

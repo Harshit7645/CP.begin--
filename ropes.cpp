@@ -6,26 +6,40 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
-
-bool cancut(ll n)
+int n,k;
+vector<int>v;
+bool cancut(double n)
 {
-
+    ll cnt=0;
+    for(auto x:v)
+    {
+        cnt+=x/n;
+    }
+    if(cnt>=k)
+    return true;
+    else
+    return false;
 }
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll n,k;
     cin>>n>>k;
-    ll arr[n],mx=0;
+    v.resize(n);
     rep(i,0,n)
     {
-        cin>>arr[i];
-        mx=max(mx,arr[i]);
+        cin>>v[i];
     }
-    mx=max(mx,k);
-    ll l=1,r=k;
-    while(l<r-1)
+    double l=0,r=10e8;
+    double m;
+    rep(i,0,100)
     {
-
+        m=l+(r-l)/2;
+        if(cancut(m))
+        {
+            l=m;
+        }
+        else
+        r=m;
     }
+    cout<<setprecision(20)<<l;
 }

@@ -27,6 +27,21 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll mn=-1;
+        rep(i,0,n)
+        {
+            if(arr[i]!=i)
+            {
+                mn&=(arr[i]);
+            }
+        }
+        cout<<mn<<endl;
     }
 }

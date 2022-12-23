@@ -1,0 +1,1 @@
+{"name":"Local: onecount","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\onecount.cpp","tests":[{"id":1671714660362,"input":"7 10\ndbcbdde\n2 4 2 7 6 4 1 3 1 2 \nc c b e b a a c d c","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\onecount.cpp","group":"local","local":true}

@@ -7,19 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
-ll fact(ll n)
-{
-    ll ans=1;
-    rep(i,1,n)
-    {
-        ans*=i;
-    }
-    return ans;
-}
-ll nCr(ll n,ll r)
-{
-    return (fact(n)/((fact (r))*(fact(n-r))));
-}
+#define M 998244353
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -27,6 +15,19 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll d=1,ans=1;
+        rep(i,1,n)
+        {
+            if(s[i]==s[i-1])
+            d=d*2%M;
+            else 
+            d=1;
+            ans=(ans+d)%M;
+        }
+        cout<<ans<<"\n";
     }
 }
