@@ -20,30 +20,31 @@ ll nCr(ll n,ll r)
 {
     return (fact(n)/((fact (r))*(fact(n-r))));
 }
+#include <bits/stdc++.h>
+using namespace std;
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
-    {
-        ll n;
-        cin>>n;
+        ll n,k;
+        cin>>n>>k;
         ll arr[n];
-        map<ll,ll>m;
         rep(i,0,n)
         {
             cin>>arr[i];
-            m[arr[i]]++;
         }
-        ll single=0,doub=0;
-        for(auto x:m)
+        sort(arr,arr+n);
+        ll l=0,r=2e9+2;
+        while(l+1<r)
         {
-            if(x.second>=2)
-            doub++;
-            else if(x.second==1)
-            single++;
+            ll res=0,m=l+r>>1;
+            rep(j,n/2,n)
+            {
+                res+=max(0ll,m-arr[j]);
+            }
+            if(res<=k)
+            l=m;
+            else 
+            r=m;
         }
-        cout<<doub+ceil((double)(single)/2)<<endl;
-    }
+        cout<<l<<endl;
 }

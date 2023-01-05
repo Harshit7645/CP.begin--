@@ -16,38 +16,26 @@ int main()
     {
         ll n,m,t1=0,t2=0;
         cin>>n>>m;
-        vector<set<ll>>vec(n+1);
+        vector<ll>right(n+1,n);
         rep(i,0,m)
         {
-            // t1,t2;
-            cin>>t1;
-            cin>>t2;
-            if(t1>t2)
-            vec[t2].insert(t1);
+            ll x,y;
+            cin>>x>>y;
+            ll temp=x;
+            x=min(x,y);
+            y=max(temp,y);
+            right[x]=min(y-1,right[x]);
         }
-        ll tempomin=10e5,ans=n;
-        vector<ll>vis(n+1,-10e5);
-        repr(i,n,0)
+        right[0]=0;
+        ll ans=0;
+        repr(i,n-1,1)
         {
-            tempomin=10e5;
-            if(vec[i].size()>=1)
-            {
-                for(auto x:vec[i])
-                {
-                    t1=x;
-                    break;
-                }
-                tempomin=min(tempomin,t1);
-            }
-            vis[i]=tempomin;
+            right[i]=min(right[i],right[i+1]);
         }
-        ans=ans*(n+1)/2;
         rep(i,1,n+1)
         {
-            if(vis[i]==-10e5)
-            continue;
-            t2=vis[i];
-            ans=ans-(n-t2+1);
+            //R=min(R,right[i]);
+            ans+=right[i]-i+1;
         }
         cout<<ans<<endl;
     }    

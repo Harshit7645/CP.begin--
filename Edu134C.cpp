@@ -29,21 +29,32 @@ int main()
     {
         ll n;
         cin>>n;
-        ll arr[n];
-        map<ll,ll>m;
+        ll a[n],b[n];
         rep(i,0,n)
         {
-            cin>>arr[i];
-            m[arr[i]]++;
+            cin>>a[i];
         }
-        ll single=0,doub=0;
-        for(auto x:m)
+        rep(i,0,n)
         {
-            if(x.second>=2)
-            doub++;
-            else if(x.second==1)
-            single++;
+            cin>>b[i];
         }
-        cout<<doub+ceil((double)(single)/2)<<endl;
+        //sort(b,b+n);
+        ll j=0;
+        rep(i,0,n)
+        {
+            while(a[i]>b[j])
+            j++;
+            cout<<abs(a[i]-b[j])<<" ";
+        }
+        cout<<"\n";
+        j=0;
+        rep(i,0,n)
+        {
+            j=max(i,j);
+            while(j+1<n && a[j+1]<=b[j])
+            j++;
+            cout<<abs(b[j]-a[i])<<" ";
+        }
+        cout<<"\n";
     }
 }

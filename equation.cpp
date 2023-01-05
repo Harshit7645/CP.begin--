@@ -37,13 +37,23 @@ bool isPrime(ll n)
     }
     return true;
 }
+double n;
+bool good(double x)
+{
+    return x*x+sqrt(x)>=n;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
+    cin>>n;
+    double l=0,r=1e10;
+    rep(i,0,60)
     {
-           
+        double mid=l+(r-l)/2;
+        if(good(mid))
+        r=mid;
+        else 
+        l=mid;
     }
+    cout<<setprecision(20)<<r<<endl;
 }

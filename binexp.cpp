@@ -37,6 +37,15 @@ bool isPrime(ll n)
     }
     return true;
 }
+int binexp(ll a,ll b)
+{
+    ll ans=1;
+    rep(i,1,b)
+    {
+        ans*=a;
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -44,6 +53,6 @@ int main()
     cin>>t;
     while(t--)
     {
-           
+        
     }
 }

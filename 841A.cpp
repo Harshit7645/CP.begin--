@@ -20,23 +20,6 @@ ll nCr(ll n,ll r)
 {
     return (fact(n)/((fact (r))*(fact(n-r))));
 }
-bool isPrime(ll n)
-{
-    if(n<=1)
-    return false;
-    if(n<=3)
-    return true;
-
-    if(n%2==0 || n%3==0 || n%5==0)
-    return false;
-    for(ll i=6;i<=sqrt(n);i+=5)
-    {
-        //for (ll i=5;i*i<=n;i+=6)
-        if (n % i == 0 || n % (i + 2) == 0)
-            return false;//return true;
-    }
-    return true;
-}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -44,6 +27,25 @@ int main()
     cin>>t;
     while(t--)
     {
-           
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        rep(i,0,n-1)
+        {
+            ll temp=arr[i]*arr[i+1];
+            arr[i]=1;
+            arr[i+1]=temp;
+        }
+        ll sum=0;
+        rep(i,0,n)
+        {
+            sum+=arr[i];
+        }
+        cout<<sum*2022<<endl;
     }
 }

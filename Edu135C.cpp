@@ -3,6 +3,7 @@
 using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
+#define repr(i,a,b) for(ll i=a;i>=b;i--)
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
@@ -26,36 +27,48 @@ int main()
         ll n;
         cin>>n;
         ll a[n],b[n];
-        map<ll,ll>m1,m2;
+        priority_queue<ll> m1,m2;
         rep(i,0,n)
         {
             cin>>a[i];
-            m1[a[i]]++;
+            m1.push(a[i]);
         }
         rep(i,0,n)
         {
             cin>>b[i];
-            m2[b[i]]++;
+            m2.push(b[i]);
         }
-        ll ans1=0,ans2=0;
-        rep(i,0,n)
+        sort(a,a+n);
+        sort(b,b+n);
+        if(a==b)
         {
-            if(m2[a[i]]>0)
-            m2[a[i]]--;
-            else if(m2[length(a[i])]>0)
-            ans1++;
-            else
-            ans1+=2;
+            cout<<0<<endl;
+            continue;
         }
-        rep(i,0,n)
+        ll ans=0;
+        repr(i,n-1,0)
         {
-            if(m1[b[i]]>0)
-            m1[b[i]]--;
-            else if(m1[length(b[i])]>0)
-            ans2++;
-            else
-            ans2+=2;
+            ll x=0,y=0;
+                x=m1.top(),y=m2.top();
+                while(x!=y)
+                {
+                    ans++;
+                    if(x>y)
+                    {
+                        m1.pop();
+                        m1.push(length(x));
+                        x=m1.top();
+                    }
+                    else
+                    {
+                        m2.pop();
+                        m2.push(length(y));
+                        y=m2.top();
+                    }
+                }
+                m1.pop();
+                m2.pop();
         }
-        cout<<min(ans1,ans2)<<endl;
+        cout<<ans<<endl;
     }
 }

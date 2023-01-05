@@ -1,0 +1,1 @@
+{"name":"Local: hello2023A","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\hello2023A.cpp","tests":[{"id":1672757269334,"input":"6\n2\nLL\n2\nLR\n2\nRL\n2\nRR\n7\nLLRLLLR\n7\nRRLRRRL\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\hello2023A.cpp","group":"local","local":true}

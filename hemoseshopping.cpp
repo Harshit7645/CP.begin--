@@ -44,6 +44,32 @@ int main()
     cin>>t;
     while(t--)
     {
-           
+        ll n,x;
+        cin>>n>>x;
+        ll arr[n],sa[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            sa[i]=arr[i];
+        }
+        if(is_sorted(arr,arr+n) || n>=2*x)
+        {
+            PYES;
+            continue;
+        }
+        ll f=1;
+        sort(sa,sa+n);
+        rep(i,n-x,x)
+        {
+            if(sa[i]!=arr[i])
+            {
+                f=0;
+                break;
+            }
+        }
+        if(f)
+        PYES;
+        else
+        PNO;
     }
 }

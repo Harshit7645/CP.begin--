@@ -44,6 +44,25 @@ int main()
     cin>>t;
     while(t--)
     {
-           
+        ll n,h;
+        cin>>n>>h;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        ll s1=arr[n-1];
+        ll s2=arr[n-2];
+        ll a=s1+s2;
+        ll ans=h/a;
+        ans*=2;
+        h%=a;
+        if(h-s1<=0 && h!=0)
+        ans++;
+        else if(h!=0)
+        ans+=2;
+        cout<<ans<<endl;
+
     }
 }

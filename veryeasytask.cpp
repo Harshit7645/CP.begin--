@@ -37,13 +37,34 @@ bool isPrime(ll n)
     }
     return true;
 }
+ll n;
+bool good(ll t,ll x,ll y)
+{
+    if(t<min(x,y))
+    return false;
+    t-=min(x,y);
+    ll a=t/x;
+    ll b=t/y;
+    if(a+b+1>=n)
+    return true;
+    else
+    return false;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
-    {
-           
-    }
+        ll x,y;
+        cin>>n>>x>>y;
+        ll l=1,r=max(x,y)*n;
+        while(l+1<r)
+        {
+            ll m=l+(r-l)/2;
+            if(good(m,x,y))
+            {
+                r=m;
+            }
+            else
+            l=m;
+        }
+        cout<<r<<endl;
 }

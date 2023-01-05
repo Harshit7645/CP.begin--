@@ -44,6 +44,38 @@ int main()
     cin>>t;
     while(t--)
     {
-           
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll rs=0;
+        rep(i,0,n)
+        {
+            rs+=(s[i]=='R');
+        }
+
+        if(rs==0||rs==n||(s=="LL" ||s=="RR"))
+        {
+            cout<<-1<<endl;
+            continue;
+        }
+        else
+        {
+            ll ans=-1,f=0;
+            rep(i,0,n-1)
+            {
+                if(s[i]=='L' && s[i+1]=='R')
+                {
+                    ans=i+1;
+                    break;
+                }
+                else if(s[i]=='R' && s[i+1]=='L')
+                {
+                    ans=0;
+                    break;
+                }
+            }
+            cout<<ans<<endl;
+        }
     }
 }

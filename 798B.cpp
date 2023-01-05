@@ -20,6 +20,8 @@ ll nCr(ll n,ll r)
 {
     return (fact(n)/((fact (r))*(fact(n-r))));
 }
+#include <bits/stdc++.h>
+using namespace std;
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -29,21 +31,37 @@ int main()
     {
         ll n;
         cin>>n;
-        ll arr[n];
-        map<ll,ll>m;
+        ll a[n];
         rep(i,0,n)
         {
-            cin>>arr[i];
-            m[arr[i]]++;
-        }
-        ll single=0,doub=0;
-        for(auto x:m)
+            cin>>a[i];
+        } 
+        if(n==1)
         {
-            if(x.second>=2)
-            doub++;
-            else if(x.second==1)
-            single++;
+            cout<<"-1\n";
+            continue;
         }
-        cout<<doub+ceil((double)(single)/2)<<endl;
+        ll b[n];
+        rep(i,0,n)
+        {
+            b[i]=i+1;
+        }
+        rep(i,0,n-1)
+        {
+            if(b[i]==a[i])
+            {
+                swap(b[i],b[i+1]);
+                i++;
+            }
+        }
+        if(b[n-1]==a[n-1])
+        {
+            swap(b[n-1],b[n-2]);
+        }
+        rep(i,0,n)
+        {
+            cout<<b[i]<<" ";
+        }
+        cout<<endl;
     }
 }

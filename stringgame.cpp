@@ -37,13 +37,44 @@ bool isPrime(ll n)
     }
     return true;
 }
+ll arr[200005];
+string t,s;
+bool good(ll x)
+{
+    map<ll,ll>m;
+    rep(i,0,x)
+    {
+        m[arr[i]-1]++;
+    }
+    ll j=0ll;
+    rep(i,0,t.length())
+    {
+        if(!m[i])
+        {
+            if(t[i]==s[j])
+            j++;
+        }
+    }
+    return j==s.length();
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
+    //string t,s;
+    cin>>t>>s;
+    ll n=t.length();
+    rep(i,0,n)
     {
-           
+        cin>>arr[i];
     }
+    ll l=0,r=n;
+    while(l+1<r)
+    {
+        ll m=l+r>>1;
+        if(good(m))
+        l=m;
+        else
+        r=m;
+    }
+    cout<<l<<endl;
 }
