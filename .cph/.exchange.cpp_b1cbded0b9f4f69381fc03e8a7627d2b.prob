@@ -1,0 +1,1 @@
+{"name":"Local: exchange","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\exchange.cpp","tests":[{"id":1673029210745,"input":"4\n100 25 30\n9999997 25 50\n52 50 48\n49 50 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\exchange.cpp","group":"local","local":true}

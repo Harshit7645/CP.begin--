@@ -10,7 +10,7 @@ typedef long long ll;
 ll fact(ll n)
 {
     ll ans=1;
-    rep(i,1,n)
+    rep(i,1,n+1)
     {
         ans*=i;
     }
@@ -18,7 +18,7 @@ ll fact(ll n)
 }
 ll nCr(ll n,ll r)
 {
-    return (fact(n)/((fact (r))*(fact(n-r))));
+    return (fact(n)/((fact(r))*(fact(n-r))));
 }
 ll power(ll a,ll b)
 {
@@ -30,6 +30,7 @@ ll power(ll a,ll b)
         a*=a;
         b/=2;
     }
+    return result;
 }
 bool isPrime(ll n)
 {
@@ -55,6 +56,35 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        vector<vector<ll>>v(n,vector<ll>(n));
+        ll l=1,r=n*n,cnt=0;
+        rep(i,0,n)
+        {
+            //cnt=1-cnt;
+            rep(j,0,n)
+            {
+                cnt=1-cnt;
+                if(cnt)
+                v[i][j]=l++;
+                else
+                v[i][j]=r--;//<<" ";
+            }
+        }
+        rep(i,0,n)
+        {
+            if(i%2)
+            {
+                rep(j,0,n)
+                cout<<v[i][j]<<" ";
+            }
+            else
+            {
+                repr(j,n-1,0)
+                cout<<v[i][j]<<" ";
+            }
+            cout<<"\n";
+        }
     }
 }

@@ -10,7 +10,7 @@ typedef long long ll;
 ll fact(ll n)
 {
     ll ans=1;
-    rep(i,1,n)
+    rep(i,1,n+1)
     {
         ans*=i;
     }
@@ -18,7 +18,7 @@ ll fact(ll n)
 }
 ll nCr(ll n,ll r)
 {
-    return (fact(n)/((fact (r))*(fact(n-r))));
+    return (fact(n)/((fact(r))*(fact(n-r))));
 }
 ll power(ll a,ll b)
 {
@@ -30,6 +30,7 @@ ll power(ll a,ll b)
         a*=a;
         b/=2;
     }
+    return result;
 }
 bool isPrime(ll n)
 {
@@ -48,13 +49,43 @@ bool isPrime(ll n)
     }
     return true;
 }
+int Partition(int arr[],int l,int r);
+void quickSort(int arr[],int l ,int r)
+{
+    if(l<r){
+    int pi=Partition(arr,l,r);
+    quickSort(arr,l,pi-1);
+    quickSort(arr,pi+1,r);
+    }
+}
+int Partition(int arr[],int l,int r)
+{
+    int pivot=arr[r];
+    int i=l-1;
+    rep(j,l,r)
+    {
+        if(arr[j]<pivot)
+        {
+            i++;
+            swap(arr[i],arr[j]);
+        }
+        //swap(arr[i],arr[l]);
+    }
+    swap(arr[i+1],arr[r]);
+    return i+1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
+    int n;
+    cin>>n;
+    int arr[n];
+    rep(i,0,n)
     {
-        
+        cin>>arr[i];
     }
+    quickSort(arr,0,n-1);
+    rep(i,0,n)
+    cout<<arr[i]<<" ";
+    cout<<"\n";
 }

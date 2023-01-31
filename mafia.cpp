@@ -30,6 +30,7 @@ ll power(ll a,ll b)
         a*=a;
         b/=2;
     }
+    return result;
 }
 bool isPrime(ll n)
 {
@@ -51,10 +52,16 @@ bool isPrime(ll n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n],sum=0,mx=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            sum+=arr[i];
+            mx=max(mx,arr[i]);
+        }
+        cout<<max(mx,(ll)ceil((double)sum/(n-1)))<<"\n";
     }
 }

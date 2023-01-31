@@ -1,0 +1,105 @@
+#include<stdio.h>
+int main()
+{
+    int size=140000;
+    char datetimeo[size][40];
+    FILE *f1=fopen("d40k.txt","r");
+    FILE *f2=fopen("out.txt","w");
+    char x=fgetc(f1);
+    int i=0,j=0;
+    datetimeo[0][0]=x;
+    while (x!=EOF)
+    {
+        x=fgetc(f1);
+        if(x=='\n')
+        {
+            i++;
+            j=0;
+        }
+        j++;
+        datetimeo[i][j]=x;
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<20;j++){
+        fprintf(f2,"%c",datetimeo[i][j]);
+        }
+    }
+    char months[12][3];
+    i=0,j=0;
+    for(i=0;i<12;i++)
+    {
+        if(i==0)
+        {
+            months[i][0]='J';
+            months[i][1]='a';
+            months[i][2]='n';
+        }
+        if(i==1)
+        {
+            months[i][0]='F';
+            months[i][1]='e';
+            months[i][2]='b';
+        }
+        if(i==2)
+        {
+            months[i][0]='M';
+            months[i][1]='a';
+            months[i][2]='r';
+        }
+        if(i==3)
+        {
+            months[i][0]='A';
+            months[i][1]='p';
+            months[i][2]='r';
+        }
+        if(i==4)
+        {
+            months[i][0]='M';
+            months[i][1]='a';
+            months[i][2]='y';
+        }
+        if(i==5)
+        {
+            months[i][0]='J';
+            months[i][1]='u';
+            months[i][2]='n';
+        }
+        if(i==6)
+        {
+            months[i][0]='J';
+            months[i][1]='u';
+            months[i][2]='l';
+        }
+        if(i==7)
+        {
+            months[i][0]='A';
+            months[i][1]='u';
+            months[i][2]='g';
+        }
+        if(i==8)
+        {
+            months[i][0]='S';
+            months[i][1]='e';
+            months[i][2]='p';
+        }
+        if(i==9)
+        {
+            months[i][0]='O';
+            months[i][1]='c';
+            months[i][2]='t';
+        }
+        if(i==10)
+        {
+            months[i][0]='N';
+            months[i][1]='o';
+            months[i][2]='v';
+        }
+        if(i==11)
+        {
+            months[i][0]='D';
+            months[i][1]='e';
+            months[i][2]='c';
+        }
+    }
+}

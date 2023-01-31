@@ -30,6 +30,7 @@ ll power(ll a,ll b)
         a*=a;
         b/=2;
     }
+    return result;
 }
 bool isPrime(ll n)
 {
@@ -55,6 +56,11 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,a,b;
+        cin>>n>>a>>b;
+        if(a>b)
+        cout<<"1\n";
+        else
+        cout<<(n+a-1)/a<<"\n";
     }
 }

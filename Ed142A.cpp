@@ -10,7 +10,7 @@ typedef long long ll;
 ll fact(ll n)
 {
     ll ans=1;
-    rep(i,1,n)
+    rep(i,1,n+1)
     {
         ans*=i;
     }
@@ -18,7 +18,19 @@ ll fact(ll n)
 }
 ll nCr(ll n,ll r)
 {
-    return (fact(n)/((fact (r))*(fact(n-r))));
+    return (fact(n)/((fact(r))*(fact(n-r))));
+}
+ll power(ll a,ll b)
+{
+    ll result=1;
+    while(b>0)
+    {
+        if(b%2==1)
+        result*=a;
+        a*=a;
+        b/=2;
+    }
+    return result;
 }
 bool isPrime(ll n)
 {
@@ -37,15 +49,6 @@ bool isPrime(ll n)
     }
     return true;
 }
-int binexp(ll a,ll b)
-{
-    ll ans=1;
-    rep(i,1,b)
-    {
-        ans*=a;
-    }
-    return ans;
-}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -53,6 +56,17 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n],c=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]==1)
+            c++;
+        }
+        ll ans=ceil((double)c/2);
+        ans+=(n-c);
+        cout<<ans<<endl;
     }
 }

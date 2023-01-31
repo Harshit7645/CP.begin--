@@ -20,17 +20,6 @@ ll nCr(ll n,ll r)
 {
     return (fact(n)/((fact (r))*(fact(n-r))));
 }
-ll power(ll a,ll b)
-{
-    ll result=1;
-    while(b>0)
-    {
-        if(b%2==1)
-        result*=a;
-        a*=a;
-        b/=2;
-    }
-}
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -55,6 +44,23 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,k;
+        cin>>n>>k;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll cnt=1,ans=0;
+        rep(i,0,n)
+        {
+            if(arr[i]==cnt)
+            {
+                ans++;
+                cnt++;
+            }
+            //cnt++;
+        }
+    cout<<ceil((double)(n-ans)/k)<<"\n";
     }
 }

@@ -30,6 +30,7 @@ ll power(ll a,ll b)
         a*=a;
         b/=2;
     }
+    return result;
 }
 bool isPrime(ll n)
 {
@@ -55,6 +56,29 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll i=0,f=1;
+        if(n%3==2)
+        {
+            PNO;
+            continue;
+        }
+        i=1;
+        while(i<n)
+        {
+            if(s[i]!=s[i+1])
+            {
+                f=0;
+                break;
+            }
+            i+=3;
+        }
+        if(f)
+        PYES;
+        else
+        PNO;
     }
 }

@@ -49,7 +49,12 @@ bool isPrime(ll n)
     }
     return true;
 }
+// A Better (than Naive) Solution to find all divisors
+#include <iostream>
+#include <math.h>
+using namespace std;
 
+// Function to print the divisors
 vector<ll> printDivisors(int n)
 {
 	// Note that this loop runs till square root
@@ -79,6 +84,28 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        //map<ll,ll>m;
+        ll s=0;
+        vector<ll>pref;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            //m[arr[i]]++;
+            s+=arr[i];
+            pref.push_back(s);
+        }
+        //vector<ll>req;
+        //req=printDivisors(s);
+        //sort(req.begin(),req.end());
+        //cout<<req[req.size()-2]<<endl;
+        ll ans=1;
+        rep(i,0,n-1)
+        {
+            ans=max(ans,gcd(pref[i],s-pref[i]));
+        }
+        cout<<ans<<endl;
     }
 }
