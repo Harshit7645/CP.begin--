@@ -79,38 +79,6 @@ int main()
     cin>>t;
     while(t--)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>l(n),r(n);
-        map<ll,ll>m;
-        rep(i,0,n)
-        {
-            cin>>l[i]>>r[i];
-        }
-        rep(i,1,51)
-        {
-            rep(j,0,n)
-            {
-                if(i>=l[j] && i<=r[j])
-                m[i]++;
-            }
-        }
-        if(m[k]==0)
-        {
-            PNO;
-            continue;
-        }
-        bool c1=false,c2=false;
-        rep(i,0,n)
-        {
-            if(k==r[i])
-            c1=true;
-            if(k==l[i])
-            c2=true;
-        }
-        if(c1&& c2)
-        PYES;
-        else
-        PNO;
+        
     }
 }

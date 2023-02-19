@@ -79,38 +79,22 @@ int main()
     cin>>t;
     while(t--)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>l(n),r(n);
-        map<ll,ll>m;
-        rep(i,0,n)
+        ll a,b;
+        cin>>a>>b;
+        ll m,n;
+        cin>>n>>m;
+        if(n<m)
         {
-            cin>>l[i]>>r[i];
-        }
-        rep(i,1,51)
-        {
-            rep(j,0,n)
-            {
-                if(i>=l[j] && i<=r[j])
-                m[i]++;
-            }
-        }
-        if(m[k]==0)
-        {
-            PNO;
+            cout<<min(a,b)*n<<endl;
             continue;
         }
-        bool c1=false,c2=false;
-        rep(i,0,n)
-        {
-            if(k==r[i])
-            c1=true;
-            if(k==l[i])
-            c2=true;
-        }
-        if(c1&& c2)
-        PYES;
-        else
-        PNO;
+        ll temp=a/(m+1);
+        ll temp2=a%(m+1);
+        ll ans1=temp*a;
+        ans1+=temp2*min(a,b);
+        //cout<<ans1<<endl;
+        ll ans2=min(a,b)*n;
+        cout<<min(ans1,ans2)<<endl;
+
     }
 }

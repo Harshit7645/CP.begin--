@@ -75,42 +75,33 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll t;
-    cin>>t;
-    while(t--)
+    ll n,w;
+    cin>>n>>w;
+    vector<ll>wt(n),v(n);
+    ll dp[n+1][w+1];
+    rep(i,0,n)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>l(n),r(n);
-        map<ll,ll>m;
-        rep(i,0,n)
+        cin>>wt[i]>>v[i];
+    }
+    rep(i,0,n+1)
+    {
+        rep(j,0,w+1)
         {
-            cin>>l[i]>>r[i];
+            dp[i][j]=0;
         }
-        rep(i,1,51)
+    }
+    rep(i,1,n+1)
+    {
+        rep(j,1,w+1)
         {
-            rep(j,0,n)
+            if(j<wt[i-1])
+            dp[i][j]=dp[i-1][j];
+            else
             {
-                if(i>=l[j] && i<=r[j])
-                m[i]++;
+                dp[i][j]=max(v[i-1]+dp[i-1][j-wt[i-1]],dp[i-1][j]);
             }
         }
-        if(m[k]==0)
-        {
-            PNO;
-            continue;
-        }
-        bool c1=false,c2=false;
-        rep(i,0,n)
-        {
-            if(k==r[i])
-            c1=true;
-            if(k==l[i])
-            c2=true;
-        }
-        if(c1&& c2)
-        PYES;
-        else
-        PNO;
     }
+    cout<<dp[n][w]<<"\n";
 }
+    

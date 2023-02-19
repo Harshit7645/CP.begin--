@@ -79,38 +79,46 @@ int main()
     cin>>t;
     while(t--)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>l(n),r(n);
-        map<ll,ll>m;
+        ll n,m,d;
+        cin>>n>>m>>d;
+        ll p[n];
+        ll a[m];
+        map<ll,ll>pos;
         rep(i,0,n)
         {
-            cin>>l[i]>>r[i];
+            cin>>p[i];
+            p[i]--;
+            pos[p[i]]=i;
         }
-        rep(i,1,51)
+        rep(i,0,m)
         {
-            rep(j,0,n)
+            cin>>a[i];
+            a[i]--;
+        }
+        //vector<ll>prob;
+        ll ans=n,move=0,diff=0;
+        rep(i,1,m)
+        {
+            if(pos[a[i-1]]>pos[a[i]])
             {
-                if(i>=l[j] && i<=r[j])
-                m[i]++;
+                ans=0;
+                break;
+            }
+            else if(pos[a[i]]>(pos[a[i-1]]+d))
+            {
+                ans=0;
+                break;
+            }
+            else
+            {
+                diff=pos[a[i]]-pos[a[i-1]];
+                if(d>=n-1)
+                ans=min(ans,max(0ll,diff));
+                else
+                ans=min(ans,max(0ll,min(d+1-diff,diff)));
             }
         }
-        if(m[k]==0)
-        {
-            PNO;
-            continue;
-        }
-        bool c1=false,c2=false;
-        rep(i,0,n)
-        {
-            if(k==r[i])
-            c1=true;
-            if(k==l[i])
-            c2=true;
-        }
-        if(c1&& c2)
-        PYES;
-        else
-        PNO;
+        cout<<ans<<endl;
+
     }
 }

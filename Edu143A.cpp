@@ -71,7 +71,20 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
+bool good(string s)
+{
+    ll cnt=0;
+    rep(i,0,s.length()-1)
+    {
+        if(s[i]==s[i+1])
+        cnt++;
+    }
+    if(cnt<=1)
+    return true;
+    else
+    return false;
 
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -79,36 +92,13 @@ int main()
     cin>>t;
     while(t--)
     {
-        ll n,k;
-        cin>>n>>k;
-        vector<ll>l(n),r(n);
-        map<ll,ll>m;
-        rep(i,0,n)
-        {
-            cin>>l[i]>>r[i];
-        }
-        rep(i,1,51)
-        {
-            rep(j,0,n)
-            {
-                if(i>=l[j] && i<=r[j])
-                m[i]++;
-            }
-        }
-        if(m[k]==0)
-        {
-            PNO;
-            continue;
-        }
-        bool c1=false,c2=false;
-        rep(i,0,n)
-        {
-            if(k==r[i])
-            c1=true;
-            if(k==l[i])
-            c2=true;
-        }
-        if(c1&& c2)
+        ll n1,n2;
+        cin>>n1>>n2;
+        string a,b;
+        cin>>a>>b;
+        reverse(b.begin(),b.end());
+        a+=b;
+        if(good(a))
         PYES;
         else
         PNO;
