@@ -1,0 +1,1 @@
+{"name":"Local: 855B","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\855B.cpp","tests":[{"id":1677772877812,"input":"5\n11 2\naAaaBACacbE\n2 2\nab\n4 1\naaBB\n6 0\nabBAcC\n5 3\ncbccb\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\855B.cpp","group":"local","local":true}

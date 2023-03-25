@@ -79,6 +79,28 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        ll pos=0,neg=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]>=0)
+            pos++;
+            else
+            neg++;
+            arr[i]=abs(arr[i]);
+        }
+        sort(arr,arr+n);
+        ll sum=0;
+        rep(i,0,n)
+        {
+            sum+=arr[i];
+        }
+        if(neg%2==0)
+        cout<<sum<<"\n";
+        else
+        cout<<sum-2*arr[0]<<"\n";
     }
 }

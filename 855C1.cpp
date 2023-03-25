@@ -79,6 +79,27 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        priority_queue<ll>req;
+        ll ans=0;
+        rep(i,0,n)
+        {
+            if(arr[i]!=0)
+            req.push(arr[i]);
+            else
+            {
+                if(req.empty())
+                continue;
+                ans+=req.top();
+                req.pop();
+            }
+        }
+        cout<<ans<<endl;
     }
 }

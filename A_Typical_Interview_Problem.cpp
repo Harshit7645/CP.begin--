@@ -71,7 +71,27 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+int isSubstring(string s1, string s2)
+{
+    int M = s1.length();
+    int N = s2.length();
+ 
+    /* A loop to slide pat[] one by one */
+    for (int i = 0; i <= N - M; i++) {
+        int j;
+ 
+        /* For current index i, check for
+ pattern match */
+        for (j = 0; j < M; j++)
+            if (s2[i + j] != s1[j])
+                break;
+ 
+        if (j == M)
+            return i;
+    }
+ 
+    return 0;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -79,6 +99,27 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        string ans="FBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFBFBFFBFFB";
+        string temp="";
+        ll f=0;
+        rep(i,0,ans.length())
+        {
+            if(i+n>ans.length())
+            break;
+            temp=ans.substr(i,n);
+            if(temp==s)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        PYES;
+        else
+        PNO;
     }
 }

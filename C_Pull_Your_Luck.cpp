@@ -79,6 +79,20 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,x,p,f=0;
+        cin>>n>>x>>p;
+        rep(i,1,min(2*n,p)+1)
+        {
+            if(((i*(i+1)/2)+x)%n==0)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        PYES;
+        else
+        PNO;
+
     }
 }

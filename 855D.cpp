@@ -79,6 +79,22 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        string temp="";
+        //map<string,ll>m;
+        ll ans=n-1;
+        rep(i,0,n-1)
+        {
+            if(s[i]==s[i+2])
+            ans--;
+        }
+        cout<<ans<<"\n";
+        // for(auto x:m)
+        // {
+        //     cout<<x.first<<" "<<x.second<<"\n";
+        // }
     }
 }

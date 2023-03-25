@@ -71,14 +71,69 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+int fib(int n) {
+   if (n <= 1)
+   return n;
+   return fib(n-1) + fib(n-2);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll t;
     cin>>t;
+    map<ll,ll>fibpresence;
+    vector<ll>fibseq;
+        rep(i,0,32)
+        {
+            if(i!=0 && i!=1){
+            fibseq.push_back(fib(i));
+            fibpresence[fibseq[i-2]]++;
+            }
+        }
+        // rep(i,0,30)
+        // cout<<fibseq[i]<<" ";
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        set<ll>s;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            s.insert(arr[i]);
+        }
+        sort(arr,arr+n);
+        ll f=0,maxsum=1;
+        ll presum[n];
+        rep(i,0,n)
+        {
+            if(i==0)
+            presum[0]=arr[0];
+            else
+            presum[i]=presum[i-1]+arr[i];
+        }
+        if(arr[0]!=1)
+        {
+            PNO;
+            continue;
+        } 
+        rep(i,1,n)
+        {
+            if(arr[i]<=maxsum)
+            {
+                maxsum+=arr[i];
+                continue;
+            }
+            else
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        PNO;
+        else
+        PYES;
     }
 }

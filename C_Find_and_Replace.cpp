@@ -79,6 +79,45 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        char arr[26];
+        arr[0]='0';
+        map<char,char>m;
+        map<char,ll>flag;
+        rep(i,0,n)
+        {
+            if(flag[s[i]])
+            continue;
+            else
+            {
+                if(m[s[i-1]]=='0')
+                m[s[i]]='1';
+                else
+                m[s[i]]='0';
+                flag[s[i]]++;
+            }
+        }
+        string ans;
+        rep(i,0,n)
+        {
+            ans+=m[s[i]];
+        }
+        //cout<<ans<<"\n";
+        ll f=0;
+        rep(i,0,n-1)
+        {
+            if(ans[i]==ans[i+1])
+            {
+                f=1;
+                break;
+            }
+        } 
+        if(f)
+        PNO;
+        else
+        PYES;
     }
 }

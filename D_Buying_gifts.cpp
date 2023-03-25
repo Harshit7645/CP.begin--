@@ -79,6 +79,52 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        vector<ll>a(n),b(n);
+        vector<pair<ll,ll>>duo;
+        rep(i,0,n)
+        {
+            cin>>a[i]>>b[i];
+            duo.push_back({a[i],b[i]});
+        }
+        sort(duo.begin(),duo.end());
+        vector<ll>suffmax(n+1);
+        suffmax[n-1]=duo[n-1].second;
+        suffmax[n]=-1e9;
+        //ll tmax=-1;
+        repr(i,n-2,0)
+        {
+            //tmax=max(tmax,duo[i].second);
+            suffmax[i]=max(suffmax[i+1],duo[i].second);
+        }
+        multiset<ll>m;
+        ll ans=10e9;
+        ll x=0,y=0;
+        rep(i,0,n)
+        {
+            x=duo[i].first,y=duo[i].second;
+            ans=min(ans,abs(x-suffmax[i+1]));
+            ll temp=0;
+            if(!m.empty())
+            {
+                auto it=m.lower_bound(x);
+                if(it!=m.end())
+                {
+                    temp=*it;
+                    if(temp>suffmax[i+1])
+                    ans=min(ans,abs(temp-x));
+                }
+                if(it!=m.begin())
+                {
+                    it--;
+                    temp=*it;
+                    if(temp>suffmax[i+1])
+                    ans=min(ans,abs(x-temp));
+                }
+            }
+            m.insert(duo[i].second);
+        }
+        cout<<ans<<"\n";
     }
 }

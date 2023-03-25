@@ -79,6 +79,26 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll l,r;
+        cin>>l>>r;
+        if(r/l<2)
+        {
+            cout<<"1 "<<r-l+1<<"\n";
+            continue;
+        }
+        ll ans1=1,ans2=0,peak=l,f=0;
+        while(2*peak<=r)
+        {
+            ans1++;
+            peak*=2;
+        }
+        //cout<<ans1<<" ";
+        f=0;
+        peak/=l;
+        ans2=r/peak-l+1;
+        peak/=2;
+        peak*=3;
+        ans2+=max(0ll,(r/peak-l+1)*(ans1-1));
+        cout<<ans1<<" "<<ans2<<"\n";
     }
 }

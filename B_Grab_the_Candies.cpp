@@ -79,6 +79,36 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        vector<ll>odd,even;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]%2==0)
+            even.push_back(arr[i]);
+            else
+            odd.push_back(arr[i]);
+        }
+        ll sum=0;
+        rep(i,0,even.size())
+        {
+            sum+=even[i];
+        }
+        ll f=0;
+        rep(i,0,odd.size())
+        {
+            sum-=odd[i];
+            if(sum<=0)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        PNO;
+        else
+        PYES;
     }
 }

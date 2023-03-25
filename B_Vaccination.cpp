@@ -79,6 +79,27 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,k,d,w;
+        cin>>n>>k>>d>>w;
+        ll t[n];
+        rep(i,0,n)
+        {
+            cin>>t[i];
+        }
+        ll ans=0,curr=0,time=w,last=-d-1;
+        rep(i,0,n)
+        {
+            curr=t[i];
+            if(time == 0 || curr>d+last)
+            {
+                time=k-1;
+                ans++;
+                //last=t+w;
+                last=curr+w;
+            }
+            else
+            time--;
+        }
+        cout<<ans<<"\n";
     }
 }

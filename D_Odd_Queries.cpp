@@ -79,6 +79,37 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,q;
+        cin>>n>>q;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll sum=0,l,r,k,diff=0;
+        ll presum[n];
+        rep(i,0,n)
+        {
+            sum+=arr[i];
+            presum[i]=sum;
+        }
+        // rep(i,0,n)
+        // {
+        //     cout<<presum[i]<<" ";
+        // }
+        // cout<<"\n";
+        rep(i,0,q)
+        {
+            cin>>l>>r>>k;
+            if(l>=2)
+            diff=(presum[r-1]-presum[l-2]);
+            else
+            diff=presum[r-1];
+            ll comp=k*(r-l+1);
+            if((presum[n-1]-diff+comp)%2==0)
+            PNO;
+            else
+            PYES;
+        }
     }
 }

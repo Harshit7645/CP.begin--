@@ -79,6 +79,17 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll a,b,c,d;
+        cin>>a>>b>>c>>d;
+        ll x=1;
+        x=b+c-d-a;
+        if(d<b)
+        cout<<"-1\n";
+        else if(d==b && c<a)
+        cout<<"-1\n";
+        else if(d==b && c>a)
+        cout<<abs(c-a)<<"\n";
+        else
+        cout<<
     }
 }

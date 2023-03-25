@@ -79,6 +79,23 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]==1) arr[i]++;
+        }
+        rep(i,0,n-1)
+        {
+            while(arr[i+1]%arr[i]==0)
+            arr[i+1]++;
+        }
+        rep(i,0,n)
+        {
+            cout<<arr[i]<<" ";
+        }
+        cout<<"\n";
     }
 }

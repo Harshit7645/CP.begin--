@@ -79,6 +79,42 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,k;
+        cin>>n>>k;
+        string s;
+        cin>>s;
+        map<char,ll>m;
+        ll ans=0;
+        string s1,s2;
+        map<char,ll>m1,m2;
+        rep(i,0,n)
+        {
+            if(s[i]>='A' && s[i]<='Z')
+            m1[char(((ll)(s[i]))+32)]++;
+            else
+            m2[s[i]]++;
+        }
+        rep(i,97,123)
+        {
+            ans+=min(m1[(char)(i)],m2[(char)(i)]);
+        }
+        rep(i,97,123)
+        {
+            if(0==abs(m1[(char)(i)]-m2[(char)(i)])/2)
+            continue;
+            else if(k>abs(m1[(char)(i)]-m2[(char)(i)])/2)
+            {
+                ans+=abs(m1[(char)(i)]-m2[(char)(i)])/2;
+                k-=abs(m1[(char)(i)]-m2[(char)(i)])/2;
+            }
+            else
+            {
+                ans+=k;
+                k-=k;
+            }
+            if(k==0)
+            break;
+        }
+        cout<<ans<<endl;
     }
 }

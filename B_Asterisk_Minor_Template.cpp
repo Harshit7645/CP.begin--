@@ -79,6 +79,52 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        string a,b;
+        cin>>a>>b;
+        ll f=0;
+        rep(i,0,a.length())
+        {
+            //string temp=a.substr(i,2);
+            rep(j,0,b.length())
+            {
+                if(a[i]==b[j] && (i==a.length()-1 && j==b.length()-1))//||(a[i]==b[j] && i==0 && j==0)))
+                {
+                    f=1;
+                    PYES;
+                    cout<<"*"<<a[i]<<"\n";
+                    break;
+                }
+                else if(a[0]==b[0])
+                {
+                    f=1;
+                    PYES;
+                    cout<<a[i]<<"*\n";
+                    break;
+                }
+            }
+            if(f)
+            break;
+        }
+        if(!f){
+        rep(i,0,a.length()-1)
+        {
+            string temp=a.substr(i,2);
+            rep(j,0,b.length()-1)
+            {
+                string s1=b.substr(j,2);
+                if(temp==s1)
+                {
+                    f=1;
+                    PYES;
+                    cout<<"*"<<temp<<"*\n";
+                    break;
+                }
+            }
+            if(f)
+            break;
+        }
+        }
+        if(!f)
+        PNO;
     }
 }

@@ -79,6 +79,43 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,m;
+        cin>>n>>m;
+        ll num1=pow(2,9),numprint=0,og;
+        og=num1;
+        numprint=og;
+        cout<<n*m<<"\n";
+        ll ans[n][m],c=0;
+        rep(i,0,n)
+        {
+            if(i%2==1)
+            {
+                rep(j,0,m)
+                {
+                    ans[i][j]=ans[i-1][j]+2;
+                }
+            }
+            else
+            {
+                numprint=1024*c-3;
+                rep(j,0,m)
+                {
+                    if(j%2==1)
+                    numprint++;
+                    else
+                    numprint+=3;
+                    ans[i][j]=numprint;
+                }
+                c++;
+            }
+        }
+        rep(i,0,n)
+        {
+            rep(j,0,m)
+            {
+                cout<<ans[i][j]<<" ";
+            }
+            cout<<"\n";
+        }
     }
 }

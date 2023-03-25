@@ -79,6 +79,12 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,m;
+        cin>>n>>m;
+        ll p[m];
+        rep(i,0,m)
+        {
+            
+        }
     }
 }

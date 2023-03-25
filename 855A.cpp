@@ -79,6 +79,21 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        string s,ans="";
+        cin>>s;
+        transform(s.begin(),s.end(),s.begin(),::tolower);
+        ans+=s[0];
+        rep(i,0,n-1)
+        {
+            if(s[i]!=s[i+1])
+            ans+=s[i+1];
+        }
+        //cout<<ans<<"\n";
+        if(ans=="meow")
+        PYES;
+        else
+        PNO;
     }
 }

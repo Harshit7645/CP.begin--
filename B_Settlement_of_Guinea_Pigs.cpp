@@ -1,4 +1,4 @@
-#include<iostream>
+        #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -79,6 +79,25 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        ll aviary=0,countones=0,ans=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]==1)
+            {
+                aviary++;
+                countones++;
+                ans=max(ans,aviary);
+            }
+            else if(aviary)
+            {
+                aviary=countones/2+1;
+                ans=max(ans,aviary);
+            }
+        }
+        cout<<ans<<endl;
     }
 }

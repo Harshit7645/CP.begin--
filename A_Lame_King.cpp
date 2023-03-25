@@ -79,6 +79,12 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll a,b;
+        cin>>a>>b;
+        ll diff=abs(abs(a)-abs(b));
+        if(abs(a)==abs(b))
+        cout<<2*min(abs(a),abs(b))+2*diff<<"\n";
+        else
+        cout<<2*min(abs(a),abs(b))+2*diff-1<<"\n";
     }
 }

@@ -79,6 +79,60 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n,k;
+        cin>>n>>k;
+        string s,t;
+        cin>>s>>t;
+        if(s==t)
+        {
+            PYES;
+            continue;
+        }
+        if(n<=k)
+        {
+            if(s==t)
+            PYES;
+            else
+            PNO;
+            continue;
+        }
+        map<char,ll>m1,m2;
+        rep(i,0,n)
+        {
+            m1[s[i]]++;
+            m2[t[i]]++;
+        }
+        ll f=1;
+        rep(i,97,123)
+        {
+            if(m1[(char)(i)]!=m2[(char)(i)])
+            {
+                f=0;
+                break;
+            }
+        }
+        if(!f)
+        {
+            PNO;
+            continue;
+        }
+        if(n>=2*k)
+        {
+            PYES;
+            continue;
+        }
+        rep(i,n-k,k)
+        {
+            if(s[i]!=t[i])
+            {
+                f=0;
+                break;
+            }
+        }
+        if(f)
+        PYES;
+        else 
+        PNO;
+        //cout<<s<<"\n"<<" "<<t<<"\n";
     }
 }

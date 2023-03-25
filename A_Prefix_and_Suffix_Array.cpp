@@ -79,6 +79,43 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        vector<string>req;
+        rep(i,0,2*n-2)
+        {
+            string temp;
+            cin>>temp;
+            req.push_back(temp);
+        }
+        ll k=1,c=0;
+        string s1="",s2="";
+        ll f=1;
+        while(k<=n){
+        rep(i,0,req.size())
+        {
+            if(req[i].length()==k)
+            {
+                if(c==0){
+                s1=req[i];
+                c++;}
+                else{
+                s2=req[i];
+                c=0;
+                reverse(s1.begin(),s1.end());
+                if(s1!=s2)
+                {
+                    f=0;
+                    break;
+                }
+                }
+            }
+        }
+        k++;
+        }
+        if(f)
+        PYES;
+        else
+        PNO;
     }
 }

@@ -79,6 +79,31 @@ int main()
     cin>>t;
     while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll dp[n],len=1,j=0;
+        rep(i,0,n)
+        {
+            //dp[0]=max(arr[i],dp[0]);
+            while(j<i)
+            {
+                if(arr[j]>=len)
+                break;
+                len--; 
+                j++;
+            }
+            dp[i]=len;
+            len++;
+        }
+        rep(i,0,n)
+        {
+            cout<<dp[i]<<" ";
+        }
+        cout<<"\n";
     }
 }
