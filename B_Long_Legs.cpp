@@ -69,16 +69,39 @@ vector<ll> printDivisors(int n)
                 }
 		}
 	}
+    //sort(req.begin(),req.end());
     return req;
 }
-
+ll value(ll n)
+{
+    ll res=10e9;
+    vector<ll>req=printDivisors(n);
+    rep(i,0,req.size())
+    {
+        ll temp=0;
+        if(i!=req.size()-1)
+        temp=(req[i]-1)+(req[i+1]);
+        res=min(res,temp);
+        i++;
+    }
+    return res;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll x,y;
+        cin>>x>>y;
+        if(x==1 && y==1)
+        cout<<"2\n";
+        else if(x==1)
+        cout<<1+value(y)<<"\n";
+        else if(y==1)
+        cout<<1+value(x)<<"\n";
+        else 
+        cout<<value(x)+value(y)+1<<"\n";
     }
-}   
+}

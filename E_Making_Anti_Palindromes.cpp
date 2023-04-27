@@ -75,10 +75,54 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        if(n%2==1)
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        map<char,ll>m;
+        rep(i,0,n)
+        {
+            m[s[i]]++;
+        }
+        ll f=0;
+        for(auto x:m)
+        {
+            if(x.second>n/2)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        ll cnt=0;
+        map<char,ll>res;
+        rep(i,0,n/2)
+        {
+            if(s[i]==s[n-1-i])
+            {
+                res[s[i]]++;
+                cnt++;
+            }
+        }
+        ll ans=ceil((double)cnt/2);
+        for(auto x:res)
+        {           
+            ans=max(ans,x.second);
+        }
+        cout<<ans<<"\n";
+
     }
 }   

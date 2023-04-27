@@ -71,14 +71,43 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
+ll lucky(int n)
+{
+    int largest = 0;
+    int smallest = 9;
+ 
+    while (n) {
+        int r = n % 10;
+ 
+        // Find the largest digit
+        largest = max(r, largest);
+ 
+        // Find the smallest digit
+        smallest = min(r, smallest);
+ 
+        n = n / 10;
+    }
+    return (largest - smallest);
+}
 
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll t;
+    cin>>t;
+    while(t--)
     {
-        
+        ll l,r;
+        cin>>l>>r;
+        ll ans=l,mx=0;
+        rep(i,l,min(l+101,r+1))
+        {
+            if(lucky(i)>mx)
+            {
+                mx=lucky(i);
+                ans=i;
+            }
+        }
+        cout<<ans<<"\n";
     }
-}   
+}

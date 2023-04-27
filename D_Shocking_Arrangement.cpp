@@ -4,8 +4,8 @@ using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 ll fact(ll n)
 {
@@ -75,10 +75,59 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n],mini=10e9,maxi=0;
+        vector<ll>pos,neg;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]>0)
+            pos.push_back(arr[i]);
+            else
+            neg.push_back(arr[i]);
+            mini=min(arr[i],mini);
+            maxi=max(arr[i],maxi);
+        }
+        ll diff=maxi-mini,f=0;
+        rep(i,0,n)
+        {
+            if(diff<=arr[i])
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        {
+            PNO;
+            continue;
+        }
+        sort(neg.begin(),neg.end());
+        reverse(neg.begin(),neg.end());
+        sort(pos.begin(),pos.end());
+        reverse(pos.begin(),pos.end());
+        vector<ll>ans(n);
+        ll sum=0,c=0;
+        rep(i,0,neg.size())
+        {
+            ans[c++]=neg[i];
+            sum+=neg[i];
+            rep(j,0,pos.size())
+            {
+                if(sum>=0)
+                break;
+                sum+=pos[j];
+                ans[c++]=pos[j];
+            }
+        }
+        PYES;
+        rep(i,0,n)
+        cout<<ans[i]<<" ";
+        cout<<"\n";
     }
-}   
+}

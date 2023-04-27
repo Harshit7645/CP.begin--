@@ -71,14 +71,27 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+int solve(int arr[],int n,int b)
+{
+    ll i=0,c=0,sum=0;
+    for(i=0;i<b;i++)
+    {
+        sum+=arr[i];
+    }
+    int tempsum=sum;
+    for(i=b-1;i>=0;i--)
+    {
+        tempsum-=arr[i];
+        tempsum+=arr[n-1+(i-b+1)];
+        if(tempsum>sum)
+        sum=tempsum;
+    }
+    return sum;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
-}   
+    int arr[]={10,2,3,4,5,6,7,8,9,1};
+    int x=solve(arr,10,4);
+    cout<<x;
+}

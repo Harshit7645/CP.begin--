@@ -75,10 +75,25 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        ll min1,min2,max1,max2;
+        {
+            min1=arr[0];
+            min2=arr[1];
+            max1=arr[n-2];
+            max2=arr[n-1];
+        }
+        cout<<max(min1*min2,max1*max2)<<"\n";
     }
 }   

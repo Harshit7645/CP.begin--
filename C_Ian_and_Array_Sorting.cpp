@@ -75,10 +75,26 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        vector<ll>arr(n);
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        if(arr[0]>arr[1])
+        {
+            PNO;
+            continue;
+        }
+        ll f=0;
+        rep(i,0,n-1)
+        {
+            arr[i]=0;
+        }
     }
 }   

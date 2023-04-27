@@ -75,10 +75,7 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
-}   
+    ll x,y,z;
+    cin>>x>>y>>z;
+    cout<<"1000\n";
+}

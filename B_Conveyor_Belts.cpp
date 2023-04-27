@@ -75,10 +75,21 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,x1,y1,x2,y2;
+        cin>>n>>x1>>y1>>x2>>y2;
+        if(x1>n/2)
+        x1=n-x1+1;
+        if(x2>n/2)
+        x2=n-x2+1;
+        if(y1>n/2)
+        y1=n-y1+1;
+        if(y2>n/2)
+        y2=n-y2+1;
+        cout<<abs(min(x1,y1)-min(x2,y2))<<"\n";
+
     }
-}   
+}

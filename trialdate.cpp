@@ -75,10 +75,20 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
-}   
+        ll n;
+        cin>>n;
+        string s;
+        vector<string>dates;
+        rep(i,0,n)
+        {
+            cin>>s;
+            dates.push_back(s);
+        }
+        sort(dates.begin(),dates.end());
+        rep(i,0,n)
+        {
+            cout<<dates[i]<<"\n";
+        }
+        //cout<<"\n"<<n;
+        cout<<dates[n-4]<<"\n";
+}

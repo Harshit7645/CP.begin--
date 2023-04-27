@@ -4,8 +4,8 @@ using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 ll fact(ll n)
 {
@@ -75,10 +75,49 @@ vector<ll> printDivisors(int n)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll t;
+    cin>>t;
+    while(t--)
     {
-        
+        ll n;
+        cin>>n;
+        ll a[n],b[n];
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>b[i];
+        }
+        ll f=0;
+        rep(i,0,n-1)
+        {
+            if(a[i]<=a[n-1] && b[i]<=b[n-1])
+            {
+                continue;
+            }
+            else if(a[i]>a[n-1] || b[i]>b[n-1])
+            {
+                swap(a[i],b[i]);
+            }
+            else
+            {
+                f=1;
+                break;
+            }
+        }
+        rep(i,0,n-1)
+        {
+            if(a[i]>a[n-1] || b[i]>b[n-1])
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        PNO;
+        else
+        PYES;
     }
-}   
+}
