@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -77,6 +72,35 @@ vector<ll> printDivisors(int n)
     return req;
 }
 
+// C++ program to find GCD of two or
+// more numbers
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// Function to return gcd of a and b
+int gcd(int a, int b)
+{
+  if (a == 0)
+    return b;
+  return gcd(b % a, a);
+}
+ 
+// Function to find gcd of array of
+// numbers
+int findGCD(int arr[], int n)
+{
+  int result = arr[0];
+  for (int i = 1; i < n; i++)
+  {
+    result = gcd(arr[i], result);
+ 
+    if(result == 1)
+    {
+    return 1;
+    }
+  }
+  return result;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -84,6 +108,20 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        //ll k=2,ans=1,f=0;
+        int dist[n];
+        rep(i,0,n)
+        {
+            dist[i]=abs(arr[i]-(i+1));
+        }
+        ll ans=1;
+        cout<<findGCD(dist,n)<<"\n";
     }
 }   

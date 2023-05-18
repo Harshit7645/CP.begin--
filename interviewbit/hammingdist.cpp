@@ -76,14 +76,47 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
+string decToBinary(int n)
+{
+    // Size of an integer is assumed to be 32 bits
+    string s;
+    int num;
+    for (int i = 31; i >= 0; i--) {
+        int k = n >> i;
+        if (k & 1)
+            s+="1";
+        else
+            s+="0";
+    }
+    return s;
+}
 
+int solve(const vector<int>A)
+{
+    int n=A.size(),i=0,j=0,ans=0;
+    vector<string>v;
+    for(i==0;i<n;i++)
+    {
+        v.push_back(decToBinary(A[i]));
+    }
+    vector<int>count(32);
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<v[i].length();j++)
+        {
+            count[j]+=(v[i][j]-'0');
+        }
+    }
+    ans=0;
+    for(i=0;i<32;i++)
+    {
+        ans+=2*count[i]*(n-count[i]);
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    int x=solve({2,4,6});
+    cout<<x;
 }   

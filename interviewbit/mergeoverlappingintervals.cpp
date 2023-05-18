@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -76,14 +71,30 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+struct Interval{
+    int start;
+    int end;
+};
+vector<Interval>solve(vector<Interval>A)
+{
+    int n=A.size(),i=0,j=0;
+    vector<Interval>ans;
+    ans.push_back({A[0]});
+    for(i=1;i<n;i++)
+    {
+        if(ans[ans.size()-1].end>=A[i].start)
+        ans[ans.size()-1].end=max(ans[ans.size()-1].end,A[i].end);
+        else
+        ans.push_back(A[i]);
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    vector<Interval>v={{1,10},{2,9},{3,8},{15,18},{16,19},{18,22},{20,25}};
+    vector<Interval>ans;
+    ans=solve(v);
+    for(auto x:ans)
+    cout<<x.start<<" "<<x.end<<"\n";
 }   

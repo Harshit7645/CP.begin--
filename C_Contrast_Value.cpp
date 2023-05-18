@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -84,6 +79,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,ans=n;
+        cin>>n;
+        vector<ll>a(n),b;
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            while(a[i]==a[i+1] && i+1<n)
+            i++;
+            b.push_back(a[i]);
+        }
+        n=b.size();
+        ans=n;
+        rep(i,1,b.size()-1)
+        {
+            if((b[i-1]<b[i] && b[i]<b[i+1])||(b[i-1]>b[i] && b[i]>b[i+1]))
+            ans--;
+        }
+        cout<<ans<<"\n";
     }
 }   

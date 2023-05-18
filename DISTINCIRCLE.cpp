@@ -76,14 +76,13 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+int solve(int A,int B,int C)
+{
+    A=A%B;
+    return C+(A%B)-1;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    int x=solve(8,5,2);
+    cout<<x;
 }   

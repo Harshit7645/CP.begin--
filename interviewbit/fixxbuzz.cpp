@@ -76,14 +76,28 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+vector<string>solve(int A)
+{
+    int i=1;
+    vector<string>ans;
+    for(i=1;i<=A;i++)
+    {
+        if(i%15==0)
+        ans.push_back("FizzBuzz");
+        else if(i%5==0)
+        ans.push_back("Buzz");
+        else if(i%3==0)
+        ans.push_back("Fizz");
+        else
+        ans.push_back(to_string(i));  
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    vector<string>a=solve(15);
+    rep(i,0,a.size())
     {
-        
+        cout<<a[i]<<" ";
     }
 }   

@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -76,14 +71,45 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-
+vector<string>solve(vector<string>A)
+{
+    int i=0,n=A.size();
+    vector<string>dig,letter;
+    vector<string>ans;
+    for(i=0;i<n;i++)
+    {
+        if(A[i][A[i].length()-1]<='9' && A[i][A[i].length()-1]>='0')
+        dig.push_back(A[i]);
+        else
+        letter.push_back(A[i]);
+    }
+    vector<pair<string,string>>lett;
+    for(auto x:letter)
+    {
+        for(i=0;i<x.length();i++)
+        {
+            if(x[i]=='-')
+            {
+                lett.push_back({x.substr(i+1),x.substr(0,i)});
+                break;
+            }
+        }
+    }
+    sort(lett.begin(),lett.end());
+    for(auto x:lett)
+    {
+        string s=x.second+"-"+x.first;
+        ans.push_back(s);
+    }
+    for(auto x:dig)
+    ans.push_back(x);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
-}   
+    vector<string>A={"a1-9-2-3-1","g1-act-car","zo4-4-7","ab1-off-key-dog","a8-act-zoo"};
+    vector<string>ans;
+    ans=solve(A);
+    for(auto x:ans)
+    cout<<x<<"\n";
+}

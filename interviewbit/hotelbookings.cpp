@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -76,14 +71,48 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
+bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
+{
+    return (a.second < b.second);
+}
+static bool myCompare(pair<int,int> &p1, pair<int,int> &p2) {
+    if(p1.first == p2.first) {
+        return p1.second > p2.second; // if two times have same value then 'arrival time' must appear first in the sorted array
+    }
+    return p1.first < p2.first;
+}
+bool solve(vector<int>arrive,vector<int>depart,int K)
+{
+    int n=arrive.size();
+    vector<pair<int,int>>ans;
+    int i=0;
+    for(i=0;i<n;i++)
+    {
+        ans.push_back({arrive[0],1});
+        ans.push_back({depart[i],0});
+    }  
+    int maxrooms=0,cntofrooms=0;
+    sort(ans.begin(),ans.end(),myCompare); 
+    for(i=0;i<ans.size();i++)
+    {
+        if(ans[i].second==1){
+        cntofrooms++;
+        maxrooms=max(maxrooms,cntofrooms);
+        }
+        else
+        cntofrooms--;
+        if(maxrooms<=K)
+        return 0;
+    }
+    return 1;
+}
 
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    vector<int>x={1,2,3};
+    vector<int>y={2,3,4};
+    int k=1;
+    int t=solve(x,y,k);
+    cout<<t;
 }   

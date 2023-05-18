@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -76,14 +71,46 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define rep(i,a,b) for(ll i=a;i<b;i++)
+#define repr(i,a,b) for(ll i=a;i>=b;i--)
+#define PNO cout<<"NO\n"
+#define PYES cout<<"YES\n"
+#define vll vector<ll>;
+bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
+{
+    return (a.second < b.second);
+}
 
+int solve(vector<vector<int>>A)
+{
+            sort(A.begin(), A.end(), [](vector<int>& a, vector<int>& b) {
+            return a[1] < b[1] || (a[1] == b[1] && a[0] > b[0]); 
+        });
+        int n = A.size(), ans = 0, p1 = -1, p2 = -1;
+        for (int i = 0; i < n; i++) {
+            if (A[i][0] <= p1) continue;
+            if (A[i][0] > p2) {
+                ans += 2;
+                p2 = A[i][1];
+                p1 = p2-1;
+            }
+            else {
+                
+                ans++;
+                p1 = p2;
+                p2 = A[i][1];
+            }
+        }
+        return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    vector<vector<int>>A={{1,3},{1,4},{2,5},{3,5}};
+    int x=solve(A);
+    cout<<x;
 }   

@@ -32,11 +32,6 @@ ll power(ll a,ll b)
     }
     return result;
 }
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
-{
-    return (a.second < b.second);
-}
- 
 bool isPrime(ll n)
 {
     if(n<=1)
@@ -76,14 +71,40 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
+int maxsubarray(vector<int>a)
+{
+    int i=0,n=a.size(),sum=0,maxsum=0,f=0;
+    for(i=0;i<n;i++)
+    {
+        if(a[i]>0)
+        f=1;
+    }
+    if(!f)
+    {
+        int large=-1e9;
+        for(i=0;i<n;i++)
+        {
+            large=max(large,a[i]);
+        }
+        return large;
+    }
+    for(i=0;i<n;i++)
+    {
+        sum+=a[i];
+        if(sum<0)
+        {
+            sum=0;
+        }
+        if(a[i]>0)
+        maxsum=max(maxsum,sum);
+    }
+    return maxsum;
+}
 
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    vector<int>a={-2,-5};
+    int ans=maxsubarray(a);
+    cout<<ans<<"\n";
 }   
