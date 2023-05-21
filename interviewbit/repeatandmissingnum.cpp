@@ -146,14 +146,54 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(const vector<int>A)
+{
+    int n=A.size(),i=0;
+    int a=0,k=n/3;
+    int ele1=INT_MAX,ele2=INT_MAX;
+    int cnt1=0,cnt2=0;
+    for(i=0;i<n;i++)
+    {
+        if(cnt1>0 && ele1==A[i])
+        {
+            cnt1++;
+        }
+        else if(cnt2>0 && ele2==A[i])
+        {
+            cnt2++;
+        }
+        else if(cnt1==0)
+        {
+            ele1=A[i];
+            cnt1++;
+        }
+        else if(cnt2==0)
+        {
+            ele2=A[i];
+            cnt2++;
+        }
+        else    
+        {
+            cnt1--;
+            cnt2--;
+        }
+    }
+    cnt1=0,cnt2=0;
+    for(i=0;i<n;i++)
+    {
+        if(A[i]==ele1)
+        cnt1++;
+        else if(A[i]==ele2)
+        cnt2++;
+    }
+    if(cnt1>n/3)
+    return ele1;
+    else if(cnt2>n/3)
+    return ele2;
+    return -1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+int ans=solve({1,2,3,1,1});    cout<<ans;
 }   

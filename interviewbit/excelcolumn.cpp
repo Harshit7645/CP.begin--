@@ -146,14 +146,39 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string solve(int A)
+{
+    string ans="";
+    while(A>0)
+    {
+        int rem=A%26;
+        if(rem)
+        {
+            ans+=rem-1+'A';
+            A=A/26;
+        }
+        else
+        {
+            ans+='Z';
+            A=A/26-1;
+        }      
+    }
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
+// int solve(string A)
+// {
+//     int n=A.length();
+//     int i=n-1,ans=0,c=0;
+//     for(i=n-1;i>=0;i--)
+//     {
+//         ans=ans+pow(26,c)*(A[i]-'A'+1);
+//         c++;
+//     }
+//     return ans;
+// }
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve(943566);
 }   

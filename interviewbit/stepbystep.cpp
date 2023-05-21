@@ -76,30 +76,22 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-int solve(vector<int>A)
+int solve(int A)
 {
-    int n=A.size(),i=0;
-    vector<int>premax(n),suffmin(n);
-    premax[0]=0;
-    for(i=1;i<n;i++)
-    {
-        premax[i]=max(premax[i-1],A[i-1]);
-    }
-    suffmin[n-1]=1e9;
-    for(i=n-2;i>=0;i--)
-    {
-        suffmin[i]=min(A[i+1],suffmin[i+1]);
-    }
-    for(i=1;i<n-1;i++)
-    {
-        if(A[i]>premax[i] && A[i]<suffmin[i])
-        return 1;
-    }
-    return 0;
+    int target = abs(A);
+int n = ceil((-1.0 + sqrt(1 + 8.0 * target)) / 2);
+int sum = n * (n + 1) / 2;
+if (sum == target)
+return n;
+
+int d = sum - target;
+if ((d & 1) == 0)
+    return n;
+else
+    return n + ((n & 1) ? 2 : 1);
 }
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    int x=solve({5, 1, 4,4});
-    cout<<x;
+    cout<<solve(-67);
 }   

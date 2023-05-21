@@ -76,30 +76,33 @@ vector<ll> printDivisors(int n)
 	}
     return req;
 }
-int solve(vector<int>A)
+int solve(vector<vector<string>>A)
 {
-    int n=A.size(),i=0;
-    vector<int>premax(n),suffmin(n);
-    premax[0]=0;
-    for(i=1;i<n;i++)
+    int n=A.size(),i=0,ans=0;
+    map<string,multiset<int>>m;
+    for(i=0;i<n;i++)
     {
-        premax[i]=max(premax[i-1],A[i-1]);
+        m[A[i][0]].insert(stoi(A[i][1]));
     }
-    suffmin[n-1]=1e9;
-    for(i=n-2;i>=0;i--)
+    map<string,int>finalmarks;
+    for(auto x:m)
     {
-        suffmin[i]=min(A[i+1],suffmin[i+1]);
+        int sum=0;
+        for(auto y:x.second)
+        {
+            sum+=y;
+        }
+        finalmarks[x.first]=sum/x.second.size();
     }
-    for(i=1;i<n-1;i++)
+    ans=0;
+    for(auto x:finalmarks)
     {
-        if(A[i]>premax[i] && A[i]<suffmin[i])
-        return 1;
+        ans=max(ans,x.second);
     }
-    return 0;
+    return ans;
 }
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    int x=solve({5, 1, 4,4});
+    int x=solve({{"nfa", "97"},{"nfa", "97"},{"nfa", "32"},{"nfa", "67"},{"nfa", "80"},{"nfa", "20"},{"nfa", "43"}});
     cout<<x;
 }   

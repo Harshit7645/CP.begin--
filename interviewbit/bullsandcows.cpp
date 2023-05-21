@@ -146,14 +146,36 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string solve(string A,string B)
+{
+    int n=A.length();
+    int c1=0,c2=0;
+    map<char,int>m1,m2;
+    rep(i,0,n)
+    {
+        if(A[i]==B[i])
+        c1++;
+        m1[A[i]]++;
+        m2[B[i]]++;
+    }
+    rep(i,0,n)
+    {
+        if(m1[B[i]]>0)
+        {
+            c2+=min(m1[B[i]],m2[B[i]]);
+            m1[B[i]]=0;
+            m2[B[i]]=0;
+        }
+    }
+    string ans="";
+    ans+=to_string(c1);
+    ans+="A";
+    ans+=to_string(c2-c1);
+    ans+="B";
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("1123","0111");
 }   

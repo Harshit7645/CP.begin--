@@ -146,14 +146,35 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+vector<string>solve(string A)
+{
+    int n=A.length();
+    vector<string>ans;
+    int k=0;
+    string temp="";
+    rep(i,0,n)
+    {
+        temp+=A[i];
+        if(A[i]=='~')
+        {
+            ans.push_back(temp);
+            temp="";
+        }
+    }
+    rep(i,0,ans.size())
+    {
+        rep(j,0,ans[i].length())
+        {
+            if(ans[i][j]>='0' && ans[i][j]<='9')
+            ans[i].erase(j);
+        }
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    vector<string>ans=solve("scaleignign11~academy7~");
+    rep(i,0,ans.size())
+    cout<<ans[i]<<" ";
 }   

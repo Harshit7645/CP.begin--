@@ -146,14 +146,26 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string solve(string A,int B)
+{
+    int n=A.length(),i=0;
+    string ans="";
+    rep(i,0,n)
+    {
+        int c=1,f=0,init=i;
+        while(A[i]==A[i+1] && i+1<n)
+        {
+            c++;
+            i++;
+        }
+        if(c==B)
+        continue;
+        else
+        ans+=A.substr(init,c);
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("abbccd",1);
 }   

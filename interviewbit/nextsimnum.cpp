@@ -146,14 +146,37 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string solve(string A)
+{
+    int i=0,n=A.length(),f=0,c=0;
+    string ans=A,a="",b="";
+    for(i=n-1;i>=1;i--)
+    {
+        if(A[i]>A[i-1])
+        {
+            f=1;
+            a=A.substr(0,i);
+            b=A.substr(i);
+            sort(b.begin(),b.end());
+            //cout<<a<<" "<<b<<"\n";
+            for(i=0;i<b.length();i++)
+            {
+                if(b[i]>a[a.length()-1])
+                {
+                    c=i;
+                    break;
+                }
+            }
+            swap(a[a.length()-1],b[c]);
+            break;
+        }
+    }
+    if(!f)
+    return "-1";
+    return (a+b);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("3412");
 }   

@@ -146,14 +146,54 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int binary_search(vector<int>arr,int l,int r,int x)
+{
+    int mid=(l+r)/2;
+    if(l<=r)
+    {
+        if(arr[mid]==x)
+        return mid;
+        else if(arr[mid]>x)
+        return binary_search(arr,l,mid-1,x);
+        else
+        return binary_search(arr,mid+1,r,x);
+    }
+    return -1;
+}
+int binsearch(vector<int>arr,int l,int r,int x)
+{
+    if(l<=r)
+    {
+        int mid=(l+r)/2;
+        if(arr[mid]>x)
+        {
+            int i=mid;
+            while(i>=0)
+            {
+                if(arr[i]<x)
+                {
+                    return i+1;
+                }
+                i--;
+            }
+        }
+        else
+        return binsearch(arr,mid+1,r,x);
+    }
+    return arr.size();
+}
+int solve(vector<int>A,int B)
+{
+    int n=A.size(),i=0;
+    int ind=binary_search(A,0,n-1,B);
+    while(A[ind]==A[ind+1] && ind+1<n && ind>=0)
+    ind++;
+    if(ind>=0)
+    return ind+1;
+    return binsearch(A,0,n-1,B);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({5},4);
 }   

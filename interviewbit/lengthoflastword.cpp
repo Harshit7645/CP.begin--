@@ -146,14 +146,27 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(string A)
+{
+    int n=A.length(),i=n-1,ind=0,cnt=0,f=0,j=0;
+    repr(i,n-1,0)
+    {
+        if(A[i]==' ')
+        j++;
+        else 
+        break;
+    }
+    repr(i,n-1-j,0)
+    {
+        if(A[i]==' ')
+        break;
+        else
+        cnt++;
+    }
+    return cnt;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("Hello WOrld     ");
 }   

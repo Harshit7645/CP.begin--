@@ -146,14 +146,38 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+    bool goodheight(vector<int>A,int n,int B)
+    {
+        int cnt=0;
+        rep(i,0,A.size())
+        {
+            cnt+=max(0,A[i]-n);
+        }
+        if(cnt>=B)
+        return true;
+        return false;
+    }
+int solve(vector<int>A,int B)
+{
+    ll n=A.size(),i=0;
+    sort(A.begin(),A.end());
+    ll l=0,r=A[n-1]+1,mid=0,ans=0;
+    while(l<=r)
+    {
+        mid=l+(r-l)/2;
+        //cout<<l<<" "<<r<<endl;
+        if(goodheight(A,mid,B))
+        {
+            ans=max(ans,mid);
+            l=mid+1;
+        }
+        else
+        r=mid-1;
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({117, 84, 50, 119, 74, 128},58);
 }   

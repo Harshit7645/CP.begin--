@@ -146,14 +146,46 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+typedef long long ll;
+#define rep(i,a,b) for(ll i=a;i<b;i++)
+#define repr(i,a,b) for(ll i=a;i>=b;i--)
+#define PNO cout<<"NO\n"
+#define PYES cout<<"YES\n"
+#define vll vector<ll>;
+int solve(string A)
+{
+    int n=A.length(),i=0;
+    int M=1e9+7;
+    vector<int>suffcnt(n);
+    int cnt=0;
+    repr(i,n-1,0)
+    {
+        suffcnt[i]=cnt;
+        if(A[i]!='a' && A[i]!='e'&& A[i]!='i'&& A[i]!='o'&& A[i]!='u')
+        cnt++;
+    }
+    int ans=0;
+    rep(i,0,n)
+    {
+        if(A[i]=='a' || A[i]=='e' || A[i]=='i' || A[i]=='o' || A[i]=='u')
+        ans+=suffcnt[i]%M;
+    }
+    vector<int>suffcnt2(n);
+    cnt=0;
+    repr(i,n-1,0)
+    {
+        suffcnt2[i]=cnt;
+        if(A[i]=='a' || A[i]=='e' || A[i]=='i' || A[i]=='o' || A[i]=='u')
+        cnt++;
+    }
+    rep(i,0,n)
+    {
+        if(A[i]!='a' && A[i]!='e'&& A[i]!='i'&& A[i]!='o'&& A[i]!='u')
+        ans+=suffcnt2[i]%M;
+    }
+    return ans%M;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("a");
 }   

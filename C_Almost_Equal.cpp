@@ -4,8 +4,8 @@ using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 ll fact(ll n)
 {
@@ -146,14 +146,49 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool diffcheck(string a,string b,ll m)
+{
+    ll c=0;
+    rep(i,0,m)
+    {
+        if(a[i]!=b[i])
+        c++;
+    }
+    return (c==1);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n,m;
+    cin>>n>>m;
+    vector<string>v;
+    rep(i,0,n)
     {
-
+        string temp;
+        cin>>temp;
+        v.push_back(temp);
     }
+    sort(v.begin(),v.end());
+    vector<ll>flag(n);
+    rep(i,0,n)
+    {
+        rep(j,i+1,n)
+        {
+            if(diffcheck(v[i],v[j],m) && flag[j]!=1)
+            {
+                flag[i]=1;
+                break;
+            }
+        }
+    }
+    rep(i,0,n)
+    {
+        if(flag[i]==0)
+        {
+            PNO;
+            return 0;
+        }
+    }
+    PYES;
+    return 0;
 }   

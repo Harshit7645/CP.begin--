@@ -146,14 +146,28 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(string A)
+{
+     string s="";
+    int i=0,n=A.length();
+    transform(A.begin(), A.end(), A.begin(), ::tolower);
+    for(i=0;i<A.length();i++)
+    {
+        if(A[i]>='0' && A[i]<='9')
+        s+=A[i];
+        else if(A[i]>='a' && A[i]<='z')
+        s+=A[i];
+    }
+    //cout<<s<<endl;
+    for(i=0;i<s.length()/2;i++)
+    {
+        if(s[i]!=s[s.length()-i-1])
+        return 0;
+    }
+    return 1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("A man, a plan, a canal: Panama");
 }   

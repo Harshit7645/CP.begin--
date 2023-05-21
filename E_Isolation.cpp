@@ -150,10 +150,42 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n,q;
+    cin>>n>>q;
+    map<ll,set<ll>>m;
+    rep(i,0,q)
     {
-
+        ll qtype,u,v;
+        cin>>qtype;
+        if(qtype==1)
+        {
+            cin>>u>>v;
+            m[u].insert(v);
+            m[v].insert(u);
+        }
+        else
+        {
+            cin>>u;
+            m[u].clear();
+            for(auto x:m)
+            {
+                for(auto y:x.second)
+                {
+                    if(y==u)
+                    m[x.first].erase(y);
+                }
+            }
+        }
+        ll cnt=0;
+        for(auto x:m)
+            {
+                // for(auto y:x.second)
+                // cout<<y<<" ";
+                // cout<<"\n";
+                if(x.second.size()>0)
+                cnt++;
+            }
+            //cout<<"hyhyhyhyhyhy\n";
+        cout<<n-cnt<<"\n";
     }
 }   

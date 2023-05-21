@@ -146,14 +146,64 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(vector<int>A,int B)
+{
+    int n=A.size(),sum=0,avg=0,i=0,maxm=INT_MIN,minm=INT_MAX;
+    sort(A.begin(),A.end());
+    map<int,int>m;
+    for(i=0;i<n;i++)
+    {
+        m[A[i]]++;
+        maxm=max(maxm,A[i]);
+        minm=min(minm,A[i]);
+    }
+    for(auto x:m)
+    {
+        sum+=x.first;
+    }
+    if(sum%m.size()==0)
+    avg=sum/m.size();
+    ll f=0;
+    cout<<avg;
+    for(i=0;i<n;i++)
+    {
+        if(A[i]==avg ||A[i]+B==avg || A[i]-B==avg)
+        continue;
+        else
+        {
+            f=1;
+            break;
+        }
+    }
+    if(!f)
+    return 1;
+    for(i=0;i<n;i++)
+    {
+        if(A[i]==maxm ||A[i]+B==maxm || A[i]-B==maxm)
+        continue;
+        else
+        {
+            f=1;
+            break;
+        }
+    }
+    if(!f)
+    return 1;
+    for(i=0;i<n;i++)
+    {
+        if(A[i]==minm ||A[i]+B==minm || A[i]-B==minm)
+        continue;
+        else
+        {
+            f=1;
+            break;
+        }
+    }
+    if(!f)
+    return 1;
+    return 0;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({1,2,3,3,2,1,2,3,1,2,1,2,1,2,3,2,1,3,1,2,1,2,3,1,1,1,3,2,1,},1);
 }   

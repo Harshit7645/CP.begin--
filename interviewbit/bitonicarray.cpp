@@ -146,14 +146,83 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int binary_search_desc(vector<int>arr,int l,int r,int x)
+{
+    int mid=(l+r)/2;
+    if(l<=r)
+    {
+        if(arr[mid]==x)
+        return mid;
+        else if(arr[mid]<x)
+        return binary_search_desc(arr,l,mid-1,x);
+        else
+        return binary_search_desc(arr,mid+1,r,x);
+    }
+    return -1;
+}
+int binary_search_asc(vector<int>arr,int l,int r,int x)
+{
+    int mid=(l+r)/2;
+    if(l<=r)
+    {
+        if(arr[mid]==x)
+        return mid;
+        else if(arr[mid]>x)
+        return binary_search_asc(arr,l,mid-1,x);
+        else
+        return binary_search_asc(arr,mid+1,r,x);
+    }
+    return -1;
+}
+int BitonicPoint(vector<int>arr,int l,int r)
+{
+    if(l<=r)
+    {
+        int mid=(l+r)/2;
+        if(arr[mid-1]<arr[mid] && arr[mid]>arr[mid+1])
+        return mid;
+        else if(arr[mid]<arr[mid+1])
+        return BitonicPoint(arr,mid+1,r);
+        else
+        return BitonicPoint(arr,l,mid-1);
+    }
+    return -1;
+}
+int solve(vector<int>A,int B)
+{
+    int n=A.size(),i=0;
+    int bitpoint=BitonicPoint(A,0,n-1);
+    if(B==A[bitpoint])
+    return bitpoint;
+    int x=binary_search_asc(A,0,bitpoint-1,B);
+    if(x!=-1)
+    return x;
+    return binary_search_desc(A,bitpoint+1,n-1,B);
+}
+int binpow(int base,int b,int d)
+{
+    if(d==1)
+    return 0;
+    ll result=1;
+    ll a=base%d;
+    while(b>0)
+    {
+        if(b%2==1)
+        result=(result*a)%d;
+        a=(a*a)%d;
+        if(a<0)
+        a+=d;
+        b/=2;
+    }
+        if(result<0)
+        {
+            result=(d-abs(result)%d);
+        return result;
+        }
+    return result%d;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    //cout<<solve({1,3,4,6,8,7,5,2},5);
+    cout<<binpow(71045970,41535484,64735492);
 }   

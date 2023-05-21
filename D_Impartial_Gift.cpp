@@ -150,10 +150,31 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n,m,d;
+    cin>>n>>m>>d;
+    set<ll>A,B;
+    rep(i,0,n)
     {
-
+        ll a;
+        cin>>a;
+        A.insert(a);
     }
+    rep(i,0,m)
+    {
+        ll b;
+        cin>>b;
+        B.insert(b);
+    }
+    ll ans=-1;
+    for(auto a:A)
+    {
+        auto it=B.upper_bound(a+d);
+        if(it!=B.begin())
+        {
+            ll tempb=*--it;
+            if(abs(a-tempb)<=d)
+            ans=max(ans,a+tempb);
+        } 
+    }
+    cout<<ans;
 }   

@@ -146,14 +146,51 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int atoi(const string A)
+{
+    string init="";
+    //cout<<12345;
+    ll f=0;
+    rep(i,0,A.length())
+    {
+        if(A[i]=='-' && i==0)
+        continue;
+        //cout<<A[i]<<"ihufvbfwiU"<<init;
+        if(A[i]>='0' && A[i]<='9' && f==0)
+        init+=A[i];
+        if(A[i]<'0' || A[i]>'9')
+        break;
+    }
+    //cout<<init<<"xgxktxtyxd";
+     //cout<<init<<"iurugvibvWIUGVGHWifugbwoUYFGBwui";
+    int n=init.length();
+    int c=0,num=0;
+    string maxnum="2147483647";
+    if(init.length()>maxnum.length() &&init[0]!='-')
+    return INT_MAX;
+    else if(init.length()>maxnum.length() &&init[0]=='-')
+    return INT_MIN;
+    repr(i,n-1,0)
+    {
+        if(num+pow(10,c)*(init[i]-'0')>INT_MAX && A[0]!='-')
+        return INT_MAX;
+        else if(num+pow(10,c)*(init[i]-'0')>INT_MAX && A[0]=='-')
+        return INT_MIN;
+        num=num+pow(10,c)*(init[i]-'0');
+        c++;
+    }
+    if(A[0]!='-')
+    return num;
+    else 
+    {
+        num=num*-1;
+        return num;
+    }
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    int x=atoi("+7");
+    cout<<x;
+    //cout<<INT_MAX;
 }   

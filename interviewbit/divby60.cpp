@@ -146,14 +146,27 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(vector<int>A)
+{
+    int n=A.size(),i=0,sum=0,cntz=0,cntn=0;
+    if(A[0]==0 && A.size()==1)
+    return 1;
+    for(i=0;i<n;i++)
+    {
+        sum+=A[i];
+        if(A[i]==0)
+        cntz++;
+        if(A[i]==2 || A[i]==4 || A[i]==6 || A[i]==8)
+        cntn++;
+    }
+    cout<<cntz<<" "<<cntn<<"";
+    if(sum%3!=0)
+    return 0;
+    if(cntz==0 || cntn==0)
+    return 0;
+    return 1;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({0});
 }   

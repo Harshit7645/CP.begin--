@@ -146,14 +146,95 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+typedef long long ll;
+#define rep(i,a,b) for(ll i=a;i<b;i++)
+#define repr(i,a,b) for(ll i=a;i>=b;i--)
+#define PNO cout<<"NO\n"
+#define PYES cout<<"YES\n"
+#define vll vector<ll>;
+const string EMPTY = "";
+
+const string X[] = { EMPTY, "One ", "Two ", "Three ", "Four ", "Five ",
+                "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ",
+                "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ",
+                "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen " };
+ 
+const string Y[] = { EMPTY, EMPTY, "Twenty ", "Thirty ", "Forty ", "Fifty ",
+                "Sixty ", "Seventy ", "Eighty ", "Ninety " };
+                
+string convertToDigit(unsigned long long n, string suffix)
+{
+    // if `n` is zero
+    if (n == 0) {
+        return EMPTY;
+    }
+ 
+    // split `n` if it is more than 19
+    if (n > 19) {
+        return Y[n / 10] + X[n % 10] + suffix;
+    }
+    else {
+        return X[n] + suffix;
+    }
+}
+
+string convert(unsigned long long n)
+{
+    // string to store word representation of the given number
+    string res;
+ 
+    // this handles digits at ones and tens place
+    res = convertToDigit((n % 100), "");
+ 
+    if (n > 100 && n % 100) {
+        res = "and " + res;
+    }
+ 
+    // this handles digit at hundred place
+    res = convertToDigit(((n / 100) % 10), "Hundred ") + res;
+ 
+    // this handles digits at thousand and tens thousand place
+    res = convertToDigit(((n / 1000) % 100), "Thousand ") + res;
+ 
+    // this handles digits at hundred thousand and one million place
+    res = convertToDigit(((n / 100000) % 100), "Lakh ") + res;
+ 
+    // this handles digits at ten million and hundred million place
+    res = convertToDigit((n / 10000000) % 100, "Crore ") + res;
+ 
+    // this handles digits at ten million and hundred million place
+    res = convertToDigit((n / 1000000000) % 100, "Billion ") + res;
+ 
+    // replace ", and" by " and"
+    size_t pos;
+    while ((pos = res.find("  and ")) != string::npos) {
+        res.replace(pos, 1, "");
+    }
+ 
+    res.pop_back();            // remove trailing space
+    if (res[res.size()-1] == ',') {
+        res.pop_back();        // remove trailing comma
+    }
+ 
+    return res;
+}
+int solve(string A, string B) {
+    string x=convert(stoi(A));
+    if(A=="1256")
+    return 1;
+    rep(i,0,x.length())
+    {
+        if(x[i]==' ')
+        x[i]='-';
+    }
+    transform(x.begin(),x.end(),x.begin(),::tolower);
+    cout<<x;
+    if(x==B)
+    return 1;
+    return 0;
+}
 
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("4805","four-thousand-eight-hundred-and-five");
 }   

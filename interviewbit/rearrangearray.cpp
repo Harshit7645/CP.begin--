@@ -146,14 +146,13 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+void solve(vector<int>A)
+{
+    int n=A.size(),i=0;
+    
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    solve({0,2,1,3});
 }   

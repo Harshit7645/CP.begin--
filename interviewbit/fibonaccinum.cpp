@@ -147,13 +147,44 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+void matmultiply(int A[2][2],int B[2][2])
+{
+    int x = (A[0][0] * B[0][0] + A[0][1] * B[1][0])%(1000000007);
+    int y = (A[0][0] * B[0][1] + A[0][1] * B[1][1])%(1000000007);
+    int z = (A[1][0] * B[0][0] + A[1][1] * B[1][0])%(1000000007);
+    int w = (A[1][0] * B[0][1] + A[1][1] * B[1][1])%(1000000007);
+     
+    A[0][0] = x;
+    A[0][1] = y;
+    A[1][0] = z;
+    A[1][1] = w;
+}
+void power(int F[2][2],int n)
+{
+    int M[2][2]={{1,1},{1,0}};
+    if(n==0 || n==1)
+    return ;
+    power(F,n/2);
+    matmultiply(F,F);
+    if(n%2!=0)
+    matmultiply(F,M);
+}
+int fib(int n)
+{
+    int F[2][2]={{1,1},{1,0}};
+    if(n==0)
+    return 0;
+    power(F,n-1);
+    return F[0][0];
+}
+int solve(int A)
+{
+    int ans=fib(A);
+    return ans%(1000000007);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    int x=solve(10);
+    cout<<x;
 }   

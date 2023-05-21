@@ -149,11 +149,31 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);   
+    ll n,k;
+    cin>>n>>k;
+    ll arr[n];
+    rep(i,0,n)
     {
-
+        cin>>arr[i];
     }
+    vector<ll>dp(k+1,INT_MAX);
+    dp[0]=0;
+    rep(i,1,k+1)
+    {
+        rep(j,0,n)
+        {
+            if(i-arr[j]>=0)
+            {
+                if(dp[i-arr[j]]!=INT_MAX && dp[i-arr[j]]+1<dp[i])
+                dp[i]=dp[i-arr[j]]+1;
+            }
+        }
+    }
+    // rep(i,0,dp.size())
+    // cout<<dp[i]<<" ";
+    if(dp[k]==INT_MAX)
+    cout<<"-1\n";
+    else
+    cout<<dp[k];
 }   

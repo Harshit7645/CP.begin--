@@ -150,10 +150,11 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    string s="",ans="";
+    rep(i,0,5)
     {
-
+        cin>>s;
+        ans+=s[0];
     }
+    cout<<ans<<"\n";
 }   

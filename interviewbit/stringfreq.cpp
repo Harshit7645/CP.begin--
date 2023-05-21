@@ -146,14 +146,34 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+typedef long long ll;
+#define rep(i,a,b) for(ll i=a;i<b;i++)
+#define repr(i,a,b) for(ll i=a;i>=b;i--)
+#define PNO cout<<"NO\n"
+#define PYES cout<<"YES\n"
+#define vll vector<ll>;
+string solve(string A)
+{
+    int n=A.length();
+    map<char,ll>m;
+    rep(i,0,n)
+    {
+        m[A[i]]++;
+    }
+    string ans="";
+    vector<ll>flag(26);
+    rep(i,0,n)
+    {
+        if(flag[A[i]-'a']==0)
+        {
+            flag[A[i]-'a']=1;
+            ans+=A[i];
+            ans+=to_string(m[A[i]]);
+        }
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("uaefbiefhuafeaaa");
 }   
