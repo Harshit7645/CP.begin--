@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,144 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
-int main()
+int n;
+int completes, gs;
+const int MXN = 200005;
+int par[MXN];
+ 
+int parent(int x) {
+	if (par[x] == x) return x;
+	return par[x] = parent(par[x]);
+}
+ 
+void conn(int a, int b) {
+	a = parent(a);
+	b = parent(b);
+	if (a == b) {
+		completes++;
+		return;
+	}
+	par[a] = b;
+	gs--;
+}
+const int N = 100000;
+ 
+// variables to be used
+// in both functions
+vector<int> graph[N];
+vector<vector<int>> cycles;
+ 
+// Function to mark the vertex with
+// different colors for different cycles
+void dfs_cycle(int u, int p, int color[], int par[], int& cyclenumber)
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
+ 
+    // already (completely) visited vertex.
+    if (color[u] == 2) {
+        return;
     }
-}   
+ 
+    // seen vertex, but was not completely visited -> cycle detected.
+    // backtrack based on parents to find the complete cycle.
+    if (color[u] == 1) {
+        vector<int> v;
+        cyclenumber++;
+           
+        int cur = p;
+          v.push_back(cur);
+ 
+        // backtrack the vertex which are
+        // in the current cycle thats found
+        while (cur != u) {
+            cur = par[cur];
+              v.push_back(cur);
+        }
+          cycles.push_back(v);
+        return;
+    }
+    par[u] = p;
+ 
+    // partially visited.
+    color[u] = 1;
+ 
+    // simple dfs on graph
+    for (int v : graph[u]) {
+ 
+        // if it has not been visited previously
+        if (v == par[u]) {
+            continue;
+        }
+        dfs_cycle(v, u, color, par, cyclenumber);
+    }
+ 
+    // completely visited.
+    color[u] = 2;
+}
+ 
+// add the edges to the graph
+void addEdge(int u, int v)
+{
+    graph[u].push_back(v);
+    graph[v].push_back(u);
+}
+ 
+// Function to print the cycles
+pair<ll,ll> printCycles(int& cyclenumber)
+{
+    ll bamboo=0,cycle=0;
+    // print all the vertex with same cycle
+    for (int i = 0; i < cyclenumber; i++) {
+        // Print the i-th cycle
+        if(cycles[i].size()>2)
+        cycle++;
+        else
+        bamboo++;
+    }
+    pair<ll,ll>x={cycle,bamboo};
+    return x;
+}
+ 
+vector<set<int>> edge;
+void solve_final() {
+    cin >> n;
+    edge.clear();
+    edge.resize(n);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        x--;
+        edge[i].insert(x);
+        edge[x].insert(i);
+    }
+    int cyc = 0, chain = 0;
+    vector<int> vis(n, 0);
+    bool chg = false;
+    function<void(int, int)> dfs = [&](int u, int pre) {
+        vis[u] = 1;
+        for (auto v : edge[u]) {
+            if (v == pre) continue;
+            if (vis[v]) {
+                chg = true;
+                continue;
+            }
+            dfs(v, u);
+        }
+    };
+    for (int i = 0; i < n; i++) {
+        if (vis[i]) continue;
+        chg = false;
+        dfs(i, -1);
+        if (chg) cyc++;
+        else chain++;
+    }
+    cout << cyc + (chain > 0) << ' ' << cyc + chain << '\n';
+ 
+}
+ 
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        solve_final();
+    }
+}

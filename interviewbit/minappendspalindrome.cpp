@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,36 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+vector<int> compute_lps(const string& A)
+{
+    int n = A.size();
+    vector<int> lps(n);
+    lps[0] = 0;
+    for(int i = 1; i < n; i++) {
+        int j = lps[i - 1];
+        while(j > 0 && A[i] != A[j]) {
+            j = lps[j - 1];
+        }
+        if(A[i] == A[j]) {
+            j++;
+        }
+        lps[i] = j;
+    }
+    
+    return lps;
+}
+int solve(string A)
+{
+    int n = A.size();
+    string rev = A;
+    reverse(rev.begin(), rev.end());
+    string concat = rev + "$" + A;
+    vector<int> lps = compute_lps(concat);
+    int characters_matched = lps[lps.size() - 1];
+    
+    return n - characters_matched;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("oqycntornscygodzdctxnhoc");
 }   

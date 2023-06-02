@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,15 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        string s;
+        cin>>s;
+        string req="codeforces";
+        int cnt=0;
+        rep(i,0,s.length())
+        {
+            if(s[i]!=req[i])
+            cnt++;
+        }
+        cout<<cnt<<endl;
     }
 }   

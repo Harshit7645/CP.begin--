@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,35 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,m;
+        cin>>n>>m;
+        if(m>n)
+        {
+            PNO;
+            continue;
+        }
+        vector<ll>req;
+        req.push_back(n);
+        ll f=0;
+        rep(i,0,req.size())
+        {
+            if(req[i]==m)
+            {
+                f=1;
+                break;
+            }
+            else
+            {
+                if(req[i]%3==0)
+                {
+                    req.push_back(req[i]/3);
+                    req.push_back(2*req[i]/3);
+                }
+            }
+        }
+        if(f)
+        PYES;
+        else
+        PNO;
     }
 }   

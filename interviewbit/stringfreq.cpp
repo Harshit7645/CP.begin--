@@ -173,7 +173,24 @@ string solve(string A)
     }
     return ans;
 }
+string solve2(string A)
+{
+    string ans;
+    unordered_map<char,int>map;
+    rep(i,0,A.length()){
+        char ch=A[i];
+        //cout<<ch;
+        map[ch]++;
+    }
+    for(auto i:map){
+        //cout<<i.first<<"hihihgihg\n";
+        ans+=i.first;
+        ans+=to_string(i.second);
+    }
+    return ans;
+
+}
 int main()
 {
-    cout<<solve("uaefbiefhuafeaaa");
+    cout<<solve2("uaefbiefhuafeaaa");
 }   

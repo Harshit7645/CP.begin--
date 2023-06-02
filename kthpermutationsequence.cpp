@@ -145,14 +145,28 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string backtrack(vector<int>&A,int k)
+{
+    int n=A.size();
+    if(n==0 ||k>fact(n))
+    return "";
+    int pos=k/fact(n-1);
+    string ch=to_string(A[pos]);
+    k=k%(fact(n-1));
+    A.erase(A.begin()+pos);
+    return ch+backtrack(A,k);
+}
+string solve(int n,int k)
+{
+    vector<int>A;
+    rep(i,1,n+1)
+    {
+        A.push_back(i);
+    }
+    string ans=backtrack(A,k-1);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve(4,16);
 }   

@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -19,18 +20,7 @@ ll nCr(ll n,ll r)
 {
     return (fact(n)/((fact(r))*(fact(n-r))));
 }
-ll power(ll a,ll b)
-{
-    ll result=1;
-    while(b>0)
-    {
-        if(b%2==1)
-        result*=a;
-        a*=a;
-        b/=2;
-    }
-    return result;
-}
+
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
 {
     return (a.second < b.second);
@@ -146,13 +136,103 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+// C++ program to calculate product
+// of factors of number
+#include <bits/stdc++.h>
+#define M 1000000007
+using namespace std;
+ 
+// Iterative Function to calculate
+// (x^y) in O(log y)
+long long power(long long x, long long y)
+{
+    long long res = 1;
+ 
+    while (y > 0)
+    {
+        if (y & 1)
+            res = (res * x) % M;
+        y = (y >> 1) % M;
+        x = (x * x) % M;
+    }
+    return res;
+}
+ 
+// function to count the factors
+int countFactors(int n)
+{
+    int count = 0;
+    for (int i = 1; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
+ 
+            // If factors are equal,
+            // count only once
+            if (n / i == i)
+                count++;
+ 
+            // Otherwise count both
+            else
+                count += 2;
+        }
+    }
+    return count;
+}
+ 
+long long multiplyFactors(int n)
+{
+    int numFactor = countFactors(n);
+ 
+    // Calculate product of factors
+    long long product = power(n, numFactor / 2);
+ 
+    // If numFactor is odd return
+    // power(n, numFactor/2) * sqrt(n)
+    if (numFactor & 1)
+        product = (product * (int)sqrt(n)) % M;
+ 
+    return product;
+}
+vector<int>solve(vector<int>A,vector<int>B)
+{
+    
+    int n=A.size(),q=B.size();
+    int i=0;
+    vector<int>first,ans;
+    int maxm=0;
+    rep(i,0,n)
+    {
+        maxm=A[i];
+        rep(j,i,n)
+        {
+            maxm=max(maxm,A[j]);
+            first.push_back(maxm);
+        }
+    }
+    // rep(i,0,first.size())
+    // cout<<first[i]<<" ";
+    cout<<"\n";
+    rep(i,0,first.size())
+    {
+        first[i]=multiplyFactors(first[i]);
+    }
+    // rep(i,0,first.size())
+    // cout<<first[i]<<" ";
+    sort(first.begin(),first.end());
+    reverse(first.begin(),first.end());
+    rep(i,0,q)
+    {
+        ans.push_back(first[B[i]-1]);
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    vector<int>ans=solve({39, 99, 70, 24, 49, 13, 86, 43, 88, 74, 45, 92, 72, 71, 90, 32, 19, 76, 84, 46, 63, 15, 87, 1, 39, 58, 17, 65, 99, 43, 83, 29, 64, 67, 100, 14, 17, 100, 81, 26, 45, 40, 95, 94, 86, 2, 89, 57, 52, 91, 45},{1221, 360, 459, 651, 958, 584, 345, 181, 536, 116, 1310, 403, 669, 1044, 1281, 711, 222, 280, 1255, 257, 811, 409, 698, 74, 838 });
+    rep(i,0,ans.size())
     {
-
+        cout<<ans[i]<<" ";
     }
 }   

@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -150,9 +151,34 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
-
+        ll n,q;
+        cin>>n>>q;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        vector<ll>cnt(n);
+        cnt[0]=0;
+        cnt[1]=0;
+        ll count=0;
+        rep(i,2,n)
+        {
+            if(arr[i]<=arr[i-1] && arr[i-1]<=arr[i-2])
+            count++;
+            cnt[i-1]=count;
+        }
+        rep(i,0,q)
+        {
+            ll x,y;
+            cin>>x>>y;
+            if(y-x<2)
+            cout<<y-x+1<<"\n";
+            else
+            cout<<y-x+1-(cnt[y-2]-cnt[x-1])<<"\n";
+        }
     }
 }   

@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,28 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k,l;
+        cin>>n>>k>>l;
+        vector<ll>req;
+        rep(i,0,n)
+        {
+            ll x,y;
+            cin>>x>>y;
+            if(y==l)
+            req.push_back(x);
+        }
+        if(k>req.size())
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        sort(req.begin(),req.end());
+        reverse(req.begin(),req.end());
+        ll ans=0;
+        rep(i,0,k)
+        {
+            ans+=req[i];
+        }
+        cout<<ans<<"\n";
     }
 }   

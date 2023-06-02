@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,47 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+void backtrack(vector<vector<int>>&ans,int ind,vector<int>&A,vector<int>&row,int B,int sum)
+{
+    if(sum==B)
+    {
+        ans.push_back(row);
+        return ;
+    }
+    else if(sum>B)
+    return ;
+    if(ind==A.size())
+    return;
+    row.push_back(A[ind]);
+    sum+=A[ind];
+    backtrack(ans,ind+1,A,row,B,sum);
+    sum-=row[row.size()-1];
+    row.pop_back();
+    int endIndex = 0;                       // Refined memory saving way to avoid repeated subsets.
+    for (endIndex = ind+1; endIndex < A.size() && A[endIndex]==A[ind]; ++endIndex)
+        ++ind;
+        
+    backtrack(ans,ind+1,A,row,B,sum);
+}
+vector<vector<int>>solve(vector<int>&A,int B)
+{
+    int n=A.size();
+    sort(A.begin(),A.end());
+    vector<vector<int>>ans;
+    vector<int>v1;
+    backtrack(ans,0,A,v1,B,0);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    vector<int>x={8, 10, 6, 11, 1, 16, 8};
+    vector<vector<int>>ans=solve(x,28);
+    rep(i,0,ans.size())
     {
-
+        rep(j,0,ans[i].size())
+        {
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<"\n";
     }
 }   

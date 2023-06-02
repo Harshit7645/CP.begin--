@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,23 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(const string A,const string B)
+{
+    int n1=A.length(),n2=B.length();
+    if(n2==0 || n1==0)
+    return 0;
+    int ind=-1;
+    rep(i,0,n1)
+    {
+        if(A.substr(i,n2)==B)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("bighit","bit");
 }   

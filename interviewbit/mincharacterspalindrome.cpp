@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,49 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool Palindrome(const string A)
+{
+    rep(i,0,A.length())
+    {
+        if(A[i]!=A[A.length()-i-1])
+        return 0;
+    }
+    return 1;
+}
+int compute_lps(string A)
+{
+    int len=0,i=1,n=A.length();
+    vector<int>lps(n);
+    lps[0]=0;
+    while(i<n)
+    {
+        if(A[i]==A[len])
+        {
+            len++;
+            lps[i]=len;
+            i++;
+        }   
+        else
+        {
+            if(len!=0)
+            len=lps[len-1];
+            else
+            {
+                lps[i]=0;
+                i++;
+            }
+        } 
+    }
+    return n/2-lps[n-1];
+}
+int solve(string A)
+{
+    string rev=A;
+    reverse(rev.begin(),rev.end());
+    return compute_lps(A+"$"+rev);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("ACABC");
 }   

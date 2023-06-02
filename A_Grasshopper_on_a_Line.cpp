@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,17 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        if(n%k!=0)
+        {
+            cout<<"1\n";
+            cout<<n<<endl;
+        }
+        else
+        {
+            cout<<"2\n";
+            cout<<n-1<<" "<<1<<endl;
+        }
     }
 }   

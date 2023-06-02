@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -144,15 +145,146 @@ vector<pair<int,int>> generatePrimeFactors(int N)
         cnt = 1;
     }
     return v;
+} 
+struct ListNode{
+    int val;
+    ListNode *next;
+}; 
+void append(ListNode** head_ref, int new_data)  
+{  
+    
+    // 1. allocate node 
+    ListNode* new_node = new ListNode(); 
+    
+    // Used in step 5 
+    ListNode *last = *head_ref; 
+    
+    // 2. Put in the data 
+    new_node->val = new_data;  
+    
+    // 3. This new node is going to be  
+    // the last node, so make next of  
+    // it as NULL
+    new_node->next = NULL;  
+    
+    // 4. If the Linked List is empty, 
+    // then make the new node as head 
+    if (*head_ref == NULL)  
+    {  
+        *head_ref = new_node;  
+        return;  
+    }  
+    
+    // 5. Else traverse till the last node 
+    while (last->next != NULL)
+    {
+        last = last->next;  
+    }
+    
+    // 6. Change the next of last node 
+    last->next = new_node;  
+    return;  
 }
-
+void insertAfter(ListNode* prev_node, int new_data)
+{
+  
+    // 1. Check if the given prev_node is NULL
+    if (prev_node == NULL) {
+        cout << "The given previous node cannot be NULL";
+        return;
+    }
+  
+    // 2. Allocate new node
+    ListNode* new_node = new ListNode();
+  
+    // 3. Put in the data
+    new_node->val = new_data;
+  
+    // 4. Make next of new node as
+    // next of prev_node
+    new_node->next = prev_node->next;
+  
+    // 5. move the next of prev_node
+    // as new_node
+    prev_node->next = new_node;
+}
+void printList(ListNode *node) 
+{ 
+    while (node != NULL) 
+    { 
+        cout<<" "<<node->val; 
+        node = node->next; 
+    } 
+    cout<<"\n";
+}
+int getcount(ListNode* head)
+{
+    ListNode* node=head;
+    int c=0;
+    while(node!=NULL)
+    {
+        c++;
+        node=node->next;
+    }
+    return c;
+}
+ListNode* solve(ListNode* A,ListNode* B)
+{
+    ListNode* ans=NULL;
+    ListNode* ansnode=ans;
+    ListNode* node1=A;
+    ListNode* node2=B;
+    if(getcount(A)>getcount(B))
+    return solve(B,A);
+    int i=0,sum=0,carry=0;
+    while(node1!=NULL && node2!=NULL)
+    {
+        if(node1==NULL || node2==NULL)
+        break;
+        sum=(node1->val)+(node2->val)+carry;
+        carry=sum/10;
+        sum=sum%10;
+        //cout<<sum<<"this is the sum for the "<<i<<"th\n";
+        if(i==0)
+        {
+            append(&ans,sum);
+            ansnode=ans;
+        }
+        else
+        {
+            insertAfter(ansnode,sum);
+            ansnode=ansnode->next;
+        }
+        node1=node1->next;
+        node2=node2->next;
+        i++;
+    }
+    while(node2!=NULL)
+    {
+        sum=node2->val+carry;
+        carry=sum/10;
+        sum=sum%10;
+        insertAfter(ansnode,sum);
+        ansnode=ansnode->next;
+        node2=node2->next;
+    }
+    if(carry>0)
+    append(&ans,carry);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
-}   
+    ListNode* x=NULL;
+    ListNode* y=NULL;
+    append(&x,1);
+    append(&x,5);
+    // append(&x,4);
+    // append(&y,8);
+    append(&y,9);
+    append(&y,9);
+    append(&y,9);
+    ListNode* z=solve(x,y);
+    printList(x);
+    printList(y);
+    printList(z);
+} 

@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,19 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        string s;
+        cin>>s;
+        if(s[0]=='0')
+        {
+            cout<<"0\n";
+            continue;
+        }
+        int cnt=0;
+        rep(i,0,s.length())
+        cnt+=(s[i]=='?');
+        if(s[0]=='?')
+        cout<<9*pow(10,cnt-1)<<endl;
+        else
+        cout<<pow(10,cnt)<<endl;
     }
 }   

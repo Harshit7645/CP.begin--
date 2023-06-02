@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,38 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(string s,vector<string>dictionary)
+{
+    map<string,int>m;
+        int n=s.length();
+        for(int i=0;i<dictionary.size();i++)
+        {
+            m[dictionary[i]]++;
+        }
+        int ans=0;
+        int flag[n];
+        for(auto x:m)
+        {
+            string temp="";
+            temp=x.first;
+            rep(i,0,n-temp.length())
+            {
+                string y=s.substr(i,temp.length());
+                if(y==temp)
+                {
+                    rep(k,i,temp.length())
+                    flag[i]=1;
+                }
+            }
+        }
+        rep(i,0,n)
+        {
+            ans+=(flag[i]==0);
+        }
+        return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("dwmodizxvvbosxxw",{"ox","lb","diz","gu","v","ksv","o","nuq","r","txhe","e","wmo","cehy","tskz","ds","kzbu"});
 }   

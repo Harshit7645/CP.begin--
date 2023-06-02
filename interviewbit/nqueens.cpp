@@ -145,14 +145,74 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool isSafe(int row,int col,vector<string>grid,int n)
+{
+    int temprow=row,tempcol=col;
+    while(temprow>=0 && tempcol>=0)
+    {
+        if(grid[temprow][tempcol]=='Q')
+        return false;
+        temprow--;
+        tempcol--;
+    }
+    temprow=row;
+    tempcol=col;
+    while(tempcol>=0)
+    {
+        if(grid[temprow][tempcol]=='Q')
+        return false;
+        tempcol--;
+    }
+    tempcol=col;
+    temprow=row;
+    while(temprow<n && tempcol>=0)
+    {
+        if(grid[temprow][tempcol]=='Q')
+        return false;
+        temprow++;
+        tempcol--;
+    }
+    return true;
+}
+void backtrack(vector<vector<string>>&ans,int colind,vector<string>grid,int n)
+{
+    if(colind==n)
+    {
+        ans.push_back(grid);
+    }
+    rep(row,0,n)
+    {
+        if(isSafe(row,colind,grid,n))
+        {
+            grid[row][colind]='Q';
+            backtrack(ans,colind+1,grid,n);
+            grid[row][colind]='.';
+        }
+    }
+}
+vector<vector<string>>solve(int A)
+{
+    vector<vector<string>>ans;
+    if(A<=3)
+    return ans;
+    vector<string>grid(A);
+    string s(A,'.');
+    rep(i,0,A)
+    {
+        grid[i]=s;
+    }
+    backtrack(ans,0,grid,A);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    vector<vector<string>>ans=solve(4);
+    rep(i,0,ans.size())
     {
-
+        rep(j,0,ans[i].size())
+        {
+            cout<<ans[i][j]<<"\n";
+        }
+        cout<<endl;
     }
 }   

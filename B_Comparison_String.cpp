@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,21 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        int cnt=0,maxcnt=0;
+        rep(i,0,n)
+        {
+            cnt=1;
+            while(s[i]==s[i+1])
+            {
+                i++;
+                cnt++;
+            }
+            maxcnt=max(maxcnt,cnt);
+        }
+        cout<<maxcnt+1<<endl;
     }
 }   

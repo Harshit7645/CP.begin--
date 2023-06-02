@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -148,11 +149,59 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
     cin>>tt;
     while(tt--)
     {
-
+        int n;
+        cin>>n;
+        vector<int>a(n),b(n);
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>b[i];
+        }
+        unordered_map<int,int>m1,m2;
+        int c=1,c1=1;
+        rep(i,0,n)
+        {
+            if(i>0 && a[i]==a[i-1])
+            {
+                c++;
+            }
+            else{
+                m1[a[i-1]]=max(c,m1[a[i-1]]);
+                c=1;
+            }
+        }
+        m1[a[n-1]]=max(m1[a[n-1]],c);
+        c1=1;
+        rep(i,0,n)
+        {
+            if(i>0 && b[i]==b[i-1])
+            {
+                c1++;
+            }
+            else{
+                m2[b[i-1]]=max(c1,m2[b[i-1]]);
+                c1=1;
+            }
+        }
+        m2[b[n-1]]=max(m2[b[n-1]],c1);
+        int maxm=0;
+        for(auto x:a)
+        {
+            maxm=max(maxm,m1[x]+m2[x]);
+            //cout<<x.first<<" "<<x.second<<"\n";
+        }
+        for(auto x:b)
+        {
+            maxm=max(maxm,m1[x]+m2[x]);
+            //cout<<x.first<<" "<<x.second<<"\n";
+        }
+        cout<<maxm<<"\n";
     }
 }   

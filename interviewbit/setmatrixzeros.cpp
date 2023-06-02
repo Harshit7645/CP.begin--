@@ -145,14 +145,69 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+void solve(vector<vector<int>>&A)
+{
+    int n=A.size(),m=A[0].size();
+    vector<int>rf(n);
+    vector<int>cf(m);
+    rep(i,0,n)
+    {
+        rep(j,0,m)
+        {
+            if(A[i][j]==0)
+            {
+                rf[i]=1;
+                cf[j]=1;
+            }
+        }
+    }
+    vector<vector<int>>ans(n,vector<int>(m,0));
+    rep(i,0,n)
+    {
+        rep(j,0,m)
+        {
+            ans[i][j]=A[i][j];
+        }
+    }
+    rep(i,0,n)
+    {
+        if(rf[i]==1)
+        {
+            rep(j,0,m)
+            {
+                ans[i][j]=0;
+            }
+        }
+    }
+    rep(j,0,m)
+    {
+        if(cf[j]==1)
+        {
+            rep(k,0,n)
+            {
+                ans[k][j]=0;
+            }
+        }
+    }
+    // rep(i,0,n)
+    //cout<<rf[i]<<" "<<cf[i]<<endl;
+    rep(i,0,n)
+    {
+        rep(j,0,m)
+        {
+            A[i][j]=ans[i][j];
+        }
+    }
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    vector<vector<int>>ans={{1,0,1},{1,1,1},{1,1,0}};
+    solve(ans);
+    rep(i,0,ans.size())
     {
-
+        rep(j,0,ans[i].size())
+        cout<<ans[i][j]<<" ";
+        cout<<endl;
     }
-}   
+}

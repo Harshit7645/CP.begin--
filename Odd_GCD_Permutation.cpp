@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -36,21 +37,17 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(ll n)
+bool isPrime(int n)
 {
-    if(n<=1)
-    return false;
-    if(n<=3)
-    return true;
-
-    if(n%2==0 || n%3==0 || n%5==0)
-    return false;
-    for(ll i=6;i<=sqrt(n);i+=5)
-    {
-        //for (ll i=5;i*i<=n;i+=6)
-        if (n % i == 0 || n % (i + 2) == 0)
-            return false;//return true;
-    }
+    // Corner case
+    if (n <= 1)
+        return false;
+ 
+    // Check from 2 to n-1
+    for (int i = 2; i < n; i++)
+        if (n % i == 0)
+            return false;
+ 
     return true;
 }
 
@@ -153,6 +150,20 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        if(n%2==0)
+        {
+            repr(i,n,1)
+            {
+                cout<<i<<" ";
+            }
+            cout<<"\n";
+            continue;
+        }
+        else
+        {
+            cout<<"-1\n";
+        }
     }
 }   

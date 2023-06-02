@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,45 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int binary_search(vector<int>arr,int l,int r,int x)
+{
+    int mid=(l+r)/2;
+    if(l<=r)
+    {
+        if(arr[mid]==x)
+        return mid;
+        else if(arr[mid]>x)
+        return binary_search(arr,l,mid-1,x);
+        else
+        return binary_search(arr,mid+1,r,x);
+    }
+    return -1;
+}
+int solve(vector<int>A,int B)
+{
+    int n=A.size(),i=0;
+    int x=binary_search(A,0,n-1,B);
+    if(x!=-1)
+    return x;
+    int l=0,r=n-1;
+    if(B<A[0])
+    return 0;
+    else if(B>A[n-1])
+    return n;
+    while(l+1<r)
+    {
+        int mid=(l+r)/2;
+        if(A[mid]>B)
+        r=mid;
+        else
+        l=mid; 
+        if(l==r)
+        break;
+    }
+    return l+1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({1, 3, 5, 7},6);
 }   

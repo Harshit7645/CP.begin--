@@ -145,14 +145,30 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+vector<int>solve(vector<int>A)
+{
+    int n=A.size();
+    int i=0,j=n-1;
+    vector<int>art=A;
+    vector<int>ans;
+    sort(art.begin(),art.end());
+    while(A[i]==art[i] && i<n)
+    {
+        i++;
+    }
+    while(A[j]==art[j] && j>=0)
+    j--;
+    if(i==n)
+    {
+        ans.push_back(-1);
+        return ans;
+    }
+    ans.push_back(i);
+    ans.push_back(j);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    vector<int>ans=solve({1,2,3,4,5});
+    cout<<ans[0]<<" "<<ans[1];
 }   

@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,28 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string solve(string A)
+{
+    ll n=A.length();
+    queue<char>q;
+    map<char,int>count;
+    string ans="";
+    rep(i,0,n)
+    {
+        count[A[i]]++;
+        q.push(A[i]);
+        while(!q.empty() && count[q.front()]!=1)
+        {
+            q.pop();
+        }
+        if(q.empty())
+        ans+="#";
+        else
+        ans+=q.front();
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("abadbc");
 }   

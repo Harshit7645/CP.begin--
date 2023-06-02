@@ -145,14 +145,41 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+vector<int>solve(vector<int>&A)
+{
+    int n=A.size(),maxlen=0,l=-1,r=-1,sum=0;
+    map<int,int>m;
+    m[0]=-1;
+    rep(i,0,n)
+    {
+        sum+=A[i];
+        if(m.find(sum)!=m.end())
+        {
+            if(maxlen<i-m[sum])
+            {            
+                l=m[sum]+1;
+                r=i;
+                maxlen=i-m[sum];
+            }
+        }
+        else
+        m[sum]=i;
+        //cout<<m[1]<<"hi\n";
+    }
+    vector<int>ans;
+    if(l!=-1){
+    rep(i,l,r+1)
+    {   
+        ans.push_back(A[i]);
+    }
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    vector<int>x={1,2,-2,4,-4};
+    vector<int>y=solve(x);
+    rep(i,0,y.size())
+    cout<<y[i]<<" ";
+    //cout<<y.size();
 }   

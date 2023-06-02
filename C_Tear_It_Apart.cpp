@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,58 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        string s;
+        cin>>s;
+        vector<string>v;
+        v.push_back(s);
+        int ans=0,cnt=0;
+        rep(i,0,v.size())
+        {
+            string temp1="",temp2="";
+            rep(j,0,v[i].length())
+            {
+                if(j%2==0)
+                temp1+=v[i][j];
+                else
+                temp2+=v[i][j];
+            }
+            if(temp1.length()==1)
+            {
+                v.push_back(temp1);
+                break;
+            }
+            if(temp1.length()>0)
+            v.push_back(temp1);
+            if(temp2.length()==1)
+            {
+                v.push_back(temp2);
+                break;
+            }
+            if(temp2.length()>1)
+            v.push_back(temp2);
+        }
+        rep(i,0,v.size())
+        {
+            //cout<<v[i]<<" ";
+            int f=0;
+            rep(j,0,v[i].length()-1)
+            {
+                if(v[i][j]!=v[i][j+1] && j+1<v[i].length())
+                {
+                    f=1;
+                    break;
+                }
+            }
+            if(f==0)
+            {
+                ans=i+1;
+                break;
+            }
+        }
+        ans=log2(ans);
+        cout<<ans<<"\n";
+        //cout<<ans<<endl;
+        //cnt=log2(ans);
+        //cout<<cnt<<endl;
     }
 }   

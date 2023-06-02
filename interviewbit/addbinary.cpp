@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -146,13 +147,62 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+string solve(string A,string B)
+{
+    int n1=A.length(),n2=B.length();
+    if(n1<n2)
+    swap(A,B);
+    int diff=n1-n2;
+    string padding;
+    for (int i = 0; i < diff; i++)
+        padding.push_back('0');
+ 
+    B = padding + B;
+    string res;
+    char carry = '0';
+ 
+    for (int i = A.length() - 1; i >= 0; i--) {
+        // This if condition solves 110 111 possible cases
+        if (A[i] == '1' && B[i] == '1') {
+            if (carry == '1')
+                res.push_back('1');
+            else
+                res.push_back('0');
+            carry = '1';
+        }
+        // This if condition solves 000 001 possible cases
+        else if (A[i] == '0' && B[i] == '0') {
+            if (carry == '1')
+                res.push_back('1');
+            else
+                res.push_back('0');
+            carry='0';
+        }
+        // This if condition solves 100 101 010 011 possible
+        // cases
+        else if (A[i] != B[i]) {
+            if (carry == '1')
+                res.push_back('0'), carry = '1';
+            else
+                res.push_back('1'), carry = '0';
+        }
+    }
+ 
+    // If at the end there is carry then just add it to the
+    // result
+    if (carry == '1')
+        res.push_back(carry);
+    // reverse the result
+    reverse(res.begin(), res.end());
+ 
+    // To remove leading zeroes
+    int index = 0;
+    while (index + 1 < res.length() && res[index] == '0')
+        index++;
+    return (res.substr(index));
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("111","101");
 }   

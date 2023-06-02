@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,22 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        ll odd;
+        if(n%2==1)
+        odd=n/2+1;
+        else
+        odd=n/2;
+        if(k>odd)
+        {
+            PNO;
+            continue;
+        }
+        int excess=odd-k;
+        if((excess)%2==0 && (n-k)>=k)
+        PYES;
+        else
+        PNO;
     }
 }   

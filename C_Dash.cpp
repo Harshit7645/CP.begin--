@@ -1,10 +1,11 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 ll fact(ll n)
 {
@@ -149,10 +150,42 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n,m,h,k;
+    cin>>n>>m>>h>>k;
+    string s;
+    cin>>s;
+    map<pair<ll,ll>,ll>coord;
+    rep(i,0,m)
     {
-
+        ll x,y;
+        cin>>x>>y;
+        coord[{x,y}]=1;
     }
+    ll currx=0,curry=0,f=0;
+    rep(i,0,n)
+    {
+        if(s[i]=='R')
+        currx++;
+        else if(s[i]=='L')
+        currx--;
+        else if(s[i]=='U')
+        curry++;
+        else
+        curry--;
+        h--;
+        if(h<0)
+        {
+            f=1;
+            break;
+        }
+        if(coord[{currx,curry}]==1 && h<k)
+        {
+            h=k;
+            coord[{currx,curry}]=0;
+        }
+    }
+    if(f)
+    PNO;
+    else
+    PYES;
 }   

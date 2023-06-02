@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,49 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+map<pair<int,int>,int>ind;
+int cnt;
+void dfs(int generatingnode,int node,vector<vector<int>>&edges,int count)
+{
+    int flag=0;
+    for(int edgenode:edges[node])
+    {
+        if(edgenode!=generatingnode)
+        {
+            flag=1;
+            if(ind[{edgenode,node}]<ind[{node,generatingnode}])
+            dfs(node,edgenode,edges,count+1);
+            else
+            dfs(node,edgenode,edges,count);
+        }
+    }
+    if(!flag)
+    cnt=max(cnt,count);
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    //ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    int tt=1;
     cin>>tt;
     while(tt--)
     {
-
+        int n;
+        cin>>n;
+        cnt=0;
+        ind.clear();
+        vector<vector<int>>graph(n+1);
+        rep(i,0,n-1)
+        {
+            int u,v;
+            cin>>u>>v;
+            graph[u].push_back(v);
+            graph[v].push_back(u);
+            ind[{u,v}]=i;
+            ind[{v,u}]=i;
+        }
+        ind[{-1,1}]=0;
+        ind[{1,1}]=0;
+        dfs(-1,1,graph,0);
+        cout<<cnt+1<<"\n";   
     }
 }   

@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,7 +146,46 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+bool check_regular(string expr)
+{
+    // Declare a stack to hold the previous brackets.
+    stack<char> temp;
+    for (int i = 0; i < expr.length(); i++) {
+        if (temp.empty()) {
+             
+            // If the stack is empty
+            // just push the current bracket
+            temp.push(expr[i]);
+        }
+        else if ((temp.top() == '(' && expr[i] == ')')
+                 || (temp.top() == '{' && expr[i] == '}')
+                 || (temp.top() == '[' && expr[i] == ']')) {
+             
+            // If we found any complete pair of bracket
+            // then pop
 
+            temp.pop();
+        }
+        else {
+            temp.push(expr[i]);
+        }
+    }
+    if (temp.empty()) {
+         
+        // If stack is empty return true
+        return true;
+    }
+    return false;
+}
+bool check_beautiful(string s)
+{
+    string rev;
+    rev=s;
+    reverse(rev.begin(),rev.end());
+    if(check_regular(rev))
+    return true;
+    return false;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -153,6 +193,74 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        int open=0,close=0;
+        rep(i,0,n)
+        {
+            if(s[i]=='(')
+            open++;
+            else
+            close++;
+        }
+        if(open!=close)
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        if(check_regular(s))
+        {
+            cout<<"1\n";
+            rep(i,0,n)
+            {
+                cout<<"1 ";
+            }
+            cout<<"\n";
+            continue;
+        }
+        if(check_beautiful(s))
+        {
+            cout<<"1\n";
+            rep(i,0,n)
+            {
+                cout<<"1 ";
+            }
+            cout<<"\n";
+            continue;
+        }
+        int col[n];
+        ll left=0,right=n-1;   
+        cout<<2<<"\n";
+        while(left<right)
+        {
+            if(s[left]==')' && s[right]==')')
+            {
+                col[left]=2;
+                col[right]=1;
+            }
+            else if(s[left]=='(' && s[right]=='(')
+            {
+                col[left]=1;
+                col[right]=2;
+            }
+            else if(s[left]==')' && s[right]=='(')
+            {
+                col[right]=2;
+                col[left]=col[right];
+            }
+            else
+            {
+                col[left]=1;
+                col[right]=col[left];
+            } 
+            right--;
+            left++;
+        }
+        rep(i,0,n){
+            cout<<col[i]<<" ";
+        }
+        cout<<'\n';
     }
 }   

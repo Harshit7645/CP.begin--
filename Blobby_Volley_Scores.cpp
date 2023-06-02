@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,28 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll alice=0,bob=0,f=0;
+        rep(i,0,n)
+        {
+            if(s[i]=='A')
+            {
+                if(f==0)
+                alice++;
+                else
+                f=0;
+            }
+            else
+            {
+                if(f==1)
+                bob++;
+                else
+                f=1;
+            }
+        }
+        cout<<alice<<" "<<bob<<endl;
     }
 }   

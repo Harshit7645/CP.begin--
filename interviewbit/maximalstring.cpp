@@ -145,14 +145,32 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string sol;
+void backtrack(int idx,int left,string &A)
+{
+    if(left==0 ||idx==A.size())
+    {
+        sol=A>sol?A:sol;
+        return ;
+    }
+    rep(i,idx+1,A.size())
+    {
+        if(A[i]>A[idx])
+        {
+            swap(A[idx],A[i]);
+            backtrack(idx+1,left-1,A);
+            swap(A[i],A[idx]);
+        }
+    }
+    backtrack(idx+1,left,A);
+}
+string solve(string A,int B)
+{
+    int n=A.length();
+    backtrack(0,B,A);
+    return sol;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("68543",1);
 }   

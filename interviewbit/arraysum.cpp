@@ -1,8 +1,9 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
-#define repr(i,a,b) for(ll i=a;i>=b;i--)
+#define repr(i,a,b) for(ll i=a;i>b;i--)
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
@@ -145,14 +146,37 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+vector<int>solve(vector<int>A,vector<int>B)
+{
+    int n1=A.size(),n2=B.size();
+    if(n1>n2)
+    return solve(B,A);
+    int sum=0,carry=0;
+    vector<int>ans;
+    reverse(A.begin(),A.end());
+    reverse(B.begin(),B.end());
+    rep(i,0,n1)
+    {
+        sum=A[i]+B[i]+carry;
+        carry=sum/10;
+        sum=sum%10;
+        ans.push_back(sum);
+    }
+    rep(i,n1,n2)
+    {
+        sum=B[i]+carry;
+        carry=sum/10;
+        sum=sum%10;
+        ans.push_back(sum);
+    }
+    if(carry>0)
+    ans.push_back(carry);
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    vector<int>x=solve({1,2,3},{2,5,5,6});
+    rep(i,0,x.size())
+    cout<<x[i]<<" ";
 }   

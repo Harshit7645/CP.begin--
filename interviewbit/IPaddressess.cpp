@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,64 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool isValid(string s) {
+    if (stoi(s) <= 255 && stoi(s) >= 0)
+        return true;
+    else
+        return false;
+}
+vector<string>solve(string A)
+{
+    int n=A.length(),i=0;
+    vector<string>ans;
+    if(n>12 || n<4)
+    return ans;
+    if(n==12)
+    {
+        string temp="";
+        rep(i,0,12)
+        {
+            if(i%3==2 && i!=11)
+            {
+                temp+=A[i];
+                temp+=".";
+            }
+            else
+            temp+=A[i];
+        }
+        ans.push_back(temp);
+        return ans;
+    }
+    for(int i=1;i<4;i++)
+    {
+        string first=A.substr(0,i);
+        if(!isValid(first))
+        continue;
+        int secmax=i+3;
+        for(int j=1;i+j<n && j<4;j++)   
+        {
+            string sec=A.substr(i,j);
+            if(!isValid(sec))
+            continue;
+            for(int k=1;k+j+i<n && k<4;k++)   
+            {
+                string third=A.substr(i+j,k);
+                string fourth=A.substr(i+j+k);
+                if(isValid(third) && isValid(fourth))
+                {
+                    string current=first+"."+sec+"."+third+"."+fourth;
+                    ans.push_back(current);
+                }
+            }
+        }
+    }
+    sort(ans.begin(),ans.end());
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    vector<string>ans=solve("0100100");
+    rep(i,0,ans.size())
+    cout<<ans[i]<<" ";
 }   

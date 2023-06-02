@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,30 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int divide(int A,int B)
+{
+    int sign=(A<0) ^ (B<0);
+    if(B==-1)
+    {
+        if(A<=INT_MAX && A>INT_MIN)
+        return ((sign==0)? -A : A);
+        else
+        return INT_MAX;
+    }
+    if(B == 1)
+    {
+        if(A<=INT_MAX && A>=INT_MIN)
+        return A;
+        else
+        return INT_MAX;
+    }
+    A=abs(A);
+    B=abs(B);
+    int ans = exp(log(A) - log(B)) + 0.0000000001;
+    return (sign*ans >= INT_MAX ||  sign*ans < INT_MIN) ? INT_MAX : sign*ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
+    cout<<divide(-2147483648,1);
 
-    }
 }   

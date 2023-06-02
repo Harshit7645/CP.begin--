@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        vector<ll>v(4,1e9);
+        rep(i,0,n)
+        {
+            ll x;
+            string temp;
+            cin>>x>>temp;
+            if(temp=="00")
+            continue;
+            else if(temp=="10")
+            v[1]=min(v[1],x);
+            else if(temp=="01")
+            v[2]=min(v[2],x);
+            else 
+            v[3]=min(v[3],x);
+        }
+        if(v[3]==1e9 &&( v[1]==1e9 || v[2]==1e9))
+        cout<<"-1\n";
+        else
+        cout<<min(v[3],(v[2]+v[1]))<<endl;
     }
 }   

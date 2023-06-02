@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll a[n],b[n];
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>b[i];
+        }  
+        int l=0,r=n-1;
+        while(a[l]==b[l])
+        l++;
+        while(a[r]==b[r])
+        r--; 
+        while(b[l-1]<=b[l] && l>=1)
+        l--;
+        while(b[r+1]>=b[r] && r<n-1)
+        r++;
+        cout<<l+1<<" "<<r+1<<"\n";
     }
 }   

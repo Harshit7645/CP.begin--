@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -144,15 +145,142 @@ vector<pair<int,int>> generatePrimeFactors(int N)
         cnt = 1;
     }
     return v;
+}  
+struct ListNode{
+    int val;
+    ListNode *next;
+};
+void push(struct ListNode** head_ref, int new_data)
+{
+    /* 1. allocate node */
+    // 1. allocate node
+    ListNode* new_node = new ListNode(); 
+  
+    // 2. put in the data
+    new_node->val = new_data; 
+  
+    // 3. Make next of new node as head
+    new_node->next = (*head_ref); 
+  
+    // 4. Move the head to point to 
+    // the new node
+    (*head_ref) = new_node;
 }
-
+void insertAfter(ListNode* prev_node, int new_data)
+{
+  
+    // 1. Check if the given prev_node is NULL
+    if (prev_node == NULL) {
+        cout << "The given previous node cannot be NULL";
+        return;
+    }
+  
+    // 2. Allocate new node
+    ListNode* new_node = new ListNode();
+  
+    // 3. Put in the data
+    new_node->val = new_data;
+  
+    // 4. Make next of new node as
+    // next of prev_node
+    new_node->next = prev_node->next;
+  
+    // 5. move the next of prev_node
+    // as new_node
+    prev_node->next = new_node;
+}
+void append(ListNode** head_ref, int new_data)  
+{  
+    
+    // 1. allocate node 
+    ListNode* new_node = new ListNode(); 
+    
+    // Used in step 5 
+    ListNode *last = *head_ref; 
+    
+    // 2. Put in the data 
+    new_node->val = new_data;  
+    
+    // 3. This new node is going to be  
+    // the last node, so make next of  
+    // it as NULL
+    new_node->next = NULL;  
+    
+    // 4. If the Linked List is empty, 
+    // then make the new node as head 
+    if (*head_ref == NULL)  
+    {  
+        *head_ref = new_node;  
+        return;  
+    }  
+    
+    // 5. Else traverse till the last node 
+    while (last->next != NULL)
+    {
+        last = last->next;  
+    }
+    
+    // 6. Change the next of last node 
+    last->next = new_node;  
+    return;  
+}
+void printList(ListNode *node) 
+{ 
+    while (node != NULL) 
+    { 
+        cout<<" "<<node->val; 
+        node = node->next; 
+    } 
+}
+int getcount(ListNode* head)
+{
+    ListNode* node=head;
+    int c=0;
+    //cout<<"elements are: "; 
+    while(node!=NULL)
+    {
+        c++;
+        //cout<<node->val<<" ";
+        node=node->next;
+    }
+    return c;
+}
+ListNode* solve(ListNode* A,int B)
+{
+    ListNode* node=A;
+    int length=getcount(A);
+    //cout<<"length of list is:"<<length<<endl;
+    int count=length-B;
+    if(B==length)
+    {
+        A=A->next;
+        return A;
+    }
+    else if(B==0)
+    {
+        return A;
+    }
+    int cnt=0;
+    while(node!=NULL)
+    {
+        cnt++;  
+        if(cnt==count)
+        {
+            node->next=node->next->next;
+            break;
+        }
+        node=node->next;
+    }
+    return A;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
-}   
+    ListNode *x=NULL;
+    append(&x,1);
+    append(&x,2);
+    append(&x,3);
+    append(&x,4);
+    append(&x,5);
+    ListNode* y=solve(x,2);
+    printList(y);
+} 

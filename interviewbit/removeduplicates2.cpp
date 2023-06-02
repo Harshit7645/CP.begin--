@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,48 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(vector<int>A)
+{
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    //cout<<A.size();
+    int n=A.size(),i=0;
+    int k=0,f=0;
+    if(n==1)
+    {
+        return A.size();
+    }
+    rep(i,0,n)
+    {
+        if(i==n-1)
+        {
+            if(A[i]==A[i-1])
+            {
+                A[k++]=A[n-1];
+                A[k++]=A[n-1];
+            }
+            else
+            A[k++]=A[n-1];
+        }
+        else if(A[i]!=A[i+1] && i+1<n)
+        {
+            if(A[i-1]==A[i] && i>0)
+            {
+                A[k++]=A[i];
+                A[k++]=A[i];
+            }
+            else
+            A[k++]=A[i];
+        }
+    }
+    A.erase(A.begin()+k,A.end());
+    rep(i,0,A.size())
+    cout<<A[i]<<" ";
+    return (int)A.size();
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3});
 }   

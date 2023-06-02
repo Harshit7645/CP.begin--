@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -6,12 +7,14 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define M 1000000007;
 ll fact(ll n)
 {
     ll ans=1;
     rep(i,1,n+1)
     {
         ans*=i;
+        ans=ans%M;
     }
     return ans;
 }
@@ -153,6 +156,24 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k,cnt=1;
+        cin>>n>>k;
+        if(k==1)
+        {
+            cout<<"1\n";
+            continue;
+        }
+        if(k>n)
+        {
+            cout<<fact(k)/fact(n-k)<<endl;
+            continue;
+        }
+        long long ans=1;
+        for(ll i=0;i<n;i++)
+        {
+        ans=(ans*k)%M;
+        if(k>1) k--;
+        }
+        cout<<ans<<endl;
     }
 }   

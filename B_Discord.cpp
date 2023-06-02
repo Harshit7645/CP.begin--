@@ -1,10 +1,11 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 ll fact(ll n)
 {
@@ -149,10 +150,42 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n,m;
+    cin>>n>>m;
+    map<ll,set<ll>>pairs;
+    ll arr[m][n];
+    rep(i,0,m)
     {
-
+        rep(j,0,n)
+        {
+            cin>>arr[i][j];
+        }
     }
+    rep(i,0,m)
+    {
+        rep(j,0,n)
+        {
+            if(j==0)
+            pairs[arr[i][j]].insert(arr[i][j+1]);
+            else if(j==n-1)
+            pairs[arr[i][j]].insert(arr[i][j-1]);
+            else
+            {
+                pairs[arr[i][j]].insert(arr[i][j+1]);
+                pairs[arr[i][j]].insert(arr[i][j-1]);
+            }
+        }
+    }
+    ll ans=0;
+    for(auto x:pairs)
+    {   
+        ans+=n-x.second.size()-1;
+        for(auto y:x.second)
+        {
+            //cout<<y<<" ";
+        }
+        //cout<<endl;
+    }
+    cout<<ans/2<<"\n";
+
 }   

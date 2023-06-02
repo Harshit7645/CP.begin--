@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,6 +154,17 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll a,b,c,cnt=0;
+        cin>>a>>b>>c;
+        if(a==1)
+        cnt++;
+        if(b==1)
+        cnt++;
+        if(c==1)
+        cnt++;
+        if(cnt>=2)
+        cout<<"Not now\n";
+        else  
+        cout<<"Water filling time\n";
     }
 }   

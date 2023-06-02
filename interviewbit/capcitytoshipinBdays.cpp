@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,54 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool goodweight(int w,vector<int>A,int B)
+{
+    int st = 1;
+    int sum = 0;
+    int n=A.size();
+    // Traverse all the weights
+    for (int i = 0; i < n; i++) {
+        sum += A[i];
+ 
+        // If total weight is more than the maximum capacity
+        if (sum > w) {
+            st++;
+            sum = A[i];
+        }
+ 
+        // If days are more than D, then return false
+        if (st > B)
+            return false;
+    }
+ 
+    // Return true for the days < D
+    return true;
+}
+int solve(const vector<int>A,int B)
+{
+    int n=A.size();
+    int l=0,r=0,ans=-1;
+    rep(i,0,n)
+    {
+        r+=A[i];
+        l=max(l,A[i]);
+    }
+    //cout<<goodweight(15,A,B)<<" ";
+    while(l<=r)
+    {
+        cout<<l<<" "<<r<<endl;
+        int mid=(l+r)/2;
+        if(goodweight(mid,A,B))
+        {
+            ans=mid;
+            r=mid-1;
+        }
+        else
+        l=mid+1;
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve({3, 4, 17, 8, 8, 7, 8, 9, 13, 11, 10, 4},14);
 }   

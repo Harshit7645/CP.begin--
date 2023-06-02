@@ -1,3 +1,4 @@
+#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -145,14 +146,40 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+string solve(string A,int B)
+{
+    int n=A.length(),i=0;
+    char rail[B][n];
+    rep(i,0,B)
+    {
+        rep(j,0,n)
+        {
+            rail[i][j]='\n';
+        }
+    }
+    bool dir_down = false;
+    int row = 0, col = 0;
+    rep(i,0,n)
+    {
+        //cout<<v[0]<<" &&&   "<<v[1]<<" &&&&&&&  "<<v[2]<<"h\n";
+        if (row == 0 || row == B-1)
+            dir_down = !dir_down;
+        rail[row][col++]=A[i];
+        dir_down?row++:row--;
+    }
+    cout<<"\n\n \n";
+    string ans="";
+    rep(i,0,B)
+    {
+        rep(j,0,n)
+        {
+            if(rail[i][j]!='\n')
+            ans+=rail[i][j];
+        }
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-
-    }
+    cout<<solve("kHAlbLzY8Dr4zR0eeLwvoRFg9r23Y3hEujEqdio0ctLh4jZ1izwLh70R7SAkFsXlZ8UlghCL95yezo5hBxQJ1Td6qFb3jpFrMj8pdvP6M6k7IaXkq21XhpmGNwl7tBe86eZasMW2BGhnqF6gPb1YjCTexgCurS",3);
 }   
