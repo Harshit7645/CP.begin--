@@ -17,7 +17,11 @@ ll fact(ll n)
 }
 ll nCr(ll n,ll r)
 {
-    return (fact(n)/((fact(r))*(fact(n-r))));
+    if (r > n)
+        return 0;
+    if (r == 0 || r == n)
+        return 1;
+    return nCr(n - 1, r - 1) + nCr(n - 1, r);
 }
 ll power(ll a,ll b)
 {
@@ -67,10 +71,10 @@ vector<ll> printDivisors(int n)
 				req.push_back(i);
 
 			else // Otherwise print both
-				{
-                    req.push_back(i);
-                    req.push_back(n/i);
-                }
+            {
+                req.push_back(i);
+                req.push_back(n/i);
+            }
 		}
 	}
     return req;
@@ -153,6 +157,6 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        
     }
 }   

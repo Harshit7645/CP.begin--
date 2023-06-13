@@ -77,10 +77,36 @@ int main()
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt;
     cin>>tt;
+    ll F[47];
+    F[0]=1;
+    F[1]=1;
+    rep(i,2,47)
+    {
+        F[i]=F[i-1]+F[i-2];
+    }
     while(tt--)
     {
         ll n,x,y;
         cin>>n>>x>>y;
-        
+        ll ht=0,wth=0;
+        ht=F[n];
+        wth=F[n+1];
+        int f=0;
+        while(n>0)
+        {
+            if(y>=F[n]+1)
+            y-=F[n];
+            else if(y>F[n-1])
+            {
+                f=1;
+                break;
+            }
+            swap(x,y);
+            n--;
+        }
+        if(f)
+        PNO;
+        else
+        PYES;
     }
 }

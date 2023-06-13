@@ -149,63 +149,35 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
     cin>>tt;
+    int cnt[200000];
+    for (int i = 1; i <= 200000; ++i) {
+        cnt[i] = 1 + cnt[i>>1];
+    }
+    // rep(i,1,17)
+    // cout<<cnt[i]<<" ";
+    //cout<<endl;
     while(tt--)
     {
         string s;
         cin>>s;
-        vector<string>v;
-        v.push_back(s);
-        int ans=0,cnt=0;
-        rep(i,0,v.size())
+        int n=s.length();
+        int ans=1e9;
+        for(char ch='a';ch<='z';ch++)
         {
-            string temp1="",temp2="";
-            rep(j,0,v[i].length())
+            int curr=0,last=0;
+            rep(i,0,n)
             {
-                if(j%2==0)
-                temp1+=v[i][j];
-                else
-                temp2+=v[i][j];
-            }
-            if(temp1.length()==1)
-            {
-                v.push_back(temp1);
-                break;
-            }
-            if(temp1.length()>0)
-            v.push_back(temp1);
-            if(temp2.length()==1)
-            {
-                v.push_back(temp2);
-                break;
-            }
-            if(temp2.length()>1)
-            v.push_back(temp2);
-        }
-        rep(i,0,v.size())
-        {
-            //cout<<v[i]<<" ";
-            int f=0;
-            rep(j,0,v[i].length()-1)
-            {
-                if(v[i][j]!=v[i][j+1] && j+1<v[i].length())
+                if(s[i]==ch)          
                 {
-                    f=1;
-                    break;
+                    curr=max(curr,cnt[i-last]);
+                    last=i+1;
                 }
             }
-            if(f==0)
-            {
-                ans=i+1;
-                break;
-            }
+            curr=max(curr,cnt[n-last]);
+            ans=min(ans,curr);
         }
-        ans=log2(ans);
-        cout<<ans<<"\n";
-        //cout<<ans<<endl;
-        //cnt=log2(ans);
-        //cout<<cnt<<endl;
+        cout<<ans<<endl;
     }
 }   

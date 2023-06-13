@@ -72,20 +72,6 @@ vector<ll> printDivisors(int n)
     //sort(req.begin(),req.end());
     return req;
 }
-ll value(ll n)
-{
-    ll res=10e9;
-    vector<ll>req=printDivisors(n);
-    rep(i,0,req.size())
-    {
-        ll temp=0;
-        if(i!=req.size()-1)
-        temp=(req[i]-1)+(req[i+1]);
-        res=min(res,temp);
-        i++;
-    }
-    return res;
-}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -96,12 +82,14 @@ int main()
         ll x,y;
         cin>>x>>y;
         if(x==1 && y==1)
-        cout<<"2\n";
-        else if(x==1)
-        cout<<1+value(y)<<"\n";
-        else if(y==1)
-        cout<<1+value(x)<<"\n";
-        else 
-        cout<<value(x)+value(y)+1<<"\n";
+        {
+            cout<<"2\n";
+        continue;}
+        ll ans=INT_MAX;
+        rep(i,1,100001)
+        {
+            ans=min(ans,((x+i-1)/i)+((y+i-1)/i)+(i-1));
+        }
+        cout<<ans<<endl;
     }
 }

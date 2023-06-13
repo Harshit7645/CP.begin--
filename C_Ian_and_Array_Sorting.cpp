@@ -86,15 +86,15 @@ int main()
         {
             cin>>arr[i];
         }
-        if(arr[0]>arr[1])
-        {
-            PNO;
-            continue;
-        }
         ll f=0;
         rep(i,0,n-1)
         {
+            arr[i+1]=arr[i+1]-arr[i];
             arr[i]=0;
         }
+        if(arr[n-1]>=0 || n%2==1)
+        PYES;
+        else
+        PNO;
     }
 }   
