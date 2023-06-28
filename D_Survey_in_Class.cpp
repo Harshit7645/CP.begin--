@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,29 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        int n,m;
+        cin>>n>>m;
+        vector<int>prefix_sum(m + 2, 0);
+        rep(i,0,n)
+        {
+            int l,r;
+            cin>>l>>r;
+            prefix_sum[l]+=1;
+            prefix_sum[r + 1]-=1;
+        }
+        rep(i,1,m+1)
+        {
+            prefix_sum[i] += prefix_sum[i - 1];
+        }
+        rep(i,1,m+1)
+        cout<<prefix_sum[i]<<" ";
+        int ans=0,cnt1=0,cnt2=0;
+        rep(i,1,m+1)
+        {
+            if(prefix_sum[i]<ceil((double)n/2))
+            cnt1+=(n-prefix_sum[i])-prefix_sum[i];
+            ans=max(ans,cnt1);
+        }
+        cout<<ans<<endl;
     }
 }   

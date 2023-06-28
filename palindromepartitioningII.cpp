@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,43 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool isPalindrome(string s)
+{
+    rep(i,0,s.length()/2)
+    {
+        if(s[i]!=s[s.length()-i-1])
+        return false;
+    }
+    return true;
+}
+map<string,ll>m;
+int recur(string s)
+{
+    if(s.length()==0)
+    return 0;
+    if(isPalindrome(s))
+    return 0;
+    int ans=INT_MAX;
+    if(m.find(s)!=m.end())
+    return m[s];
+    rep(i,1,s.length())
+    {
+        string temp=s.substr(0,i);
+        if(isPalindrome(temp))
+        {
+            ans=min(ans,1+recur(s.substr(i)));
+            //cout<<ans<<" "<<s<<endl;
+        }
+    }
+    m[s]=ans;
+    return ans;
+}
+int solve(string A)
+{
+    int n=A.length(),i=0;
+    return recur(A);
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve("abbacdeffegh");
 }   

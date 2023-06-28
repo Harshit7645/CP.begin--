@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,57 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,m;
+        cin>>n>>m;
+        ll R[n][m],B[n][m];
+        vector<ll>redrow,bluerow;
+        rep(i,0,n)
+        {
+            ll sum=0;
+            rep(j,0,m)
+            {
+                cin>>R[i][j];
+            }
+        }
+        rep(i,0,n)
+        {
+            ll sum=0;
+            rep(j,0,m)
+            {
+                cin>>B[i][j];
+            }
+        }
+        ll ans=0;
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = n-2; j >=0; j--)
+            {
+                R[j][i]+=R[j+1][i];
+            }
+        }
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 1; j < n; j++)
+        {
+            B[j][i]+=B[j-1][i];
+        }      
+    }
+    vector<vector<ll>> dp(m+1,vector<ll>(n+1));
+    for(int i = 1; i<=m ; i++){
+        for(int j = 0; j <=n ; j++)
+        {
+            dp[i][j]=dp[i-1][j]+((j>0) ? B[j-1][i-1] : 0) + ((j<n) ? R[j][i-1] : 0);
+            if(j>0) dp[i][j]=max(dp[i][j],dp[i][j-1]);
+        }
+    }
+        // rep(i,0,m+1)
+        // {
+        //     rep(j,0,n+1)
+        //     {
+        //         cout<<dp[i][j]<<" ";
+        //     }
+        //     cout<<"\n";
+        // }
+        cout<<dp[m][n]<<"\n";
     }
 }   

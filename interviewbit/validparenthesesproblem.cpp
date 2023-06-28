@@ -1,8 +1,7 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-#define rep(i,a,b) for(ll i=a;i<b;i++)
+#define rep(i,a,b) for(int i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
@@ -153,13 +152,29 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+int solve(string A)
+{
+    int n=A.length();
+    //cout<<"length is:"<<n<<endl;
+    stack<int>s;
+    s.push(-1);
+    int ans=0;
+    rep(i,0,n)
+    {
+        if(A[i]=='(')
+        s.push(i);
+        else
+        {
+            s.pop();
+            if(!s.empty())
+            ans=max(ans,i-s.top());
+            else
+            s.push(i);
+        }
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve(")()))(())((())))))())()(((((())())((()())(())((((())))())((()()))(()(((()()(()((()()))(())()))(((");
 }   

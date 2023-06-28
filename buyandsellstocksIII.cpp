@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,57 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int maxProfit(const vector<int> &prices) {
+    //this is the Divide and Conquer method
+    int N = prices.size();
+    if(N == 0) return 0;
+    
+    //make 2 vectors left and right. At every point u draw a line. Pick 1 or 0(in case of 
+    //dec order prices, u cant pick buy and sell points as it will give loss) 
+    // transactions on both sides w max profit and calc overall profit
+    
+    // we move left->right(buy then sell) in left side and 
+    // right->left on right side of line (sell and then buy)
+    
+    // FOR LEFT SIDE: pick 0th point as buy(min val) and each point after it is sell. 
+    // Find max profit for each set of points.
+    // If smaller val obtained, replace min Val with it so next iterations get subtracted 
+    // from this min val(as we move right)
+    
+    // FOR RIGHT SIDE: pick last n-1th point as sell (max Val) and each point after it is
+    // buy. Find max Profit. If larger val is seen, replace max Val w it. 
+    
+    //First val of left arr and last val of right array is 0 (skipped as
+    // we cant buy on last val of right, nor sell on first val of left)
+    
+    vector<int> left(N), right(N);
+    
+    int leftMin = prices[0];
+    for(int i = 1; i<N; i++){
+        left[i] = max(left[i-1], prices[i]-leftMin);
+        leftMin = min(leftMin, prices[i]);
+    }
+    
+    int rightMax = prices[N-1];
+    for(int i = N-2; i>=0; i--){
+        right[i] = max(right[i+1], rightMax-prices[i]);
+        rightMax = max(rightMax, prices[i]);
+    }
+    rep(i,0,N)
+    cout<<left[i]<<" ";
+    cout<<"\n";
+    rep(i,0,N)
+    cout<<right[i]<<" ";
+    cout<<"\n";
+    // find max profit 
+    int profit = right[0];
+    for(int i = 1; i<N; i++){
+        profit = max(profit, left[i-1]+right[i]); 
+    }
+    return profit;
+    
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<maxProfit({7,2,4,8,7});
 }   

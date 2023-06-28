@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,38 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        string l,r;
+        cin>>l>>r;
+        string left="",right="";
+        reverse(l.begin(),l.end());
+        while(r.length()>l.length())
+        {
+            l+="0";
+        }
+        reverse(l.begin(),l.end());
+        //cout<<l<<" "<<r<<"\n";
+        left+=l[0];
+        right+=r[0];
+        ll n=r.length();
+        rep(i,1,n)
+        {
+            if(left[i-1]!=right[i-1])
+            {
+                left+="9";
+                right+="0";
+            }
+            else
+            {
+                left+=l[i];
+                right+=r[i];
+            }
+        }
+        //cout<<left<<" "<<right<<"\n";
+        ll ans=0;
+        rep(i,0,n)
+        {
+            ans+=abs(right[i]-left[i]);
+        }
+        cout<<ans<<"\n";
     }
 }   

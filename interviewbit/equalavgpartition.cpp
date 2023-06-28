@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,72 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool check(int sum,int ind,int cnt,vector<int>&A,vector<int>&res)
+{
+    if(cnt==0)
+    return (sum==0);
+    if(ind>=A.size())
+    return false;
+    if(A[ind]<=sum)
+    {
+        res.push_back(A[ind]);
+        if(check(sum-A[ind],ind+1,cnt-1,A,res))
+        return true;
+        res.pop_back();
+    }
+    if(check(sum,ind+1,cnt,A,res))
+    return true;
+    return false;   
+}
+vector<vector<int>>solve(vector<int>A)
+{
+    sort(A.begin(),A.end());
+    vector<vector<int>>ans;
+    int n=A.size();
+    int sum=0;
+    map<ll,ll>m;
+    rep(i,0,n)
+    {
+        sum+=A[i];
+    }
+    vector<int>x;
+    rep(i,1,n)
+    {
+        if((sum*i)%n==0)
+        {
+            int sumreq=sum*i;
+            sumreq/=n;
+            vector<int>res;
+            if(check(sumreq,0,i,A,res))
+            {
+                x=res;
+                break;
+            }
+        }
+    }
+    vector<int>y;
+    if(x.size()==0)
+    return ans;
+    rep(i,0,x.size())
+    m[x[i]]++;
+    rep(i,0,n)
+    {
+        if(m[A[i]]>0)
+        m[A[i]]--;
+        else
+        y.push_back(A[i]);
+    }
+    ans.push_back(x);
+    ans.push_back(y);
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    vector<vector<int>>ans=solve({1, 7 ,15, 29, 11 ,9});
+    rep(i,0,ans.size())
     {
-        
+        rep(j,0,ans[i].size())
+        cout<<ans[i][j]<<" ";
+        cout<<"\n";
     }
 }   

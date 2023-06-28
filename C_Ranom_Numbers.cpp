@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -7,16 +6,14 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
-int M=1e9+7;
-
 ll fact(ll n)
 {
     ll ans=1;
     rep(i,1,n+1)
     {
-        ans=(ans*i)%M;
+        ans*=i;
     }
-    return ans%M;
+    return ans;
 }
 ll nCr(ll n,ll r)
 {
@@ -160,6 +157,135 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        string s;
+        cin>>s;
+        ll n=s.length();
+        vector<ll>ind;
+        ll l;
+        l=0;
+        while(l<n && s[l]!='A')
+        {
+            l++;
+        }
+        if(l<n)
+        ind.push_back(l);
+        else
+        ind.push_back(-1);
+        l=0;
+        while(l<n && s[l]!='B')
+        {
+            l++;
+        }
+        if(l<n)
+        ind.push_back(l);
+        else
+        ind.push_back(-1);
+        l=0;
+        while(l<n && s[l]!='C')
+        {
+            l++;
+        }
+        if(l<n)
+        ind.push_back(l);
+        else
+        ind.push_back(-1);
+        l=0;
+        while(l<n && s[l]!='D')
+        {
+            l++;
+        }
+        if(l<n)
+        ind.push_back(l);
+        else
+        ind.push_back(-1);
+        l=0;
+        while(l<n && s[l]!='E')
+        {
+            l++;
+        }
+        if(l<n)
+        ind.push_back(l);
+        else
+        ind.push_back(-1);
+        ll r;
+        r=n-1;
+        while(r>=0 && s[r]!='A')
+        r--;
+        if(r>=0)
+        ind.push_back(r);
+        else
+        ind.push_back(-1);
+        r=n-1;
+        while(r>=0 && s[r]!='B')
+        r--;
+        if(r>=0)
+        ind.push_back(r);
+        else
+        ind.push_back(-1);
+        r=n-1;
+        while(r>=0 && s[r]!='C')
+        r--;
+        if(r>=0)
+        ind.push_back(r);
+        else
+        ind.push_back(-1);
+        r=n-1;
+        while(r>=0 && s[r]!='D')
+        r--;
+        if(r>=0)
+        ind.push_back(r);
+        else
+        ind.push_back(-1);
+        r=n-1;
+        while(r>=0 && s[r]!='E')
+        r--;
+        if(r>=0)
+        ind.push_back(r);
+        else
+        ind.push_back(-1);
+        // rep(i,0,ind.size())
+        // {
+        //     cout<<ind[i]<<" ";
+        // }
+        // cout<<"\n";
+        string x="ABCDE";
+        char c=s[s.length()-1];
+        ll ans=pow(10,c-'A');
+        repr(k,s.length()-2,0)
+            {
+                if(s[k]<c)
+                ans-=pow(10,s[k]-'A');
+                else
+                ans+=pow(10,s[k]-'A');
+                if(s[k]>c)
+                c=s[k];
+            }
+        //cout<<ans<<" ";
+        rep(i,0,ind.size())
+        {
+            if(ind[i]==-1)
+            continue;
+            rep(j,0,x.length())
+            {
+                if(i%5==j)
+                continue;
+                string temp=s;
+                temp[ind[i]]=x[j];
+                ll num=0;
+                char ch=temp[temp.length()-1];
+                num+=pow(10,ch-'A');
+                repr(k,temp.length()-2,0)
+                {
+                    if(temp[k]<ch)
+                    num-=pow(10,temp[k]-'A');
+                    else
+                    num+=pow(10,temp[k]-'A');
+                    if(temp[k]>ch)
+                    ch=temp[k];
+                }
+                ans=max(ans,num);
+            }
+        }
+        cout<<ans<<endl;
     }
 }   

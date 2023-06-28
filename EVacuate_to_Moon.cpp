@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,m,h;
+        cin>>n>>m>>h;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll energy[m];
+        rep(i,0,m)
+        {
+            cin>>energy[i];
+        }
+        map<ll,ll>mp;
+        sort(arr,arr+n);
+        sort(energy,energy+m);
+        ll i=n-1,j=m-1,ans=0;
+        while(i>=0 && j>=0)
+        {   
+            ans+=min(arr[i--],h*energy[j--]);
+        }
+        cout<<ans<<"\n";
     }
 }   

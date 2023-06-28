@@ -152,14 +152,33 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int dp[1005][1005];
+int recur(int row,int col,vector<vector<int>>&A)
+{
+    if(row==A.size()-1 && col==A[0].size()-1)
+    return dp[row][col]=A[row][col];
+    if(dp[row][col]!=-1)
+    return dp[row][col];
+    if(row==A.size()-1)
+    return dp[row][col]=A[row][col]+recur(row,col+1,A);
+    else if(col==A[0].size()-1)
+    return dp[row][col]=A[row][col]+recur(row+1,col,A);
+    return dp[row][col]=A[row][col]+min(recur(row+1,col,A),recur(row,col+1,A));
+}
+int solve(vector<vector<int>>A)
+{
+    int n=A.size();
+    memset(dp,-1,sizeof(dp));
+    return recur(0,0,A);
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve({{20, 29, 84, 4, 32, 60, 86, 8, 7, 37}
+  ,{77, 69, 85, 83, 81, 78, 22, 45, 43, 63}
+  ,{60, 21, 0, 94, 59, 88, 9, 54, 30, 80}
+  ,{40, 78, 52, 58, 26, 84, 47, 0, 24, 60}
+  ,{40, 17, 69, 5, 38, 5, 75, 59, 35, 26}
+  ,{64, 41, 85, 22, 44, 25, 3, 63, 33, 13}
+  ,{2, 21, 39, 51, 75, 70, 76, 57, 56, 22}
+  ,{31, 45, 47, 100, 65, 10, 94, 96, 81, 14}});
 }   

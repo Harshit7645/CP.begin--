@@ -1,11 +1,10 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 int M=1e9+7;
 
@@ -153,6 +152,20 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+string decToBinary(int n)
+{
+    string ans="";
+    // Size of an integer is assumed to be 32 bits
+    for (int i = 31; i >= 0; i--) 
+    {
+        int k = n >> i;
+        if (k & 1)
+            ans+="1";
+        else
+            ans+="0";
+    }
+    return ans;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -160,6 +173,67 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,x;
+        cin>>n>>x;
+        ll a[n],b[n],c[n],ans=0;
+        stack<ll>st1,st2,st3;
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>b[i];
+            st2.push(b[i]);
+        }
+        rep(i,0,n)
+        {
+            cin>>c[i];
+            st3.push(c[i]);
+        }
+        ans=0;
+        repr(i,n-1,0)
+        {
+            st1.push(a[i]);
+            st2.push(b[i]);
+            st3.push(c[i]);
+        }
+        rep(i,0,n)
+        {
+            if(!st1.empty())
+            {
+                if((st1.top()|x)<=x)
+                {
+                    ans=ans|st1.top();
+                    st1.pop();
+                }
+            }
+        }
+        rep(i,0,n)
+        {
+            if(!st2.empty())
+            {
+                if((st2.top()|x)<=x)
+                {
+                    ans=ans|st2.top();
+                    st2.pop();
+                }
+            }
+        }
+        rep(i,0,n)
+        {
+            if(!st3.empty())
+            {
+                if((st3.top()|x)<=x)
+                {
+                    ans=ans|st3.top();
+                    st3.pop();
+                }
+            }
+        }
+        if(ans==x)
+        PYES;
+        else
+        PNO;
     }
 }   

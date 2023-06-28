@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,28 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(int A)
+{
+    vector<ll>dp(2*A+1);
+    if(A<=1)
+    return A;
+    dp[0]=1;
+    dp[2]=1;
+    rep(i,4,2*A+1)
+    {
+        rep(j,0,i-2+1)
+        {
+            dp[i]=(dp[i]%M + (dp[j]%M * dp[i-j-2]%M)%M)%M;
+            dp[i]=dp[i]%M;
+            j++;
+        }
+        i++;
+    }
+    // rep(i,0,2*A+1)
+    // cout<<dp[i]<<" ";
+    return dp[2*A]%M;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve(22);
 }   

@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,24 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,m;
+        cin>>n>>m;
+        ll a[n],b[m],sum1=0,sum2=0;
+        rep(i,0,n)
+        {
+            cin>>a[i];
+            sum1+=a[i];
+        }
+        rep(i,0,m)
+        {
+            cin>>b[i];
+            sum2+=b[i];
+        }
+        if(sum1>sum2)
+        cout<<"Tsondu\n";
+        else if(sum2>sum1)
+        cout<<"Tenzing\n";
+        else
+        cout<<"Draw\n";
     }
 }   

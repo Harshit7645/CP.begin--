@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,46 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll a[n],b[n];
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>b[i];
+        }
+        ll cnt1=0,stk1=0;
+        rep(i,0,n)
+        {
+            if(a[i]==0)
+            {
+                stk1=max(stk1,cnt1);
+                cnt1=0;
+            }
+            else
+            cnt1++;
+        }
+        stk1=max(stk1,cnt1);
+        ll cnt2=0,stk2=0;
+        rep(i,0,n)
+        {
+            if(b[i]==0)
+            {
+                stk2=max(stk2,cnt2);
+                cnt2=0;
+            }
+            else
+            cnt2++;
+        }
+        stk2=max(stk2,cnt2);
+        if(stk1>stk2)
+        cout<<"Om\n";
+        else if(stk2>stk1)
+        cout<<"Addy\n";
+        else
+        cout<<"Draw\n";
     }
 }   

@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,30 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,b;
+        cin>>n>>b;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll f=0;
+        map<ll,ll>m;
+        ll num=arr[0];
+        m[num]++;
+        rep(i,1,n)
+        {
+            m[num]++;
+            num=(num&arr[i]);
+        }
+        int curr = -1; 
+        for(int i=0;i<n;i++)
+        {
+            if((arr[i] & b) == b) curr = (curr & arr[i]);
+        }
+        if(curr==b)
+        PYES;
+        else
+        PNO;
     }
 }   

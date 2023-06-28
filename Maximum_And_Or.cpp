@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -156,10 +155,23 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
+    ll tt;
     cin>>tt;
     while(tt--)
     {
-        
+        ll a,b,c;
+        cin>>a>>b>>c;
+        ll maxm=0;
+        rep(i,0,pow(2,c))
+        {
+            maxm=max(maxm,(i|b)-(i&a));
+        }
+        ll ans=0;
+        rep(i,0,pow(2,c))
+        {
+            if((i|b)-(i&a)==maxm)
+            ans++;
+        }
+        cout<<ans<<endl;
     }
 }   

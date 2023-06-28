@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,41 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool isPalindrome(string s)
+{
+    rep(i,0,s.length()/2)
+    {
+        if(s[i]!=s[s.length()-i-1])
+        return false;
+    }
+    return true;
+}
+map<string,ll>m;
+bool wordBreak(string s,unordered_map<string,int>mp) 
+{
+    vector<bool>dp(s.length()+1);
+    dp[0] = true;
+    rep(i,1,s.length()+1)
+    {
+        rep(j,0,i)
+        {
+            if(dp[j] and mp.find(s.substr(j,j-i))!=mp.end()) {
+                dp[i] = true;
+                break;
+            }
+        }
+    }
+  return dp[s.length()];
+}
+int solve(string A,vector<string>B)
+{
+    int n=B.size();
+    unordered_map<string,int>mp;
+    rep(i,0,B.size())
+    mp[B[i]]++;
+    return wordBreak(A,mp);
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve("bbbbbbababaaababbabbbaaabbbaaaabbbaaabbbabbababaabbabbabaaaaabbbaabbaabaabbabbaababaaababbbaabaabababbabaaaababaaaabbbbbaaaaabaaaaaaababababababbaabaabaaaaabbbbabbbbabbabbababbbbbbababaaaaaababbbabaaabaabbabbaabbabababaaaabbbaaabbababbabbaabbbabbbbabaababbaabbaaabababaabbbbbaaabaababbababbbaaabbbaabbaaaababbbbbbbaaaabbbaaabababbbbababbbabaabaaabaabbbaaabbaaaabbbbabaabaabbbbabaaababaaaabbababbbbabbaababbbbabbabababaabbababbaabbbbabbbaabbaabbaabaaaabbaaabaaaabbbaaaabbbaaaabbbbaaaabbbbbaaaaabababaaabababaabbbabaaabbabaabbababbabbaaabbbabbababababbabbbaaaabaabaaabaaabbbaaabaabbbbbbaaabbaabbbbaaaabbbbbbbaaaaabaabbabaabbbbbabbabaabababbababbaaaababaabaabbbbabbabbbbaabbbabbaabbabababaaaaaaabaaaaaabbaaabbabaabaaabaaaabaababbababbaabbbaaaabaababaaaaabbbbaaababaabbbaababaaaaaababbbbabbabbbabbbaabbaaabbbbaabbbbaabaabbbaaabb",{"babbbab", "aababaabaa", "aaaabba", "babbbb", "aabbaba", "bab", "babbba", "bababbbbb", "aaababbb", "bbabab", "ba", "bbbbab", "a", "b", "abababb", "baa", "b", "bbbabaa", "aab", "bbaaaaaaa", "babbbbabbb", "abbbbbabba", "aba", "a", "baa", "aaabaaa", "baabaa", "bababaabba", "abbb", "aba", "ba", "abaababa", "bbbbaaa", "bbaabbaa", "aaabb", "bbbba", "bbbbb", "aaba", "abb", "baaaaa", "baabaaba", "abbb", "abbaa", "aabb", "abbabbbb", "abababa", "ababbbaba", "bbbbbbb", "bbbaaabbab", "abbbbab", "aa", "aaabaaa", "bbaaba", "bbbaab", "baabaab", "bbabbba", "ababbbab", "b", "aabbabbbb", "b", "abaabbb", "aaaaabaaba", "abbaaba", "aaabaaaa", "bbabb", "bbbbaabab", "aaaabb", "ababbbaab", "baaaba", "abbaaaaaaa", "abab", "abababb", "aabaaaa", "bbaa", "aaaabbab", "aa", "abaaa", "abbbb", "abbaa", "bba", "bbaba", "a", "aaaababb", "aabbababab", "aaabbba", "abbbaa", "aabbbba", "abbbbaaaba", "ababaaabba", "aa", "aaabb", "aaabba" });
 }   

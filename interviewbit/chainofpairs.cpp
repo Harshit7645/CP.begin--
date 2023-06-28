@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -40,7 +39,7 @@ ll power(ll a,ll b)
 }
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
 {
-    return (a.second < b.second);
+    return (a.second<b.second);
 }
  
 bool isPrime(ll n)
@@ -152,14 +151,27 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+int solve(vector<vector<int>>A)
+{
+    int n=A.size();
+    int i, j, max = 0;
+    int *mcl = new int[sizeof( int ) * n ];
+    for ( i = 0; i < n; i++ )
+        mcl[i] = 1;
 
+    for ( i = 1; i < n; i++ )
+        for ( j = 0; j < i; j++ )
+            if ( A[i][0] > A[j][1] &&
+                    mcl[i] < mcl[j] + 1)
+                mcl[i] = mcl[j] + 1;
+
+    for ( i = 0; i < n; i++ )
+        if ( max < mcl[i] )
+            max = mcl[i]; 
+    return max;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    vector<vector<int>>A={{5, 24},{39, 60},{15, 28},{27, 40},{50, 90}};
+    cout<<solve(A);
 }   

@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,46 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool isPalind(string s)
+{
+    rep(i,0,s.length()/2)
+    {
+        if(s[i]!=s[s.length()-i-1])
+        return false;
+    }
+    return true;
+}
+int solve(int A)
+{
+    vector<string>pal;
+    rep(i,1,9000000)
+    {
+        string s="";
+        ll j=i;
+        while(j>0)
+        {
+            if(j%2==0)
+            s+="0";
+            else
+            s+="1";
+            j=j/2;
+        }
+        if(isPalind(s))
+        pal.push_back(s);
+    }
+    ll num=0,c=0;
+    repr(i,pal[A-1].length()-1,0)
+    {
+        if(pal[A-1][i]=='1')
+        num=num+pow(2,c);
+        c++;
+    }
+    // rep(i,0,pal.size())
+    // cout<<pal[i]<<" ";
+    cout<<pal.size()<<" ";
+    return num;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve(30);
 }   

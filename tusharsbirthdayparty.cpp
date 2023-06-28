@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,13 +152,35 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+int solve(vector<int>A,vector<int>B,vector<int>C)
+{
+    int n=B.size();
+    int ans=0;
+    int max_cap=0;
+    rep(i,0,n)
+    {
+        max_cap=max(max_cap,A[i]);
+    }
+    vector<int>dp(max_cap+1,INT_MAX);
+    dp[0]=0;
+    rep(i,1,max_cap+1)
+    {
+        rep(j,0,n)
+        {
+            if(B[j]<=i)
+            dp[i]=min(dp[i],dp[i-B[j]]+C[j]);
+        }
+    }
+    // rep(i,0,dp.size())
+    // cout<<dp[i]<<" ";
+    rep(i,0,A.size())
+    ans+=dp[A[i]];
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    vector<int>A = {751, 169, 816, 32, 354, 978, 255, 740, 247, 651, 999, 292, 66, 244, 307, 80, 282, 941, 301, 745, 714, 879, 416, 120, 385, 806, 561, 804, 710, 414, 456, 461, 582, 272, 212, 936, 968, 466, 395, 933, 117, 394, 226, 900, 356, 532, 980, 356, 192, 999, 101, 906, 597, 517, 26, 981, 323, 306, 785, 751, 719, 960, 930, 301, 232, 142, 955, 201, 326, 350, 134, 162, 462, 78, 62, 818, 329, 760};
+    vector<int>B = {1};
+    vector<int>C = {520};
+    cout<<solve(A,B,C);
 }   

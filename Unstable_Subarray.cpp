@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -7,16 +6,14 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
-int M=1e9+7;
-
 ll fact(ll n)
 {
     ll ans=1;
     rep(i,1,n+1)
     {
-        ans=(ans*i)%M;
+        ans*=i;
     }
-    return ans%M;
+    return ans;
 }
 ll nCr(ll n,ll r)
 {
@@ -160,6 +157,21 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        map<ll,ll>m;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            m[arr[i]]++;
+        }
+        ll ans=0;
+        ans=n*(n-1)/2;
+        for(auto x:m)
+        {
+            ans-=x.second*(x.second-1)/2;
+        }
+        cout<<ans<<"\n";
     }
 }   

@@ -152,14 +152,22 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int dp[20005];
+int recur(int col,vector<vector<int>>A)
+{
+    if(col>A[0].size())
+    return 0;
+    if(dp[col]!=-1)
+    return dp[col];
+    return dp[col]=max(max(A[0][col],A[1][col])+recur(col+2,A),recur(col+1,A));
+}
+int solve(vector<vector<int>>A)
+{
+    int n=A.size();
+    memset(dp,-1,sizeof(dp));
+    return recur(0,A);
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve({{1,2,3,4},{2,3,4,5}});
 }   

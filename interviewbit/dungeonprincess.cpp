@@ -152,14 +152,49 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int solve(vector<vector<int>>A)
+{
+    int n=A.size();
+    int m=A[0].size();
+    vector<vector<int>>dp(n,vector<int>(m,0));
+    dp[n-1][m-1]=A[n-1][m-1];
+    repr(i,n-2,0)
+    {
+        if(dp[i+1][m-1]+A[i][m-1]>0)
+        dp[i][m-1]=0;
+        else
+        dp[i][m-1]=dp[i+1][m-1]+A[i][m-1];
+    }
+    repr(j,m-2,0)
+    {
+        if(dp[n-1][j+1]+A[n-1][j]>0)
+        dp[n-1][j]=0;
+        else
+        dp[n-1][j]=dp[n-1][j+1]+A[n-1][j];
+    }
+    repr(i,n-2,0)
+    {
+        repr(j,m-2,0)
+        {
+            if(max(dp[i+1][j],dp[i][j+1])+A[i][j]<0)
+            dp[i][j]=max(dp[i+1][j],dp[i][j+1])+A[i][j];
+            else
+            dp[i][j]=0;
+        }
+    }
+    // rep(i,0,n)
+    // {
+    //     rep(j,0,m)
+    //     {
+    //         cout<<dp[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+    return abs(dp[0][0])+1;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve({{-2,-3,3},
+                 {-5,-10,1},
+                 {10,30,-5}});
 }   

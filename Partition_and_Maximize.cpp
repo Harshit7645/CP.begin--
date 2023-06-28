@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,40 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n],maxm=INT_MIN;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            maxm=max(maxm,arr[i]);
+        }
+        ll ans=1-maxm;
+        vector<ll>req;
+        rep(i,0,n)
+        {
+            maxm=0;
+            if(arr[i]<0)
+            req.push_back(arr[i]);
+            else
+            {
+                while(arr[i]>0 && i<n)
+                {
+                    maxm=max(maxm,arr[i]);
+                    i++;
+                }
+                i--;
+                req.push_back(maxm);
+            }
+        }
+        ll sum=0;
+        rep(i,0,req.size())
+        cout<<req[i]<<" ";
+        cout<<endl;
+        rep(i,0,req.size())
+        {
+            sum+=req[i];
+        }
+        //cout<<max(ans,(ll)req.size()-sum)<<endl;
     }
 }   

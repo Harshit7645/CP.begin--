@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,15 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,k,g;
+        cin>>n>>k>>g;
+        if(k*g<(((g+1)/2)-1)*n)
+        {
+            cout<<k*g<<endl;
+            continue;
+        }
+        ll x=(k*g)/n;
+        ll num=(g+1)/2;
+        cout<<k*g-((((k*g-(num-1)*n+g-1)/g)*g))<<endl;
     }
 }   

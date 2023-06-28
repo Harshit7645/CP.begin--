@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -7,7 +6,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
-int M=1e9+7;
+ll M=1e9+7;
 
 ll fact(ll n)
 {
@@ -152,14 +151,42 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+int modInverse(int A)
+{
+    for (int X = 1; X < M; X++)
+        if (((A % M) * (X % M)) % M == 1)
+            return X;
+    return 1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n;
+    cin>>n;
+    ll sum=n*(n+1)/2;
+    if(sum%2)
     {
-        
+        cout<<"0\n";
+        return 0;
     }
+    sum/=2;
+    vector<vector<ll>>dp(n,vector<ll>(sum+1,0));
+    dp[0][0]=1;
+    rep(i,1,n)
+    {
+        rep(j,0,sum+1)
+        {
+            if(i<=j)
+            dp[i][j]=(dp[i-1][j]+dp[i-1][j-i])%M;
+            else
+            dp[i][j]=dp[i-1][j];
+        }
+    }
+    // rep(i,0,n+1)
+    // {
+    //     rep(j,0,sum+1)
+    //     cout<<dp[i][j]<<" ";
+    //     cout<<"\n";
+    // }
+    cout<<(dp[n-1][sum])%M;
 }   

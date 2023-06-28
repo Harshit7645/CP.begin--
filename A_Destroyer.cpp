@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,25 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n,x;
+        ll maxm=0,f=0;
+        cin>>n;
+        vector<int>v(1000,0);
+        rep(i,0,n)
+        {
+           cin>>x;
+           maxm=max(maxm,x);
+           v[x]++;
+        }
+        rep(i,1,maxm+1)
+        {
+            if(v[i-1]<v[i]){
+                PNO;
+                f=1;
+                break;
+            }
+        }
+        if(f==0)
+        PYES;
     }
 }   

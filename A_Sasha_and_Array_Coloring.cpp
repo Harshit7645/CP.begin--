@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,19 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll ans=0;
+        sort(arr,arr+n);
+        rep(i,0,n/2)
+        {
+            ans+=(arr[n-i-1]-arr[i]);
+        }
+        cout<<ans<<"\n";
     }
 }   

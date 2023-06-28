@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -153,13 +152,57 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+vector<vector<int>>solve(int A,vector<vector<int>>B)
+{
+    int n=B.size();
+    int m=B[0].size();
+    vector<vector<int>>ans(n,vector<int>(m,0));
+    vector<vector<vector<int>>>dp(n,vector<vector<int>>(m,vector<int>(A+1,0)));
+    rep(k,0,A+1)
+    {
+        rep(i,0,n)
+        {
+            rep(j,0,m)
+            {
+                if(k==0)
+                {
+                    dp[i][j][k]=B[i][j];
+                }
+                else
+                {
+                    int ans=dp[i][j][k-1];
+                    if(i>0)
+                    ans=max(ans,dp[i-1][j][k-1]);
+                    if(i<n-1)
+                    ans=max(ans,dp[i+1][j][k-1]);
+                    if(j>0)
+                    ans=max(ans,dp[i][j-1][k-1]);
+                    if(j<m-1)
+                    ans=max(ans,dp[i][j+1][k-1]);
+                    dp[i][j][k]=ans;
+                }
+            }
+        }
+    }
+    rep(i,0,n)
+    {
+        rep(j,0,m)
+        {
+            ans[i][j]=dp[i][j][A];
+        }
+    }
+    return ans;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    // cout<<"hi\n";
+    vector<vector<int>>B=solve(1,{{1,2,4},{4,5,8}});
+    rep(i,0,B.size())
     {
-        
+        rep(j,0,B[i].size())
+        {
+            cout<<B[i][j]<<" ";
+        }
+        cout<<endl;
     }
 }   

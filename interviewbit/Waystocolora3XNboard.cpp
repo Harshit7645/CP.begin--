@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,56 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool isCompatible(pair<pair<int,int>,int>p1,pair<pair<int,int>,int>p2)
+{
+    if(p1.first.first==p2.first.first || p1.first.second==p2.first.second || p1.second==p2.second)
+    return false;
+    return true;
+}
+int solve(int A)
+{
+    if(A<=0)
+    return 0;
+    vector<pair<pair<int,int>,int>>triplets;
+    rep(i,0,4)
+    {
+        rep(j,0,4)
+        {
+            rep(k,0,4)
+            {
+                if(i!=j && j!=k)
+                triplets.push_back({{i,j},k});
+            }
+        }
+    }
+    ll dp[4][4][4][A+1];
+    memset(dp,0,sizeof(dp));
+    rep(i,1,A+1)
+    {
+        rep(j,0,36)
+        {
+            if(i==1)
+            dp[triplets[j].first.first][triplets[j].first.second][triplets[j].second][1]=1;
+            else
+            {
+                rep(k,0,36)
+                {
+                    if(isCompatible(triplets[j],triplets[k]))
+                    {
+                        dp[triplets[j].first.first][triplets[j].first.second][triplets[j].second][i] = (dp[triplets[j].first.first][triplets[j].first.second][triplets[j].second][i] + dp[triplets[k].first.first][triplets[k].first.second][triplets[k].second][i-1])%M;
+                    }
+                }
+            }
+        }
+    }
+    int ans=0;
+    rep(i,0,36)
+    {
+        ans=(ans+dp[triplets[i].first.first][triplets[i].first.second][triplets[i].second][A])%M;
+    }
+    return ans%M;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve(3);
 }   

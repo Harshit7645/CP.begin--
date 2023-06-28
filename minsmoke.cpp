@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,43 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+ll dp[1000][1000];
+ll presum[1000];
 
+ll minsmoke(ll st,ll end)
+{
+    if(st>=end)
+    return 0;
+    if(dp[st][end]!=-1)
+    return dp[st][end];
+    dp[st][end]=INT_MAX;
+    rep(k,st,end+1)
+    {
+        if(st>=1)
+        dp[st][end]=min(dp[st][end],minsmoke(st,k)+minsmoke(k+1,end)+(presum[k]-presum[st-1])*(presum[end]-presum[k]));
+        else
+        dp[st][end]=min(dp[st][end],minsmoke(st,k)+minsmoke(k+1,end)+(presum[k])*(presum[end]-presum[k]));
+    }
+    return dp[st][end];
+}
+int solve(vector<int>A)
+{
+    ll n=A.size();
+    ll smoke=0;
+    presum[0]=A[0];
+    rep(i,1,n)
+    {
+        presum[i]=presum[i-1]+A[i];
+    }
+    rep(i,0,n)
+    {
+        cout<<presum[i]<<" ";
+    }
+    memset(dp,INT_MAX,sizeof(dp));
+    return minsmoke(0,n-1);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve({2,3,4,5});
 }   

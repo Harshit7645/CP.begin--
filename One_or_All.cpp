@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,35 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll arr[n],sum=0,minm=INT_MAX;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            sum+=arr[i];
+            minm=min(minm,arr[i]);
+        }
+        //cout<<minm<<" "<<sum<<"\n";
+        ll f=0;
+        if(n%2)
+        {
+            if(sum%2)
+            cout<<"CHEF\n";
+            else
+            cout<<"CHEFINA\n";
+        }
+        else
+        {
+            if(minm%2)
+            cout<<"CHEF\n";
+            else
+            {
+                if(sum%2==0)
+                cout<<"CHEFINA\n";
+                else
+                cout<<"CHEF\n";
+            }
+        }
     }
 }   

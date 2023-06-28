@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,14 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll n;
+        cin>>n;
+        ll sum=0;
+        while(n>0)
+        {
+            sum+=n;
+            n/=2;
+        }
+        cout<<sum<<endl;
     }
 }   

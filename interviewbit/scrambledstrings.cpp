@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,51 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+unordered_map<string,ll>mp;
+int solve(string A,string B)
+{
+    int n=A.length(),m=B.length();
+    if(n!=m)
+    return 0;
+    if(n==0)
+    return 1;
+    if(A==B)
+    return 1;
+    vector<int>c1(26),c2(26);
+    rep(i,0,n)
+    {
+        c1[A[i]-'a']++;
+    }
+    rep(i,0,m)
+    {
+        c2[B[i]-'a']++;
+    }
+    rep(i,0,26)
+    {
+        if(c1[i]!=c2[i])
+        return 0;
+    }
+    string key=(A+"*"+B);
+    if(mp.find(key)!=mp.end())
+    return mp[key];
+    ll f=0;
+    rep(i,1,n)
+    {
+        if(solve(A.substr(0,i),B.substr(0,i)) && solve(A.substr(i,n-i),B.substr(i,n-i)))
+        {
+            f=1;
+            return 1;
+        }
+        if(solve(A.substr(0,i),B.substr(n-i,i)) && solve(A.substr(i,n-i),B.substr(0,n-i)))
+        {
+            f=1;
+            return 1;
+        }
+    }
+    mp[key]=f;
+    return 0;
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve("great","eatgr");
 }   

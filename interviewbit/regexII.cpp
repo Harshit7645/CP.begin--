@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -152,14 +151,25 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+bool _isMatch(const string &str, int s, const string &pat, int p){
+    if(p == pat.length())        return s == str.size();
 
+    bool star = p < pat.size()-1 and pat[p + 1] == '*';
+    bool match = s < str.size() and  (pat[p] == '.' or str[s] == pat[p]);
+    // if theres kleene
+    if(star){
+        // dont match rec, match rec.
+        return _isMatch(str, s, pat, p+2) 
+            or ( match and _isMatch(str, s+1, pat, p));
+    }
+    return match and _isMatch(str, s+1, pat, p+1);
+}
+
+int solve(const string A,const string B)
+{
+    return _isMatch(A,0,B,0);
+}
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
-    {
-        
-    }
+    cout<<solve("ac","ab*c");
 }   

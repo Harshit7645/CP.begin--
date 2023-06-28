@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -160,6 +159,23 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        
+        ll x;
+        cin>>x;
+        if(x==1)
+        {
+            cout<<"-1\n";
+        }
+        else if(x<=1e6)
+        {
+            cout<<"1 1 "<<x-1<<"\n";
+        }
+        else if(x>1e6 && x%1000000!=0)
+        {
+            cout<<"1000000 "<<x/1000000<<" "<<x%1000000<<"\n";
+        }
+        else
+        {
+            cout<<"1000000 "<<x/1000000-1<<" 1000000\n";
+        }
     }
 }   
