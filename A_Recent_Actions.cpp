@@ -84,7 +84,28 @@ int main()
         ll p[m];
         rep(i,0,m)
         {
-            
+            cin>>p[i];
         }
+        vector<ll>ans;
+        map<ll,ll>mp;
+        ll prev=0;
+        rep(i,0,m)
+        {
+            mp[p[i]]++;
+            if(mp.size()>prev)
+            {
+                prev=mp.size();
+                ans.push_back(i+1);
+            }
+            if(ans.size()==n)
+            break;
+        }
+        ll sz=ans.size();
+        rep(i,0,n-sz)
+        ans.push_back(-1);
+        reverse(ans.begin(),ans.end());
+        rep(i,0,ans.size())
+        cout<<ans[i]<<" ";
+        cout<<"\n";
     }
 }
