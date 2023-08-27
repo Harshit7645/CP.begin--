@@ -32,9 +32,8 @@ ll power(ll a,ll b)
     while(b>0)
     {
         if(b%2==1)
-        result=(result*a)%M;
+        result*=a;
         a*=a;
-        a%=M;
         b/=2;
     }
     return result;
@@ -156,12 +155,30 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ll tt;
-    cin>>tt;
-    while(tt--)
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    ll n;
+    cin>>n;
+    ll arr[n];
+    rep(i,0,n)
     {
-        ll a,b;
-        cin>>a>>b;
-        cout<<power(a,b)<<"\n";
+        cin>>arr[i];
     }
+    sort(arr,arr+n);
+    ll f=-1;
+    // rep(i,0,n)
+    // {
+    //     cout<<arr[i]<<" ";
+    // }
+    // cout<<endl;
+    rep(i,0,n-1)
+    {
+        if(arr[i+1]-arr[i]!=1)
+        {
+            f=1;
+            cout<<arr[i]+1<<"\n";
+            break;
+        }
+    }
+    if(f==-1)
+    cout<<arr[n-1]+1<<endl;
 }   

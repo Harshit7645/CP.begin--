@@ -32,9 +32,8 @@ ll power(ll a,ll b)
     while(b>0)
     {
         if(b%2==1)
-        result=(result*a)%M;
+        result*=a;
         a*=a;
-        a%=M;
         b/=2;
     }
     return result;
@@ -156,12 +155,129 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ll tt;
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    ll tt=1;
     cin>>tt;
     while(tt--)
     {
-        ll a,b;
-        cin>>a>>b;
-        cout<<power(a,b)<<"\n";
+        ll n;
+        cin>>n;
+        ll arr[n];
+        ll pos=0,neg=0,maxpos=0,maxposind=0,maxneg=0,maxnegind=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            if(arr[i]>0)
+            pos++;
+            else
+            neg++;
+            if(maxpos<arr[i])
+            {
+                maxpos=arr[i];
+                maxposind=i;
+            }
+            if(arr[i]<maxneg)
+            {
+                maxneg=arr[i];
+                maxnegind=i;
+            }
+        }
+        if(is_sorted(arr,arr+n))
+        {
+            cout<<"0\n";
+            continue;
+        }
+        if(pos==n)
+        {
+            cout<<n-1<<"\n";
+            rep(i,1,n)
+            {
+                cout<<i+1<<" "<<i<<"\n";
+            }
+        }
+        else if(neg==n)
+        {
+            cout<<n-1<<"\n";
+            repr(i,n,2)
+            {
+                cout<<i-1<<" "<<i<<"\n";
+            }
+        }
+        // cout<<"\n";
+        // cout<<maxpos<<" "<<maxneg<<" "<<maxposind<<" "<<maxnegind<<"\n";
+        else
+        {
+            map<ll,ll>cnt,mx;
+            rep(i,0,n)
+            {
+                if(arr[i])
+                {
+                    int sign=arr[i]/abs(arr[i]);
+                    cnt[sign]++;
+                    mx[sign]=max(mx[sign],abs(arr[i]));
+                }
+            }
+            vector<pair<ll,ll>>ans;
+            if(cnt[1]>=13 || cnt[-1]>=13)
+            {
+                int sign=-1;
+                if(cnt[1]>=13)
+                sign=1;
+                int ind=-1;
+                rep(i,0,n)
+                {
+                    if(arr[i] && arr[i]/abs(arr[i])==sign)
+                    {
+                        ind=i+1;
+                        break;
+                    }
+                }
+                rep(i,0,5)
+                {
+                    ans.push_back({ind,ind});
+                    arr[ind-1]+=arr[ind-1];
+                }
+                mx[sign]=abs(arr[ind-1]);
+            }
+            int sign=-1;
+            if(mx[1]>mx[-1])
+            sign=1;
+            int ind=0;
+            rep(i,0,n)
+            {
+                if(arr[i]==sign*mx[sign])
+                {
+                    ind=i;
+                    break;
+                }
+            }
+            rep(i,0,n)
+            {
+                if(arr[i] && arr[i]/abs(arr[i])!=sign)
+                {
+                    ans.push_back({i+1,ind+1});
+                    //arr[i]+=arr[pos-1];
+                }
+            }
+            if(sign==1)
+            {
+                rep(i,2,n+1)
+                {
+                    ans.push_back({i,i-1});
+                }
+            }
+            else
+            {
+                repr(i,n-1,1)
+                {
+                    ans.push_back({i,i+1});
+                }
+            }
+            cout<<ans.size()<<"\n";
+            rep(i,0,ans.size())
+            {
+                cout<<ans[i].first<<" "<<ans[i].second<<"\n";
+            }
+        }
     }
 }   

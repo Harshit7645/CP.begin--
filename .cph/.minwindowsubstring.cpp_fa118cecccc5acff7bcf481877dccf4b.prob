@@ -1,0 +1,1 @@
+{"name":"Local: minwindowsubstring","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\minwindowsubstring.cpp","tests":[{"id":1690221481182,"input":"ADOBECODEBANC ABC","output":"BANC"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\minwindowsubstring.cpp","group":"local","local":true}

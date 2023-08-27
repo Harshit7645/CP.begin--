@@ -32,9 +32,8 @@ ll power(ll a,ll b)
     while(b>0)
     {
         if(b%2==1)
-        result=(result*a)%M;
+        result*=a;
         a*=a;
-        a%=M;
         b/=2;
     }
     return result;
@@ -153,15 +152,86 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+bool remove(vector<string>&grid)
+{
+    int n=grid.size(),m=grid[0].size();
+    vector<int>row,col;
+    rep(i,0,n)
+    {
+        map<char,ll>mp;
+        rep(j,0,m)
+        {
+            if(grid[i][j]!='.')
+            {
+                mp[grid[i][j]]++;
+            }
+        }
+        auto it=mp.begin();
+        if(mp.size()==1 && it->second>=2)
+        row.push_back(i);
+    }
+    rep(j,0,m)
+    {
+        map<char,ll>mp;
+        rep(i,0,n)
+        {
+            if(grid[i][j]!='.')
+            {
+                mp[grid[i][j]]++;
+            }
+        }
+        auto it=mp.begin();
+        if(mp.size()==1 && it->second>=2)
+        col.push_back(j);
+    }
+    if(row.size()==0 && col.size()==0)
+    return false;
+    rep(i,0,row.size())
+    {
+        rep(j,0,m)
+        {
+            grid[row[i]][j]='.';
+        }
+    }
+    rep(j,0,col.size())
+    {
+        rep(i,0,n)
+        {
+            grid[i][col[j]]='.';
+        }
+    }
+    return true;
+}
 int main()
 {
-    ll tt;
-    cin>>tt;
-    while(tt--)
+    ll n,m;
+    cin>>n>>m;
+    vector<string>v(n);
+    rep(i,0,n)
     {
-        ll a,b;
-        cin>>a>>b;
-        cout<<power(a,b)<<"\n";
+        cin>>v[i];
     }
+    int cnt=0;
+    while(1)
+    {
+        bool can=remove(v);
+        //cout<<can<<"\n";
+        cnt++;
+        if(cnt>100)
+        break;
+        if(can==false)
+        break;
+    }
+    cnt=0;
+    rep(i,0,n)
+    {
+        rep(j,0,m)
+        {
+            //cout<<v[i][j]<<" ";
+            if(v[i][j]!='.')
+            cnt++;
+        }
+        cout<<"\n";
+    }
+    cout<<cnt<<"\n";
 }   

@@ -32,9 +32,8 @@ ll power(ll a,ll b)
     while(b>0)
     {
         if(b%2==1)
-        result=(result*a)%M;
+        result*=a;
         a*=a;
-        a%=M;
         b/=2;
     }
     return result;
@@ -153,15 +152,27 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+vector<int> twoSum(vector<int>& nums, int target) 
+{
+    int n=nums.size();
+    map<int,int>m;
+    sort(nums.begin(),nums.end());
+    vector<int>ans;
+    for(int i=0;i<n;i++)
+    {
+        m[nums[i]]=i+1;
+        if(m[nums[i]] && m[target-nums[i]])
+        {
+            ans.push_back(nums[i]-1);
+            ans.push_back(m[target-nums[i]]-1);
+        }
+    }
+    return ans;
+}
 
 int main()
 {
-    ll tt;
-    cin>>tt;
-    while(tt--)
-    {
-        ll a,b;
-        cin>>a>>b;
-        cout<<power(a,b)<<"\n";
-    }
+    vector<int>A={3,2,4};
+    vector<int>x=twoSum(A,6);
+    cout<<x[0]<<" "<<x[1];
 }   

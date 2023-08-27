@@ -32,9 +32,8 @@ ll power(ll a,ll b)
     while(b>0)
     {
         if(b%2==1)
-        result=(result*a)%M;
+        result*=a;
         a*=a;
-        a%=M;
         b/=2;
     }
     return result;
@@ -156,12 +155,69 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ll tt;
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    ll tt=1;
     cin>>tt;
     while(tt--)
     {
-        ll a,b;
-        cin>>a>>b;
-        cout<<power(a,b)<<"\n";
+        ll n,k;
+        cin>>n>>k;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        vector<vector<ll>>ind(k+1);
+        rep(i,0,n)
+        {
+            ind[arr[i]].push_back(i+1);
+        }
+        // rep(i,1,k+1)
+        // {
+        //     rep(j,0,ind[i].size())
+        //     cout<<ind[i][j]<<" ";
+        //     cout<<"\n";
+        // }
+        // cout<<"\n";
+        priority_queue<int>pq;
+        ll ans=INT_MAX;
+        rep(i,1,k+1)
+        {
+            if(ind[i].size()==0)
+            continue;
+            rep(j,0,ind[i].size())
+            {
+                if(j==0)
+                {
+                    pq.push(ind[i][j]-1);
+                    if(ind[i].size()>=2)
+                    pq.push(ind[i][j+1]-ind[i][j]-1);
+                    else
+                    pq.push(n-ind[i][j]);
+                }
+                else if(j==ind[i].size()-1)
+                pq.push(n-ind[i][j]);
+                else
+                pq.push(ind[i][j+1]-ind[i][j]-1);
+            }
+            ll x=-1,y=-1;
+            if(pq.size())
+            {
+                x=pq.top();
+                pq.pop();
+            }
+            if(pq.size())
+            {
+                y=pq.top();
+                pq.pop();
+            }
+            //cout<<x<<" "<<y<<"      ";
+            while(!pq.empty())
+            {
+                pq.pop();
+            }
+            ans=min(ans,max(x/2,y));
+        }
+        cout<<ans<<"\n";
     }
 }   

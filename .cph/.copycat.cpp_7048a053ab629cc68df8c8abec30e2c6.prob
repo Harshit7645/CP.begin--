@@ -1,0 +1,1 @@
+{"name":"Local: copycat","url":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\copycat.cpp","tests":[{"id":1690109888084,"input":"4\nabababa\nbbj\nkj\nkk","output":"6\n2\n2\n0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Lenovo\\Desktop\\Coding\\CP.begin()\\copycat.cpp","group":"local","local":true}

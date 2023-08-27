@@ -32,9 +32,8 @@ ll power(ll a,ll b)
     while(b>0)
     {
         if(b%2==1)
-        result=(result*a)%M;
+        result*=a;
         a*=a;
-        a%=M;
         b/=2;
     }
     return result;
@@ -153,15 +152,37 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+ll ans;
+void dfs(int node,vector<vector<ll>>&adj,vector<ll>&vis,ll sum)
+{
+    vis[node]=1;
+    ll n=adj.size();
+    ans=max(ans,sum);
+    rep(i,0,n)
+    {
+        if(adj[node][i] && !vis[i])
+        dfs(i,adj,vis,adj[node][i]+sum);
+    }
+    vis[node]=0;
+}
 int main()
 {
-    ll tt;
-    cin>>tt;
-    while(tt--)
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    ll n,m;
+    cin>>n>>m;
+    ll a[m],b[m],c[m];
+    ans=0;
+    vector<vector<ll>>graph(n,vector<ll>(n,0));
+    rep(i,0,m)
     {
-        ll a,b;
-        cin>>a>>b;
-        cout<<power(a,b)<<"\n";
+        cin>>a[i]>>b[i]>>c[i];
+        graph[a[i]-1][b[i]-1]=c[i];
+        graph[b[i]-1][a[i]-1]=c[i];
     }
+    vector<ll>vis(n,0);
+    rep(i,0,n)
+    {
+        dfs(i,graph,vis,0);
+    }
+    cout<<ans<<"\n";
 }   
