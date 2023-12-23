@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -165,23 +162,40 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        double arr[n],c[n];
+        rep(i,0,n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            cin>>arr[i];
+        }  
+        if(n==1)
+        {
+            cout<<"0\n";
+            continue;
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        // sort(arr,arr+n); 
+        // rep(i,0,n)
+        // {
+        //     cout<<arr[i]<<" ";
+        // }
+        // cout<<endl;
+        map<double,ll>m;
+        rep(i,0,n)
+        {
+            c[i]=arr[i]-log2(arr[i]);
+            m[c[i]]++;
+        }
+        sort(c,c+n);
+        // rep(i,0,n)
+        // {
+        //     cout<<c[i]<<" ";
+        // }
+        // cout<<endl;
+        ll ans=0;
+        for(auto x:m)
+        {
+            if(x.second>1)
+            ans+=x.second*(x.second-1)/2;
+        }
+        cout<<ans<<"\n";
     }
 }   

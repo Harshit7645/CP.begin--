@@ -4,8 +4,8 @@ using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
 int M=1e9+7;
 
@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -160,28 +157,41 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        string a,b;
+        cin>>a>>b;
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        if(a==b)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            PYES;
+            continue;
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        //cout<<a<<" "<<b;
+        vector<string>one={"AB","BC","CD","DE","AE"};
+        ll f1=0,f2=0;
+        rep(i,0,5)
+        {
+            if(a==one[i])
+            f1=1;
+            if(b==one[i])
+            f2=1;
+        }
+        //cout<<f1<<" "<<f2;
+        if(f1 && f2)
+        {
+            //cout<<"hi";
+            PYES;
+            continue;
+        }
+        else if(f1 || f2)
+        {
+            //cout<<"coc";
+            PNO;
+            continue;
+        }
+        PYES;
     }
 }   

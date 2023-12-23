@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -165,23 +162,83 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        string s;
+        cin>>s;
+        ll arr[n],deg[n];
+        rep(i,0,n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            cin>>arr[i];
+            arr[i]--;
+            deg[i]=0;
+        }      
+        rep(i,0,n)
+        {
+            deg[arr[i]]++;
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        queue<ll>q;
+        vector<ll>req;
+        rep(i,0,n)
+        {
+            if(deg[i]==0)
+            q.push(i);
+        }
+        while(!q.empty())
+        {
+            auto fr=q.front();
+            q.pop();
+            if(s[fr]=='1')
+            {
+                s[fr]='0';
+                s[arr[fr]]^=1;
+                req.push_back(fr);
+            }
+            if(--deg[arr[fr]]==0)
+            q.push(arr[fr]);
+        }
+        ll flag=0;
+        rep(i,0,n)
+        {
+            if(deg[i])
+            {
+                ll node=i;
+                ll val=0,len=0,ans=0;//val to check the number of odd ones,len to calc the no of elements in cycle
+                while(deg[node])
+                {
+                    if(s[node]=='1')
+                    val^=1;
+                    ans+=val;
+                    deg[node]=0;
+                    node=arr[node];
+                    len++;
+                }
+                if(val==1)
+                {
+                    flag=1;
+                    break;
+                }
+                rep(k,0,len)
+                {
+                    if(s[node]=='1')
+                    val^=1;
+                    if((val==1 && (ans<len-ans)) || (val==0 && ans>=len-ans))
+                    req.push_back(node);
+                    node=arr[node];
+                }
+            }
+        }
+        if(flag)
+        {
+            cout<<"-1\n";
+            continue;
+        }
+        else
+        {
+            cout<<req.size()<<"\n";
+            rep(i,0,req.size())
+            {
+                cout<<req[i]+1<<" ";
+            }
+            cout<<endl;
+        }
     }
 }   

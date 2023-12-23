@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -155,7 +152,33 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+vector<ll>cnt;
+ll init(ll n,vector<vector<ll>>&adj)
+{
+    cnt[n]=1;
+    for(auto child:adj[n])
+    {
+        cnt[n]+=init(child,adj);
+    }
+    return cnt[n];
+}
+ll dfs(ll node,ll v,vector<vector<ll>>&adj)//here v is the extra nodes which are already matched in the parent node's calculation.
+{
+    ll maxm=-1,sum=0,ind=-1;
+    for(auto child:adj[node])
+    {
+        maxm=max(maxm,cnt[child]);
+        if(maxm==cnt[child])
+        ind=child;
+        sum+=cnt[child];
+    }
+    if(sum==0)
+    return 0;
+    if(maxm-v<=sum-maxm)
+    return (sum-v)/2;
+    else
+    return sum-maxm+dfs(ind,max(0ll,v+sum-maxm-1),adj);
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -165,23 +188,19 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        vector<vector<ll>>adj(n);
+        vector<ll>deg(n);
+        set<ll>s;
+        ll p[n];
+        rep(i,1,n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            ll x;
+            cin>>x;
+            x--;
+            adj[x].push_back(i);
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        cnt.resize(n);
+        init(0,adj);
+        cout<<dfs(0,0,adj)<<"\n";
     }
 }   

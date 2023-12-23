@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -159,29 +156,92 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
+    ll tt=1,s=0;
+    cin>>tt>>s;
     while(tt--)
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        ll arr[n];
+        rep(i,0,n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            cin>>arr[i];
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        sort(arr,arr+n);
+        if(n==2)
+            {
+                cout<<arr[1]<<endl;
+                //arr[1];
+                continue;
+            }
+        ll fans=0;
+        if(s==0)
+        {
+            if(n==3)
+            {
+                cout<<arr[0]+arr[1]<<endl;
+                fans=arr[1]+arr[0];
+                continue;
+            }
+            ll ans=0;
+            if(n%2)
+            {
+                rep(i,0,n/2+1)
+                {
+                    ans+=arr[i];
+                }
+                fans=ans;
+                cout<<ans<<endl;
+                continue;
+            }
+            else
+            {
+                rep(i,1,n/2+1)
+                {
+                    ans+=arr[i];
+                }
+                cout<<ans<<endl;
+                fans=ans;
+                continue;
+            }
+        }
+        else
+        {
+            ll presum[n+1];
+            presum[0]=0;
+            rep(i,1,n+1)
+            {
+                presum[i]=presum[i-1]+arr[i-1];
+            }
+            // rep(i,0,n+1)
+            // {
+            //     cout<<presum[i]<<" ";
+            // }
+            // cout<<endl;
+            if(n%2)
+            {
+                ll c=n/2,i=1;
+                while(c>0)
+                {
+                    //cout<<fans<<" "<<c<<" "<<i<<"\n";
+                    fans=max(fans,presum[i+c]-presum[i-1]);
+                    c--;
+                    i+=2;
+                }
+                cout<<max(fans,arr[n-1])<<endl;
+            }
+            else
+            {
+                ll c=n/2-1,i=2;
+                while(c>0)
+                {
+                    //cout<<fans<<" "<<c<<" "<<i<<"\n";
+                    fans=max(fans,presum[i+c]-presum[i-1]);
+                    c--;
+                    i+=2;
+                }
+                cout<<max(arr[n-1],fans)<<endl;
+            }
+        }
     }
 }   

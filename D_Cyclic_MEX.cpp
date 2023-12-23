@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -165,23 +162,43 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        ll arr[n],maxm=0,ind=0;
+        rep(i,0,n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            cin>>arr[i];
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        vector<ll>vis(n);
+        ll j=0,ans=0;
+        vector<pair<ll,ll>>req;
+        rep(i,0,n)
+        {
+            vis[arr[i]]=1;
+            while(j<n && vis[j])
+                j++;
+            req.push_back({j,1});
+            ans+=j;
+        }
+        ll res=ans;
+        // rep(i,0,req.size())
+        // {
+        //     cout<<req[i].first<<" "<<req[i].second<<"    ";
+        // }
+        rep(i,0,n)
+        {
+            ll cnt=0;
+            while(!req.empty() && req.back().first>arr[i])
+            {
+                cnt+=req.back().second;
+                ans-=req.back().first*req.back().second;
+                req.pop_back();
+            }
+            //cout<<cnt<<" "<<arr[i]<<"    "; 
+            ans+=cnt*arr[i];
+            req.push_back({arr[i],cnt});
+            ans+=n;
+            req.push_back({n,1});
+            res=max(res,ans);
+        }
+        cout<<res<<"\n";
     }
 }   

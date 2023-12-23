@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -43,24 +42,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -160,28 +156,58 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        ll x,k;
+        cin>>x>>k;
+        vector<vector<ll>>v(k);
+        rep(i,0,k)
         {
-            if(isPrime(n))
+            ll n;
+            cin>>n;
+            vector<ll>temp;
+            rep(i,0,n)
             {
-                cnt++;
-                n=0;
-                break; 
+                ll y;
+                cin>>y;
+                temp.push_back(y);
             }
-            n-=c;
-            c*=2;
-            cnt++;
+            v[i]=temp;
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        // rep(i,0,k)
+        // {
+        //     rep(j,0,v[i].size())
+        //     {
+        //         cout<<v[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        vector<pair<ll,ll>>req;
+        rep(i,0,k)
+        {
+            ll sum=0,mn=0,last=0;
+            rep(j,0,v[i].size())
+            {
+                //cout<<i<<" "<<j<<" "<<sum<<"    ";
+                sum+=v[i][j];
+                mn=min(mn,sum);
+                if(sum>last)
+                {
+                    //cout<<sum<<" "<<last<<"    ";
+                    req.push_back({-mn,sum-last});
+                    last=sum;
+                }
+            }
+            cout<<endl;
+        }
+        sort(req.begin(),req.end()); 
+        rep(i,0,req.size())
+        {
+            //cout<<req[i].first<<" "<<req[i].second<<endl;
+            if(req[i].first<=x)
+            x+=req[i].second;
+        }
+        cout<<x<<endl;
     }
 }   

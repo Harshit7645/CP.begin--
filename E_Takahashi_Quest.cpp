@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -160,28 +157,55 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        map<ll,set<ll>>m;
+        ll res=0,flag=0;
+        vector<ll>ans(n);vector<ll>maxm(n);
+        set<ll>qone;
+        rep(i,0,n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
+            ll x,y;
+            cin>>x>>y;
+            if(x==1)
+            {   
+                m[y].insert(i);
+                qone.insert(i);
             }
-            n-=c;
-            c*=2;
-            cnt++;
-        }
-        if(n!=0)
+            else
+            {
+                ans[i]=-1;
+                if(m[y].size()==0)
+                {
+                    flag=1;
+                    break;
+                }
+                auto it=m[y].end();
+                it--;
+                ll ind=*it;
+                ans[ind]=1;
+                m[y].erase(it);
+            }
+        }  
+        if(flag==1)
         cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        else
+        {
+            ll sum=0,maxm=0;
+            rep(i,0,n)
+            {
+                sum+=ans[i];
+                maxm=max(maxm,sum);
+            }
+            cout<<maxm<<endl;
+            rep(i,0,n)
+            {
+                if(qone.find(i)!=qone.end())
+                cout<<ans[i]<<" ";
+            }
+        }
     }
 }   

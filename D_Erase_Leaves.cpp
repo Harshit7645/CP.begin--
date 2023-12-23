@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -119,69 +116,65 @@ void sieveOfEratosthenes(int N, int s[])
         }
     }
 }
- 
-// Function to generate prime factors and its power
-vector<pair<int,int>> generatePrimeFactors(int N)
-{
-    // s[i] is going to store smallest prime factor
-    // of i.
-    int s[N+1];
- 
-    // Filling values in s[] using sieve
-    sieveOfEratosthenes(N, s);
- 
-    int curr = s[N];  // Current prime factor of N
-    int cnt = 1;   // Power of current prime factor
-    vector<pair<int,int>>v;
-    // Printing prime factors and their powers
-    while (N > 1)
-    {
-        N /= s[N];
- 
-        // N is now N/s[N].  If new N also has smallest
-        // prime factor as curr, increment power
-        if (curr == s[N])
-        {
-            cnt++;
-            continue;
-        }
- 
-        v.push_back({curr,cnt});
- 
-        // Update current prime factor as s[N] and
-        // initializing count as 1.
-        curr = s[N];
-        cnt = 1;
-    }
-    return v;
-}
 
+ll maxm=0;
+ll dfs(ll node,vector<vector<ll>>&adj,vector<ll>&deg,vector<ll>&vis)
+{
+    if(deg[node]==1)
+    {
+        vis[node]=1;
+        return 1;
+    }
+    if(vis[node]==1)
+    return 0;
+    ll sum=0;
+    vis[node]=1;
+    for(auto child:adj[node])
+    {
+        if(vis[child]==1)
+        continue;
+        ll curr=dfs(child,adj,deg,vis);
+        if(node==0)
+        maxm=max(maxm,curr);
+        sum+=curr;
+        //cout<<node+1<<" "<<child+1<<" "<<curr<<"    ";
+    }
+    return sum+1;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        vector<ll>deg(n);
+        vector<vector<ll>>adj(n);
+        rep(i,0,n-1)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            ll x,y;
+            cin>>x>>y;
+            x--;
+            y--;
+            deg[x]++;
+            deg[y]++;
+            adj[x].push_back(y);
+            adj[y].push_back(x);
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        //cout<<"hi";
+        // rep(i,0,n)
+        // {
+        //     cout<<deg[i]<<" ";
+        // }
+        if(deg[0]==1)
+        {
+            cout<<"1\n";
+            continue;
+        }
+        vector<ll>vis(n);
+        ll ans=dfs(0,adj,deg,vis);
+        cout<<ans-maxm<<endl;
     }
 }   

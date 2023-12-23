@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -165,23 +162,32 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        string s;
+        cin>>s;
+        ll f=1;
+        rep(i,0,n)
         {
-            if(isPrime(n))
+            if(i==n-1)
             {
-                cnt++;
-                n=0;
-                break; 
+                if(f==0 || s[i]=='0')
+                {
+                    PNO;
+                    continue;
+                }
+                else 
+                {
+                    PYES;
+                    continue;
+                }
             }
-            n-=c;
-            c*=2;
-            cnt++;
+            if(s[i]=='0')
+            {
+                f=0;
+            }
+            if(f)
+            cout<<"IDK\n";
+            else
+            PNO;
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
     }
 }   

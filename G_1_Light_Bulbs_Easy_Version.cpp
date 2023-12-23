@@ -7,7 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
-int M=1e9+7;
+int M=998244353;
 
 ll fact(ll n)
 {
@@ -43,24 +43,21 @@ bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
     return (a.second < b.second);
 }
  
-bool isPrime(int n)
+bool isPrime(ll n)
 {
-    // Check if n=1 or n=0
-    if (n <= 1)
-        return false;
-    // Check if n=2 or n=3
-    if (n == 2 || n == 3)
-        return true;
-    // Check whether n is divisible by 2 or 3
-    if (n % 2 == 0 || n % 3 == 0)
-        return false;
-     
-    // Check from 5 to square root of n
-    // Iterate i by (i+6)
-    for (int i = 5; i <= sqrt(n); i = i + 6)
+    if(n<=1)
+    return false;
+    if(n<=3)
+    return true;
+
+    if(n%2==0 || n%3==0 || n%5==0)
+    return false;
+    for(ll i=6;i<=sqrt(n);i+=5)
+    {
+        //for (ll i=5;i*i<=n;i+=6)
         if (n % i == 0 || n % (i + 2) == 0)
-            return false;
- 
+            return false;//return true;
+    }
     return true;
 }
 
@@ -155,7 +152,7 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+#define u64 unsigned long long
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -165,23 +162,47 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>req;
-        ll cnt=0,c=1;
-        while(n>0)
+        ll arr[2*n];
+        map<u64,ll>m;
+        vector<vector<ll>>ind(n);
+        ll val=0;
+        rep(i,0,2*n)
         {
-            if(isPrime(n))
-            {
-                cnt++;
-                n=0;
-                break; 
-            }
-            n-=c;
-            c*=2;
-            cnt++;
+            cin>>arr[i];
+            arr[i]--;
+            ind[arr[i]].push_back(i);
         }
-        if(n!=0)
-        cout<<"-1\n";
-        else 
-        cout<<cnt<<endl;
+        mt19937_64 rng;
+        vector<u64>rdm(n),pref(2*n+1);
+        rep(i,0,n)
+        {
+            rdm[i]=rng();
+        }
+        rep(i,0,2*n)
+        {
+            pref[i+1]=pref[i]^rdm[arr[i]];
+        }
+        rep(i,0,2*n+1)
+        {
+            m[pref[i]]=i;
+        }
+        ll ans1=0,ans2=1;
+        for(ll i=0,j=0;i<2*n;i=j)
+        {
+            if(pref[i]==0)
+            {
+                ans1++;
+                j=i+1;
+                ll cnt=1;
+                while(pref[j]!=0)
+                {
+                    cnt++;
+                    j=m[pref[j]]+1;
+                }
+                cnt%=M;
+                ans2=(ans2*cnt)%M;
+            }
+        }
+        cout<<ans1<<" "<<ans2<<"\n";
     }
 }   
