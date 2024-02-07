@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "multithread",
+            "request": "launch",
+            "mainClass": "multithread",
+            "projectName": "CP.begin()_a56c517e"
+        },
+        {
+            "type": "java",
+            "name": "rough",
+            "request": "launch",
+            "mainClass": "rough",
+            "projectName": "CP.begin()_a56c517e"
+        },
+        {
             "name": "g++.exe - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
