@@ -161,6 +161,24 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll ind=n;
+        rep(i,0,n)
+        {
+            if(s[i]=='*' && s[i+1]=='*' && i+1<n)
+            {
+                ind=i;
+                break;
+            }
+        }
+        ll ans=0;
+        rep(i,0,ind)
+        {
+            ans+=s[i]=='@';
+        }
+        cout<<ans<<endl;
     }
 }   

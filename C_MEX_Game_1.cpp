@@ -161,6 +161,101 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        map<ll,ll>m;
+        rep(i,0,n)
+        {
+            m[arr[i]]++;
+        }
+        ll first=-1,max=0;
+        for(auto x:m)
+        {
+            if(x.second==1)
+            {
+                first=x.first;
+                break;
+            }
+        }
+        ll f=0,ans=0;
+        vector<ll>alice;
+        // alice.push_back(first);
+        // ll flagf=1;
+        // rep(i,0,n)
+        // {
+        //     if(flagf && arr[i]==first)
+        //     {
+        //         flagf=0;
+        //         continue;
+        //     }
+        //     if(f){
+        //         alice.push_back(arr[i]);
+        //     }
+        //     f=1-f;
+        // }
+        ll ogfirst=first;
+        m.erase(first);
+        first=-1;
+        for(auto x:m)
+        {
+            if(x.second==1)
+            {
+                first=x.first;
+                break;
+            }
+        }
+        ll flagl=1,flagf=1;
+        // rep(i,0,n)
+        // {
+        //     if(flagf && arr[i]==ogfirst)
+        //     {
+        //         flagf=0;
+        //         alice.push_back(arr[i]);
+        //         f=1-f;
+        //         continue;
+        //     }
+        //     else if(flagl && arr[i]==first)
+        //     {
+        //         flagl=0;
+        //         f=1-f;
+        //         continue;
+        //     }
+        //     if(f){
+        //         alice.push_back(arr[i]);
+        //     }
+        //     f=1-f;
+        // }
+        // sort(alice.begin(),alice.end());
+        // rep(i,0,alice.size())
+        // {
+        //     // cout<<alice[i]<<" ";
+        //     if(alice[i]==ans)
+        //     ans++;
+        // }
+        // ans=0;
+        // rep(i,1,n)
+        // {
+        //     if(m[i]>=i+1)
+        //     alice.push_back(i);
+        // }
+        ll np=0;
+        m[ogfirst]++;
+        rep(i,0,n+1)
+        {
+            if(m[i])
+            np++;
+            else
+            break;
+        }
+        // cout<<first<<" "<<np<<"\n";
+        if(first==-1)
+        cout<<np<<"\n";
+        else
+        cout<<min(np,first)<<"\n";
     }
 }   

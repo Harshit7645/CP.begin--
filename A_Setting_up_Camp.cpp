@@ -161,6 +161,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll a,b,c;
+        cin>>a>>b>>c;
+        ll ans=a;
+        ans+=b/3;
+        b%=3;
+        if(b==0)
+        cout<<(ll)(ans+ceil(c/3.0))<<"\n";
+        else if(b==1)
+        {
+            if(c<2)
+            cout<<"-1\n";
+            else
+            cout<<ll(ans+ceil((b+c)/3.0))<<endl;
+        }
+        else
+        {
+            if(c<1)
+            cout<<"-1\n";
+            else
+            cout<<ll(ans+ceil((b+c)/3.0))<<endl;
+        }
     }
 }   

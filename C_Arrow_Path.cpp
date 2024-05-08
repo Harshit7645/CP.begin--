@@ -161,6 +161,35 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        vector<string>v(2);
+        rep(i,0,2)
+        {
+            cin>>v[i];
+        }
+        // vector<vector<ll>>dp(2,vector<ll>) 
+        ll i=0,j=0,f=0;
+        while(j<n-1)
+        {
+            if(v[1-i][j]=='>')
+            {
+                i=1-i;
+                j++;
+            }
+            else if(j+1<n && v[i][j+1]=='>')
+            {
+                j+=2;
+            }
+            else
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        PNO;
+        else
+        PYES;
     }
 }   

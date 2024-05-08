@@ -161,6 +161,39 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,m;
+        cin>>n>>m;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        string s;
+        cin>>s;
+        ll l=0,r=n-1,ans=1;
+        rep(i,0,n-1)
+        {
+            if(s[i]=='L')
+            l++;
+            else
+            r--;
+        }
+        ll val=arr[r];
+        vector<ll>final_ans;
+        repr(i,n-2,-1)
+        {
+            ans=val%m;
+            val=val%m;
+            final_ans.push_back(ans);
+            if(s[i]=='L')
+            val*=arr[--l];
+            else
+            val*=arr[++r];
+        }
+        repr(i,final_ans.size()-1,0)
+        {
+            cout<<final_ans[i]<<" ";
+        }
+        cout<<endl;
     }
 }   

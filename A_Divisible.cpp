@@ -158,9 +158,17 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        ll x;
+        rep(i,0,n)
+        {
+            cin>>x;
+            if(x%k==0)
+            cout<<x/k<<" ";
+        }
     }
 }   

@@ -161,6 +161,14 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n],sum=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            sum+=abs(arr[i]);
+        }
+        cout<<sum<<endl;
     }
 }   

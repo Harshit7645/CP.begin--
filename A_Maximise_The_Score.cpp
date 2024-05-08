@@ -161,6 +161,20 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[2*n];
+        rep(i,0,2*n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+2*n);
+        ll ans=0;
+        rep(i,0,2*n)
+        {
+            if(i%2==0)
+            ans+=arr[i];
+        }
+        cout<<ans<<"\n";
     }
 }   

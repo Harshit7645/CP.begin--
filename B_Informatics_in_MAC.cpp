@@ -154,6 +154,39 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+vector<ll> Prefix_Mex(vector<ll>& A, ll n)
+{
+    // Maximum element in vector A
+    ll mx_element = *max_element(A.begin(), A.end());
+ 
+    // Store all number from 0
+    // to maximum element + 1 in a set
+    set<ll> s;
+    for (ll i = 0; i <= mx_element + 1; i++) {
+        s.insert(i);
+    }
+ 
+    // Loop to calculate Mex for each index
+    vector<ll> B(n);
+    for (int i = 0; i < n; i++) {
+ 
+        // Checking if A[i] is present in set
+        auto it = s.find(A[i]);
+ 
+        // If present then we erase that element
+        if (it != s.end())
+            s.erase(it);
+ 
+        // Store the first element of set
+        // in vector B as Mex of prefix vector
+        B[i] = *s.begin();
+    }
+ 
+    // Return the vector B
+    return B;
+}
+ 
+
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -161,6 +194,42 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        vector<ll>arr(n);
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        vector<ll>mex=Prefix_Mex(arr,n);
+        reverse(arr.begin(),arr.end());
+        vector<ll>revmex=Prefix_Mex(arr,n);
+        // rep(i,0,mex.size())
+        // {
+        //     cout<<mex[i]<<" ";
+        // }
+        // cout<<endl;
+        // rep(i,0,mex.size())
+        // {
+        //     cout<<revmex[i]<<" ";
+        // }
+        // cout<<endl;
+        ll ind=-1;
+        rep(i,0,n-1)
+        {
+            if(mex[i]==revmex[n-i-2])
+            {
+                ind=i+1;
+                break;
+            }
+        }
+        if(ind==-1)
+        cout<<"-1\n";
+        else
+        {
+            cout<<"2\n";
+            cout<<"1 "<<ind<<"\n";
+            cout<<ind+1<<" "<<n<<"\n";
+        }
     }
 }   

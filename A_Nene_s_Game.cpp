@@ -158,9 +158,22 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    cin >>tt;
     while(tt--)
     {
-
+        ll k,q;
+        cin>>k>>q;
+        ll arr[k];
+        rep(i,0,k)
+        {
+            cin>>arr[i];
+        }
+        while(q--)
+        {
+            ll n;
+            cin>>n;
+            cout<<min(arr[0]-1,n)<<" ";
+        }
+        cout<<"\n";
     }
 }   

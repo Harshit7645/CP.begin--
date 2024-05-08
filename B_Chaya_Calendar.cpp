@@ -161,6 +161,28 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll years=arr[0];
+        // cout<<years<<" ";
+        rep(i,1,n)
+        {
+            if(arr[i]<years && years%arr[i]!=0)
+            years=arr[i]*ceil(years/(arr[i]*1.0));
+            else if(arr[i]<years)
+            years=arr[i]*((years/arr[i])+1);
+            else if(arr[i]==years)
+            years*=2;
+            else
+            years=arr[i];
+            // cout<<years<<" ";
+        }
+        // cout<<endl;
+        cout<<years<<"\n";
     }
 }   

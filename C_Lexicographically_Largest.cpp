@@ -161,6 +161,27 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        rep(i,0,n)
+        {
+            arr[i]+=(i+1);
+        }
+        sort(arr,arr+n);
+        repr(i,n-2,0)
+        {
+            // cout<<arr[i]<<" "<<arr[i+1]-1<<endl;
+            arr[i]=min(arr[i],arr[i+1]-1);
+        }
+        repr(i,n-1,0)
+        {
+            cout<<arr[i]<<" ";
+        }
+        cout<<endl;
     }
 }   

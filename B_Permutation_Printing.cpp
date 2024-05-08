@@ -161,6 +161,15 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        // ll arr[n];
+        rep(i,0,n/2)
+        {
+            cout<<i+1<<" "<<n-i<<" ";
+        }
+        if(n%2)
+        cout<<n/2+1<<" ";
+        cout<<endl;
     }
 }   

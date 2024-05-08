@@ -154,13 +154,31 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+bool good(pair<ll,ll>p1,pair<ll,ll>p2)
+{
+    ll max1=max(p1.first,p1.second);
+    ll max2=max(p2.first,p2.second);
+    if(max1>max2)
+    return true;
+    else if(max1==max2)
+    return p1.first<=p2.first;
+    return false;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    ll tt=1;
-    cin>>tt;
-    while(tt--)
+    ll n;
+    cin>>n;
+    ll ab=LONG_LONG_MAX,ba=ab;
+    rep(i,0,n)
     {
-
+        string s;
+        cin>>s;
+        ll z=0,o=0;
+        rep(j,0,s.length())
+        {
+            z+=(s[j]=='0');
+        }
+        o=s.length()-z;
     }
 }   

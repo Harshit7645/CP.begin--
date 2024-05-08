@@ -161,6 +161,54 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        string s;
+        cin>>s;
+        ll n=s.length(),ans=0;
+        rep(len,2,n+2)
+        {
+            rep(i,0,n)
+            {
+                // cout<<len<<" ";
+                if(i+len>n)
+                {
+                    break;
+                }
+                string a=s.substr(i,len/2);
+                string b=s.substr(i+len/2,len/2);
+                // cout<<a<<" "<<b<<"\n";
+                if(a==b)
+                {
+                    ans=len;
+                    // cout<<ans<<" ";
+                    // cout<<a<<" "<<b<<" ";
+                    break;
+                }
+                else
+                {
+                    ll f=0;
+                    rep(j,0,a.length())
+                    {
+                        if(a[j]==b[j])
+                        continue;
+                        else if(a[j]=='?' || b[j]=='?')
+                        continue;
+                        else
+                        {
+                            f=1;
+                            break;
+                        }
+                    }
+                    if(!f)
+                    {
+                        // cout<<"uiefoiaghefoa\n";
+                        ans=len;
+                        break;
+                    }
+                }
+            }
+            len++;
+            // cout<<len<<" ";
+        }
+        cout<<ans<<"\n";
     }
 }   

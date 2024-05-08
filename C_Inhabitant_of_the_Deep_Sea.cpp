@@ -161,6 +161,109 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        ll arr[n],sum=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            sum+=arr[i];
+        }
+        if(sum<=k)
+        {
+            cout<<n<<endl;
+            continue;
+        }
+        ll l=0,r=n-1,ans=0,f=1;
+        while(l<=r && k>0)
+        {
+            // cout<<"before: "<<arr[l]<<" "<<arr[r]<<" "<<k<<" "<<f<<"\n";
+            if(arr[l]<=arr[r])
+            {
+                if(f)
+                {
+                    if(k>=(arr[l]*2)-1)
+                    {
+                        arr[r]-=(arr[l]-1);
+                        k-=((arr[l]*2)-1);
+                        arr[l]=0;
+                        l++;
+                    }
+                    else
+                    {
+                        arr[r]-=(k/2);
+                        arr[l]-=(k/2+k%2);
+                        k=0;
+                        break;
+                    }
+                }
+                else
+                {
+                    if(k>=(arr[l]*2))
+                    {
+                        arr[r]-=(arr[l]);
+                        k-=((arr[l]*2));
+                        arr[l]=0;
+                        l++;
+                    }
+                    else
+                    {
+                        arr[l]-=(k/2);
+                        arr[r]-=(k/2+k%2);
+                        k=0;
+                        break;
+                    }
+                }
+                f=0;
+            }
+            else
+            {
+                if(f==0)
+                {
+                    if(k>=(arr[r]*2)-1)
+                    {
+                        arr[l]-=(arr[r]-1);
+                        k-=((arr[r]*2)-1);
+                        arr[r]=0;
+                        r--;
+                    }
+                    else
+                    {
+                        arr[l]-=(k/2);
+                        arr[r]-=(k/2+k%2);
+                        k=0;
+                        break;
+                    }
+                }
+                else
+                {
+                    if(k>=(arr[r]*2))
+                    {
+                        arr[l]-=(arr[r]);
+                        k-=((arr[r]*2));
+                        arr[r]=0;
+                        r--;
+                    }
+                    else
+                    {
+                        arr[r]-=(k/2);
+                        arr[l]-=(k/2+k%2);
+                        k=0;
+                        break;
+                    }
+                }
+                f=1;
+            }
+            // cout<<"after: "<<arr[l]<<" "<<arr[r]<<" "<<k<<"\n";
+        }
+        ans=0;
+        rep(i,0,n)
+        {
+            // cout<<arr[i]<<" ";
+            if(arr[i]==0)
+            ans++;
+        }
+        // cout<<endl;
+        cout<<ans<<endl;
     }
 }   

@@ -161,6 +161,27 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,l;
+        cin>>n>>l;
+        vector<pair<ll,ll>>v(n);
+        rep(i,0,n)
+        {
+            cin>>v[i].first>>v[i].second;
+        }
+        sort(v.begin(),v.end(),sortbysec);
+        rep(i,0,n)
+        {
+            cout<<v[i].first<<" "<<v[i].second<<"\n";
+        }
+        cout<<endl;
+        vector<vector<ll>>dp(n+1,vector<ll>(n+1,0));
+        dp[0][0]=0;
+        rep(l,0,n)
+        {
+            rep(r,0,n)
+            {
+                
+            }
+        }
     }
 }   

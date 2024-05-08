@@ -161,6 +161,30 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        // vector<ll>v(n,1);
+        if(n==k)
+        {
+            rep(i,0,n)
+            {
+                cout<<"1 ";
+            }
+            cout<<endl;
+            continue;
+        }
+        else if(k==1)
+        {
+            rep(i,1,n+1)
+            {
+                cout<<i<<" ";
+            }
+            cout<<endl;
+        }
+        else
+        {
+            cout<<"-1\n";
+            continue;
+        }
     }
 }   

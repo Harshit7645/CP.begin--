@@ -161,6 +161,29 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,x;
+        cin>>n>>x;
+        ll arr[n+1],pos=0;
+        rep(i,1,n+1)
+        {
+            cin>>arr[i];
+            if(arr[i]==x)
+            pos=i;
+        }
+        if(is_sorted(arr+1,arr+n+1))
+        {
+            cout<<"0\n";
+            continue;
+        }
+        ll l=1,r=n+1;
+        while(r-l!=1)
+        {
+            ll mid=(l+r)/2;
+            if(arr[mid]<=x)
+            l=mid;
+            else
+            r=mid;
+        }
+        cout<<"1\n"<<l<<" "<<pos<<endl;
     }
 }   

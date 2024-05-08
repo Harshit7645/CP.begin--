@@ -8,6 +8,7 @@ typedef long long ll;
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
 #define all(x) x.begin(),x.end()
+const int N = 300005;
 int M=1e9+7;
 
 ll fact(ll n)
@@ -154,6 +155,8 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+ll arr[N],lef[N],rig[N],ans[N];
+
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -161,6 +164,80 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        rep(i,1,n+1)
+        {
+            cin>>arr[i];
+        }
+        arr[n+1]=0;
+        vector<ll>presum(n+1);
+        presum[0]=0;
+        rep(i,1,n+1)
+        {
+            presum[i]=presum[i-1]+arr[i];
+            ans[i]=n;
+        }
+        repr(i,n,1)
+        {
+            if(arr[i]!=arr[i+1])
+                rig[i]=i+1;
+            else
+                rig[i]=rig[i+1];
+        }
+        ll l,r;
+        rep(i,1,n+1)
+        {
+            if(arr[i+1]>arr[i])
+            {
+                ans[i]=1;
+                continue;
+            }
+            l=rig[i+1],r=n+1;
+            while(l<r)
+            {
+                ll mid=(l+r)/2;
+                if(presum[mid]-presum[i]>arr[i])
+                r=mid;
+                else
+                l=mid+1;
+            }
+            if(l<=n)
+            ans[i]=min(ans[i],l-i);
+        }
+        rep(i,1,n+1)
+        {
+            if(arr[i]!=arr[i-1])
+                lef[i]=i-1;
+            else
+                lef[i]=lef[i-1];
+        }
+        rep(i,1,n+1)
+        {
+            if(arr[i-1]>arr[i] && i-1>0)
+            {
+                ans[i]=1;
+                continue;
+            }
+            l=0,r=lef[i-1];
+            while(l<r)
+            {
+                ll mid=(l+r+1)/2;
+                if(presum[i-1]-presum[mid-1]>arr[i])
+                l=mid;
+                else
+                r=mid-1;
+            }
+            if(l>0)
+            ans[i]=min(ans[i],i-l);
+        }
+        rep(i,1,n+1)
+        {
+            if(ans[i]==n)
+            cout<<"-1 ";
+            else
+            cout<<ans[i]<<" ";
+        }
+        cout<<endl;
     }
 }   

@@ -8,7 +8,7 @@ typedef long long ll;
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
 #define all(x) x.begin(),x.end()
-int M=1e9+7;
+ll M=998244353;
 
 ll fact(ll n)
 {
@@ -153,14 +153,85 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+ll printNcR(int n, int r)
+{
+ 
+    // p holds the value of n*(n-1)*(n-2)...,
+    // k holds the value of r*(r-1)...
+    long long p = 1, k = 1;
+ 
+    // C(n, r) == C(n, n-r),
+    // choosing the smaller value
+    if (n - r < r)
+        r = n - r;
+ 
+    if (r != 0) {
+        while (r) {
+            p *= n;
+            k *= r;
+ 
+            // gcd of p, k
+            long long m = __gcd(p, k);
+ 
+            // dividing by gcd, to simplify
+            // product division by their gcd 
+            // saves from the overflow
+            p /= m;
+            k /= m;
+ 
+            n--;
+            r--;
+        }
+ 
+        // k should be simplified to 1
+        // as C(n, r) is a natural number
+        // (denominator should be 1 ) .
+    }
+ 
+    else
+        p = 1;
+ 
+    // if our approach is correct p = ans and k =1
+    return p;
+}
 
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    // cin >>tt;
     while(tt--)
     {
+        ll n;
+        cin>>n;
+        ll arr[n+1];
+        rep(i,1,n+1)
+        {
+            cin>>arr[i];
+        }
+        arr[0]=0;   
+        // vector<vector<ll>>dp(n,vector<ll>(n+1,0));
+        sort(arr+1,arr+n+1);
+        vector<ll>dp(5005);//dp stores the cnt of subsets
+        vector<ll>ans(n+1);
+        dp[0]=1;
+        rep(i,1,n+1)
+        {
+            ans[i]=ans[i-1];
+            repr(j,5001,0)
+            {
+                if((ll)ceil((j+arr[i])/2.0)<=arr[i])
+                    ans[i]=(ans[i]+(arr[i]*dp[j])%M)%M;
+                else
+                    ans[i]=(ans[i]+((ll)ceil((j+arr[i])/2.0)*dp[j])%M)%M;
 
+                if(j-arr[i]>=0)
+                {
+                    dp[j]+=dp[j-arr[i]];
+                    dp[j]%=M;
+                }
+            }
+        }
+        cout<<ans[n]<<"\n";
     }
 }   

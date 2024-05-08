@@ -158,9 +158,29 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    cin >>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll ans=n,ind=-1;
+        rep(i,0,n)
+        {
+            if(arr[i]!=arr[0])
+            {
+                ans=min(ans,i-ind-1);
+                ind=i;
+            }
+        }
+        ans=min(ans,n-ind-1);
+        if(ans!=n)
+        cout<<ans<<endl;
+        else
+        cout<<"-1\n";
     }
 }   

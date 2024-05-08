@@ -161,6 +161,14 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        cout<<abs(arr[n-1]-arr[0])+abs(arr[n-1]-arr[1])+abs(arr[1]-arr[n-2])+abs(arr[n-2]-arr[0])<<endl;
     }
 }   

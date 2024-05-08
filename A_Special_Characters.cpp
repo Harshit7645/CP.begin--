@@ -156,11 +156,26 @@ vector<pair<int,int>> generatePrimeFactors(int N)
 
 int main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    // ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        if(n%2)
+        {
+            PNO;
+            continue;
+        }
+        PYES;
+        int i=0;
+        while(n>0)
+        {
+            cout<<(char)(i%26+65)<<(char)(i%26+65);
+            n-=2;
+            i++;
+        }
+        cout<<endl;
     }
 }   

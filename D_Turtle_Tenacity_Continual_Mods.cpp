@@ -161,6 +161,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+n);
+        ll minm=arr[0],f=0;
+        rep(i,0,n)
+        {
+            if(arr[i]%minm!=0)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f || arr[1]!=minm)
+        PYES;
+        else
+        PNO; 
     }
 }   

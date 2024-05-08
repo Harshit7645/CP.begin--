@@ -161,6 +161,55 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        vector<ll>presum(n),postsum(n);
+        ll tot=0,tot1=0;
+        rep(i,0,n)
+        {
+            tot+=(s[i]=='0');
+            presum[i]=tot;
+        }    
+        rep(i,0,n)
+        {
+            tot1+=(s[i]=='1');
+            postsum[i]=tot1;
+        }
+        ll ans=-1,val=1e9;
+        if((n/2)+(n%2)<=tot1)
+        {
+            ans=0;
+            val=n;
+        }
+        ll l0=0,l1=0,r0=tot,r1=tot1;
+        rep(i,0,n)
+        {
+            if(s[i]=='0')
+            {
+                l0++;
+                r0--;
+            }
+            else
+            {
+                l1++;
+                r1--;
+            }
+            ll cnt0=l0+l1;
+            ll cnt1=r0+r1;
+            if((cnt0/2)+(cnt0%2)<=l0)
+            {
+                if((cnt1/2)+(cnt1%2)<=r1)
+                {
+                    if(abs(cnt1-cnt0)<val)
+                    {
+                        ans=i+1;
+                        val=cnt1-cnt0;
+                    }
+                }
+            }
+        }
+        cout<<ans<<"\n";
     }
 }   

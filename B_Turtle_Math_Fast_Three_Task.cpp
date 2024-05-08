@@ -161,6 +161,37 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        ll sum=0;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            sum+=arr[i];
+        }
+        if(sum%3==0)
+        {
+            cout<<"0\n";
+            continue;
+        }
+        else if(sum%3==2)
+        {
+            cout<<"1\n";
+            continue;
+        }
+        ll f=0;
+        rep(i,0,n)
+        {
+            if((sum-arr[i])%3==0)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f)
+        cout<<"1\n";
+        else
+        cout<<"2\n";
     }
 }   

@@ -161,6 +161,13 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,x,y;
+        cin>>n>>x>>y;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        
     }
 }   

@@ -161,6 +161,25 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }    
+        vector<ll>p(n);
+        p[n-1]=n-arr[n-1];
+        ll mex=p[n-1];
+        repr(i,n-2,0)
+        {
+            p[i]=mex-arr[i];
+            mex=min(mex,p[i]);
+        }
+        rep(i,0,n)
+        {
+            cout<<p[i]<<" ";
+        }
+        cout<<endl;
     }
 }   

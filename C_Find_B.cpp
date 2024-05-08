@@ -161,6 +161,40 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,q;
+        cin>>n>>q;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        vector<ll>presum(n+1),precnt(n+1);
+        presum[0]=0;
+        precnt[0]=0;
+        rep(i,1,n+1)
+        {
+            presum[i]=presum[i-1]+arr[i-1];
+            precnt[i]=precnt[i-1]+(arr[i-1]==1);
+        }
+        while(q--)
+        {
+            ll l,r;
+            cin>>l>>r;
+            ll cnt=precnt[r]-precnt[l-1];
+            ll sum=presum[r]-presum[l-1];
+            // cout<<sum<<" "<<cnt<<endl;
+            if(l==r)
+            {
+                PNO;
+                continue;
+            }
+            else if(cnt>sum-(r-l+1))
+            {
+                PNO;
+                continue;
+            }
+            else
+            PYES;
+        }
     }
 }   

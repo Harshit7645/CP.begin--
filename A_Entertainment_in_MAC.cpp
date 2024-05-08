@@ -161,6 +161,24 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        string rev=s;
+        reverse(rev.begin(),rev.end());
+        if(s==rev)
+        {
+            cout<<s<<"\n";
+            continue;
+        }
+        else if(s<rev)
+        {
+            cout<<s<<"\n";
+        }
+        else
+        {
+            cout<<rev+s<<"\n";
+        }
     }
 }   

@@ -158,9 +158,16 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    cin >>tt;
     while(tt--)
     {
-
+        ll n,m,k;
+        cin>>n>>m>>k;
+        ll diff=ceil(n/(m*1.0));
+        // cout<<diff<<endl;
+        if(n-diff>k)
+        PYES;
+        else
+        PNO;
     }
 }   

@@ -161,6 +161,46 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,c,d;
+        cin>>n>>c>>d;
+        vector<ll> arr(n*n);
+        rep(i,0,n*n)
+        {
+            cin>>arr[i];
+        }
+        sort(arr.begin(),arr.end());
+        ll mat[n][n];
+        mat[0][0]=arr[0];
+        rep(i,0,n)
+        {
+            rep(j,0,n)
+            {
+                if(i==0 && j==0)
+                continue;
+                if(i>0)
+                {
+                    mat[i][j]=mat[i-1][j]+c;
+                }
+                else
+                {
+                    mat[i][j]=mat[i][j-1]+d;
+                }
+            }
+        }
+        vector<ll>can;
+        rep(i,0,n)
+        {
+            rep(j,0,n)
+            {
+                can.push_back(mat[i][j]);
+                //cout<<mat[i][j]<<" ";
+            }
+            //cout<<endl;
+        }
+        sort(can.begin(),can.end());
+        if(can==arr)
+        PYES;
+        else
+        PNO;
     }
 }   

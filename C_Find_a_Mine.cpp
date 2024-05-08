@@ -161,6 +161,13 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,m;
+        cin>>n>>m;
+        ll d1,d2,d3,d4;
+        cout<<"? 1 2"<<"\n";
+        cin>>d1;
+        cout<<"? 1 "<<1+d1<<endl;
+        cin>>d2;
+        
     }
 }   

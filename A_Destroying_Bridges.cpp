@@ -161,6 +161,11 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        if(k>=n-1)
+        cout<<"1\n";
+        else
+        cout<<n<<"\n";
     }
 }   

@@ -154,6 +154,7 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -161,6 +162,45 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll dp[16];
+        dp[1]=1;
+        dp[2]=2;
+        dp[3]=1;
+        dp[4]=2;
+        dp[5]=3;
+        dp[6]=1;
+        dp[7]=2;
+        dp[8]=3;
+        dp[9]=2;
+        dp[10]=1;
+        dp[11]=2;
+        dp[12]=2;
+        dp[13]=2;
+        dp[14]=3;
+        dp[15]=1;
+        if(n<16)
+        {
+            cout<<dp[n]<<endl;
+            continue;
+        }
+        ll ans=n;
+        rep(i,0,6)
+        {
+            rep(j,0,6)
+            {
+                rep(k,0,6)
+                {
+                    rep(l,0,6)
+                    {
+                        ll can=i*10+j*6+k*3+l;
+                        if(n-can>=0 && (n-can)%15==0)
+                        ans=min(ans,i+j+k+l+(n-can)/15);
+                    }
+                }
+            }
+        }
+        cout<<ans<<endl;
     }
 }   

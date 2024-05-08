@@ -161,6 +161,51 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        ll a[n],x[n],hsum=0,dist=0;
+        rep(i,0,n)
+        {
+            cin>>a[i];
+            hsum+=a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>x[i];
+            x[i]=abs(x[i]);
+            dist+=x[i];
+        }
+        multiset<pair<ll,ll>>v;
+        rep(i,0,n)
+        {
+            v.insert({x[i],a[i]});
+        }
+        bool f=false;
+        ll curr=0;
+        while(!v.empty())
+        {
+            ll dist=k;
+            while(!v.empty() && dist>0)
+            {
+                auto p=*v.begin();
+                if(p.first<=curr)
+                {
+                    f=true;
+                }
+                v.erase(v.begin());
+                if(dist>=p.second)
+                dist-=p.second;
+                else{
+                    v.insert({p.first,p.second-dist});
+                    dist=0;
+                    break;
+                }
+            }
+            curr++;
+        }
+        if(f)
+        PNO;
+        else
+        PYES;
     }
 }   

@@ -161,6 +161,23 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll a,b,l;
+        cin>>a>>b>>l;
+        ll x=0,y=0,k;
+        ll amax,bmax;
+        amax=log2(l)/log2(a);
+        bmax=log2(l)/log2(b);
+        // cout<<amax<<" "<<bmax<<"\n";
+        set<ll>ans;
+        for(ll i=0;pow(a,i)<=l;i++)
+        {
+            for(ll j=0;pow(b,j)<=l;j++)
+            {
+                ll temp=pow(a,i)*pow(b,j);
+                if(l%temp==0)
+                ans.insert(l/temp);
+            }
+        }
+        cout<<ans.size()<<"\n";
     }
 }   

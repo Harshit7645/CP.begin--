@@ -161,6 +161,60 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,m,k;
+        cin>>n>>m>>k;
+        vector<ll>a(n);
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        vector<ll>b(m);
+        map<ll,ll>cnt,curr;
+        rep(i,0,m)
+        {
+            curr[a[i]]++;
+        }
+        rep(i,0,m)
+        {
+            cin>>b[i];
+            cnt[b[i]]++;
+        }
+        ll can=0;
+        for(auto x:cnt)
+        {
+            if(curr.find(x.first)!=curr.end())
+            {
+                can+=min(curr[x.first],cnt[x.first]);
+            }
+        }
+        ll ans=0;
+        if(can>=k)
+        ans++;
+        ll f=0;
+        rep(i,0,n-m)
+        {
+            if(i>n-m)
+            break;
+            if(f==0){
+                if(a[i]!=a[i+m])
+                {
+                    ll val1=curr[a[i]],val2=cnt[a[i]],val3=curr[a[i+m]],val4=cnt[a[i+m]];
+                    can-=min(val1,val2);
+                    can-=min(val3,val4);
+                    curr[a[i+m]]++;
+                    curr[a[i]]--;
+                    can+=min(curr[a[i]],cnt[a[i]]);
+                    can+=min(curr[a[i+m]],cnt[a[i+m]]);
+                }
+            }
+            else
+            {
+                can+=min(curr[a[i]],cnt[a[i]]);
+                can+=min(curr[a[i+m]],cnt[a[i+m]]);
+            }
+            if(can>=k)
+            ans++;
+        }
+        cout<<ans<<endl;
     }
 }   

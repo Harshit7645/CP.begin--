@@ -161,6 +161,36 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,m;
+        cin>>n>>m;
+        ll a[n],b[n];
+        rep(i,0,n)
+        {
+            cin>>a[i];
+        }
+        rep(i,0,n)
+        {
+            cin>>b[i];
+        }
+        vector<ll>postsum(n+1);
+        postsum[n]=0;
+        repr(i,n-1,0)
+        {
+            postsum[i]=postsum[i+1]+min(a[i],b[i]);
+        }
+        // rep(i,0,n+1)
+        // {
+        //     cout<<postsum[i]<<" ";
+        // }
+        // cout<<endl;
+        ll ans=LONG_LONG_MAX;
+        rep(i,0,m)
+        {
+            if(a[i]+postsum[i+1]<ans)
+            {
+                ans=a[i]+postsum[i+1];
+            }
+        }
+        cout<<ans<<"\n";
     }
 }   

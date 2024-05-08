@@ -161,6 +161,9 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll a,b,m;
+        cin>>a>>b>>m;
+        ll ans=m/a+m/b+2;
+        cout<<ans<<"\n";
     }
 }   

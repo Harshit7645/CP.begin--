@@ -161,6 +161,30 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll ans=0;
+        rep(i,0,n)
+        {
+            ans+=arr[i]==0;
+        }
+        ll cnt=0,i=n-1;
+        while(arr[i]==0 && i>=0)
+        {
+            i--;
+            cnt++;
+        }
+        i=0;
+        while(arr[i]==0 && i<n)
+        {
+            cnt++;
+            i++;
+        }
+        cout<<ans-cnt<<"\n";
     }
 }   

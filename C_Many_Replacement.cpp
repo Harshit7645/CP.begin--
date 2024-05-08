@@ -158,9 +158,30 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        string s;
+        cin>>s;
+        ll q;
+        cin>>q;
+        map<char,char>m;
+        rep(i,0,26)
+        {
+            m['a'+i]='a'+i;
+        }
+        while(q--)
+        {
+            char c,d;
+            cin>>c>>d;
+            m[c]=d;
+        }
+        rep(i,0,n)
+        {
+            cout<<m[s[i]];
+        }
+        cout<<endl;
     }
 }   

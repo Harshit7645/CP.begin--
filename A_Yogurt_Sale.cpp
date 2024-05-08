@@ -161,6 +161,8 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
-    }
+        ll n,a,b;
+        cin>>n>>a>>b;
+        cout<<min(n/2*b+n%2*a,a*n)<<"\n";
+    }   
 }   

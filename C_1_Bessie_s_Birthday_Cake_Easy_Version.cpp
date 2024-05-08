@@ -161,6 +161,23 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,x,y;
+        cin>>n>>x>>y;
+        ll arr[x];
+        rep(i,0,x)
+        {
+            cin>>arr[i];
+        }
+        sort(arr,arr+x);
+        ll ans=x-2;
+        rep(i,0,x-1)
+        {
+            if(arr[i+1]-arr[i]==2)
+            ans++;
+        }
+        // cout<<ans<<"\n";
+        if((arr[0]==1 && arr[x-1]==n-1) || (arr[0]==2 && arr[x-1]==n))
+        ans++;
+        cout<<ans<<"\n";
     }
 }   

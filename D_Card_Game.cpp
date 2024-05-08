@@ -161,6 +161,27 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        char trump;
+        cin>>trump;
+        vector<string>v(2*n);
+        map<char,vector<string>>m;
+        rep(i,0,2*n)
+        {
+            cin>>v[i];
+            m[v[i][1]].push_back(v[i]);
+        }
+        vector<pair<ll,ll>>v;
+        for(auto x:m)
+        {
+            rep(i,0,x.second.size())
+            {
+                if(i+1<n)
+                
+            }
+        }
+        if(f)
+        cout<<"IMPOSSIBLE\n";
     }
 }   

@@ -161,6 +161,65 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,k;
+        cin>>n>>k;
+        ll arr[2*n];
+        rep(i,0,2*n)
+        {
+            cin>>arr[i];
+        }
+        map<ll,ll>m1,m2;
+        rep(i,0,n)
+        {
+            m1[arr[i]]++;
+        }
+        rep(i,n,2*n)
+        {
+            m2[arr[i]]++;
+        }
+        vector<ll>l,r;
+        for(auto x:m1)
+        {
+            if(m2.find(x.first)!=m2.end())
+            {
+                l.push_back(x.first);
+                r.push_back(x.first);
+            }
+            if(l.size()>=2*k)
+            {
+                break;
+            }
+        }
+        if(l.size()%2)
+        {
+            l.pop_back();
+            r.pop_back();
+        }
+        for(auto x:m1)
+        {
+            if(m2.find(x.first)==m2.end())
+            {
+                l.push_back(x.first);
+                l.push_back(x.first);
+            }
+        }
+        for(auto x:m2)
+        {
+            if(m1.find(x.first)==m1.end())
+            {
+                r.push_back(x.first);
+                r.push_back(x.first);
+            }
+        }
+        rep(i,0,2*k)
+        {
+            cout<<l[i]<<" ";
+        }
+        cout<<endl;
+        rep(i,0,2*k)
+        {
+            cout<<r[i]<<" ";
+        }
+        cout<<endl;
     }
 }   

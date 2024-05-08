@@ -161,6 +161,33 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        vector<int> a(n),v;
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+        if(is_sorted(a.begin(),a.end())){
+            cout<<"YES\n";
+            continue;
+        }
+        v.push_back(a[n-1]);
+        for(int i=n-2;i>=0;i--)
+        {
+            if(a[i]>v.back()){
+                v.push_back(a[i]%10);
+                v.push_back(a[i]/10);
+            }
+            else
+            {
+                v.push_back(a[i]);
+            }
+        }
+        reverse(v.begin(),v.end());
+        if(is_sorted(v.begin(),v.end())){
+            cout<<"YES\n";
+        }
+        else    
+        cout<<"NO\n";
     }
 }   

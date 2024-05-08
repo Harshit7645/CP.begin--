@@ -158,9 +158,24 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    cin >>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        map<ll,ll>m;
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+            m[arr[i]]++;
+        }
+        ll ans=0;
+        for(auto x:m)
+        {
+            if(x.second==2)
+            ans++;
+        }   
+        cout<<ans<<endl;
     }
 }   

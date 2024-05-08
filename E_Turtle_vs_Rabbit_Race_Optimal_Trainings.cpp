@@ -154,6 +154,13 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+bool good(ll x,ll y)
+{   
+    if(x<=y)
+    return y-x;
+    else
+    return x-y-1;
+}   
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -161,6 +168,38 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n;
+        cin>>n;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        vector<ll>presum(n+1);
+        presum[0]=0;
+        rep(i,1,n+1)
+        {
+            presum[i]=presum[i-1]+arr[i-1];
+        }
+        // rep(i,0,n+1)
+        // cout<<presum[i]<<" ";
+        // cout<<endl;
+        ll q;
+        cin>>q;
+        while(q--)
+        {
+            ll l,u;
+            cin>>l>>u;
+            l--;
+            ll r=upper_bound(presum.begin()+l+1,presum.begin()+n,presum[l]+u)-presum.begin();
+            // cout<<r<<" ";
+            // while(l+1<r)
+            // {
+            // }
+            if(r==n+1 || (r>l+1 && abs(presum[r-1]-presum[l]-u)<abs(presum[r]-presum[l]-u)))
+            r--;
+            cout<<r<<" ";
+        }
+        cout<<endl;
     }
 }   

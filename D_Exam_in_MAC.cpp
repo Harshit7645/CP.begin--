@@ -153,7 +153,7 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+//n+r-1Cr == arr[i]+1C2
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -161,6 +161,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-
+        ll n,c;
+        cin>>n>>c;
+        ll arr[n];
+        rep(i,0,n)
+        {
+            cin>>arr[i];
+        }
+        ll maxm=(c+1)*(c+2)/2;//for any x,y <= c 
+        ll sum=0,cnt=0;
+        rep(i,0,n)
+        {
+            sum+=arr[i]/2+1;
+            sum+=c-arr[i]+1;
+            if(arr[i]%2)
+            cnt++;
+        }
+        ll ans=maxm-sum;
+        ans+=(cnt)*(cnt+1)/2;//for odd numbers
+        cnt=n-cnt;
+        ans+=(cnt)*(cnt+1)/2;//for even numbers
+        cout<<ans<<endl;
     }
 }   

@@ -158,9 +158,22 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    //cin>>tt;
     while(tt--)
     {
-
+        ll len;
+        string s;
+        cin>>s;
+        set<string>st;
+        rep(len,1,s.length())
+        {
+            rep(i,0,s.length()-len+1)
+            {
+                string str=s.substr(i,len);
+               // cout<<str<<" ";
+                st.insert(str);
+            }
+        }
+        cout<<st.size()+1;
     }
 }   
