@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -153,6 +154,15 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+bool allLightsOn(const vector<ll>& times, ll time, ll k){
+    for (ll t:times) {
+        if ((time-t)%(2*k)>=k) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -160,26 +170,26 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,k;
+        cin>>n>>k;
+        vector<ll>arr(n);
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>arr[i];
         }
-        rep(i,1,n)
+        sort(arr.begin(),arr.end());
+        ll l=arr[n-1],r=arr[n-1]+k;
+        rep(i,0,n-1)
         {
-            v[i]=c;
-            c++;
-            i++;
+            ll num=(arr[n-1]-arr[i])/k;
+            if(num%2)
+            l=max(l,arr[i]+(num+1)*k);
+            else
+            r=min(r,arr[i]+(num+1)*k);
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        if(l<r)
+        cout<<l<<endl;
+        else
+        cout<<"-1\n";
+    }   
 }   

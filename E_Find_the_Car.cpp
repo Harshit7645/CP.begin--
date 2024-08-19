@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,35 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
+        ll n,k,q;
+        cin>>n>>k>>q;
+        vector<ll>dist(k+1);
+        map<ll,ll>exact;
+        rep(i,1,k+1)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>dist[i];
         }
-        rep(i,1,n)
+        vector<ll>time(k+1);
+        rep(i,1,k+1)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>time[i];
+            exact[dist[i]]=time[i];
         }
-        rep(i,0,n)
+        while(q--)
         {
-            cout<<v[i]<<" ";
+            ll d;
+            cin>>d;
+            // cout<<d<<" ";
+            if(exact.find(d)!=exact.end())
+            {
+                cout<<exact[d]<<" ";
+                continue;
+            }
+            auto it=upper_bound(dist.begin(),dist.end(),d);
+            it--;
+            ll ind=it-dist.begin();
+            cout<<time[ind]+(d-dist[ind])*1ll*(time[ind+1]-time[ind])/(dist[ind+1]-dist[ind])<<" ";
         }
         cout<<endl;
-    }
+    }   
 }   

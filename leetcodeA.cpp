@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -152,7 +153,34 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
-
+ll maxm=INT_MIN;
+void backtrack(const vector<vector<int>>& board,ll row,bitset<100> colsused,ll count,ll curr) 
+{
+    ll m=board.size();
+    ll n=board[0].size();
+    if(count==3)
+    {
+        maxm=max(maxm,curr);
+        return;
+    }
+    if(row>=m)
+    return;
+    rep(i,0,n)
+    {
+        if(colsused[i])
+        continue;
+        colsused.set(i);
+        backtrack(board,row+1,colsused,count+1,curr+board[row][i]);
+        colsused.reset(i);
+    }
+    backtrack(board,row+1,colsused,count,curr);
+}
+long long maximumValueSum(vector<vector<int>>& board) 
+{
+    maxm=INT_MIN;
+    backtrack(board,0,0,0,0);
+    return maxm;
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -160,26 +188,13 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+    std::vector<std::vector<int>> board = {
+        {1,2,3},
+        {4,5,6},
+        {7,8,9}
+    };
+
+    int result = maximumValueSum(board);
+    std::cout << "Maximum sum: " << result << std::endl;
+    }   
 }   

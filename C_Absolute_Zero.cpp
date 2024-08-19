@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -162,24 +163,38 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll arr[n];
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>arr[i];
         }
+        bool can=1;
         rep(i,1,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if((arr[i]&1)!=(arr[0]&1))
+            {
+                can=0;
+                break;
+            }
         }
-        rep(i,0,n)
+        if(can==0)
         {
-            cout<<v[i]<<" ";
+            cout<<"-1\n";
+            continue;
+        }
+        cout<<"40\n";
+        rep(j,0,40)
+        {
+            int min=*min_element(arr,arr+n);
+            int max=*max_element(arr,arr+n);
+            ll avg=(max-min)/2;
+            avg+=min;
+            cout<<avg<<" ";
+            rep(i,0,n)
+            {
+                arr[i]=abs(arr[i]-avg);
+            }
         }
         cout<<endl;
-    }
+    }   
 }   

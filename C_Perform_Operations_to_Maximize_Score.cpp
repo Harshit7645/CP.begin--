@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -152,7 +153,10 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+bool good(vector<pair<ll,ll>>&v,ll mid,ll k)
+{
 
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -160,26 +164,63 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,k;
+        cin>>n>>k;
+        ll a[n],b[n];
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>a[i];
         }
         rep(i,0,n)
         {
-            cout<<v[i]<<" ";
+            cin>>b[i];
         }
-        cout<<endl;
-    }
+        vector<pair<ll,ll>>v;
+        rep(i,0,n)
+        {
+            v.push_back({a[i],b[i]});
+        }
+        vector<ll>c(n);
+        sort(v.begin(),v.end());
+        // rep(i,0,n)
+        // {
+        //     cout<<v[i].first<<" ";
+        // }
+        // cout<<endl;
+        rep(i,0,n)
+        {
+            if(n%2)
+            {
+                if(i<n/2)
+                c[i]=v[n/2].first;
+                else
+                c[i]=v[(n/2)-1].first;
+            }
+            else
+            {
+                if(i<n/2)
+                c[i]=v[(n/2)].first;
+                else
+                c[i]=v[n/2-1].first;
+            }
+        }
+        // rep(i,0,n)
+        // {
+        //     cout<<c[i]<<" ";
+        // }
+        // cout<<endl;
+        ll maxm=0,curr=0;
+        rep(i,0,n)
+        {
+            curr=0;
+            if(v[i].second==1)
+            {
+                curr+=k;
+            }
+            curr+=v[i].first;
+            curr+=c[i];
+            maxm=max(maxm,curr);
+        }
+        cout<<maxm<<endl;
+    }   
 }   

@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,46 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,m;
+        cin>>n>>m;
+        ll arr[n];
+        map<ll,ll>cnt;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>arr[i];
+            cnt[arr[i]]++;
         }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
+        // rep(i,0,n)
+        // {
+        //     cout<<arr[i]<<" ";
+        // }
+        // cout<<endl;
+        // rep(i,0,n)
+        // {
+        //     cout<<cnt[arr[i]]<<" ";
+        // }
+        // cout<<endl;
+        ll ans=0;
         rep(i,0,n)
         {
-            cout<<v[i]<<" ";
+            ans=max(ans,min(m/arr[i],cnt[arr[i]])*arr[i]);
         }
-        cout<<endl;
-    }
+        // cout<<ans<<endl;
+        for(auto x:cnt)
+        {
+            ll ele=x.first;
+            if(cnt.find(ele-1)==cnt.end())
+            continue;
+            ll tot=2*ele-1;
+            ll count=min(m/tot,min(cnt[ele],cnt[ele-1]));
+            ll pans=count*tot;
+            if(m-pans>=ele && cnt[ele]-count>0)
+            pans+=ele;
+            else if(m-pans>=ele-1 && cnt[ele-1]-count>0)
+            pans+=(ele-1);
+            // cout<<x.first<<" "<<pans<<"   ";
+            ans=max(ans,pans);
+        }
+        cout<<ans<<endl;
+    }   
 }   

@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -153,6 +154,22 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     return v;
 }
 
+pair<ll, ll> dfs(ll v, const vector<vector<ll>> &adj, const vector<ll> &arr, vector<ll> &sum, ll &maxvalue) {
+    ll subtree_sum = arr[v];
+    ll max_at_v = arr[v];
+    
+    for (ll u : adj[v]) {
+        auto [child_sum, child_max] = dfs(u, adj, arr, sum, maxvalue);
+        subtree_sum += child_sum;
+        max_at_v = max(max_at_v, child_max);
+    }
+    
+    sum[v] = subtree_sum;
+    maxvalue = max(maxvalue, max_at_v + subtree_sum - arr[v]);
+    
+    return {subtree_sum, max_at_v + subtree_sum - arr[v]};
+}
+
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -162,24 +179,19 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
+        vector<ll>arr(n+1);
+        rep(i,1,n+1)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>arr[i];
         }
-        rep(i,1,n)
+        vector<vector<ll>>adj(n+1);
+        rep(i,2,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            ll par;
+            cin>>par;
+            adj[par].push_back(i);
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        vector<ll>sum(n+1);
+        
+    }   
 }   

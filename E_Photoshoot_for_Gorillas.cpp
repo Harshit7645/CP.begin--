@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,63 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,m,k;
+        cin>>n>>m>>k;
+        ll w;
+        cin>>w;
+        vector<ll>arr(w),can;
+        rep(i,0,w)
+        {
+            cin>>arr[i];
+        }
+        sort(arr.rbegin(),arr.rend());
+        ll maxm=max(n,m);
+        vector<ll>post(maxm+1,0);
+        ll ans=0;
+        // rep(i,0,n-k+1)
+        // {
+        //     rep(j,0,m-k+1)
+        //     {
+        //         rep(x,0,k)
+        //         {
+        //             rep(y,0,k)
+        //             {
+        //                 score[i+x][j+y]++;
+        //             }
+        //         }
+        //     }
+        // }
+        // rep(i,0,n)
+        // {
+        //     rep(j,0,m)
+        //     {
+        //         cout<<score[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        // cout<<endl;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            rep(j,0,m)
+            {
+                ll x=0,y=0;
+                if(n-1>=i+k-1)
+                x=i+k-1-max(0ll,i-k+1)+1;
+                else
+                x=n-1-max(0ll,i-k+1)+1;
+                if(m-1>=j+k-1)
+                y=j+k-1-max(0ll,j-k+1)+1;
+                else
+                y=m-1-max(0ll,j-k+1)+1;
+                can.push_back((y-k+1)*(x-k+1));
+            }
         }
-        rep(i,1,n)
+        sort(can.begin(),can.end(),greater<ll>());
+        ans=0;
+        rep(i,0,w)
         {
-            v[i]=c;
-            c++;
-            i++;
+            ans+=arr[i]*can[i];
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        cout<<ans<<endl;
+    }   
 }   

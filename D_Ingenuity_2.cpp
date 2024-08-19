@@ -1,4 +1,3 @@
-#include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -7,6 +6,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -162,24 +162,136 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        string s;
+        cin>>s;
+        ll hx=0,hy=0,rx=0,ry=0,h=0,r=0;
+        string out;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if(s[i]=='N')
+            {
+                if(hy==ry)
+                {
+                    if(h)
+                    {
+                        ry++;
+                        r++;
+                        out+="R";
+                    }
+                    else
+                    {
+                        hy++;
+                        h++;
+                        out+="H";
+                    }
+                }
+                else if(hy>ry)
+                {
+                    ry++;
+                    r++;
+                    out+="R";
+                }
+                else
+                {
+                    hy++;
+                    h++;
+                    out+="H";
+                }
+            }
+            else if(s[i]=='S')
+            {
+                if(hy==ry)
+                {
+                    if(h)
+                    {
+                        ry--;
+                        r++;
+                        out+="R";
+                    }
+                    else
+                    {
+                        hy--;
+                        h++;
+                        out+="H";
+                    }
+                }
+                else if(hy>ry)
+                {
+                    hy--;
+                    h++;
+                    out+="H";
+                }
+                else
+                {
+                    ry--;
+                    r++;
+                    out+="R";
+                }
+            }
+            else if(s[i]=='E')
+            {
+                if(hx==rx)
+                {
+                    if(h)
+                    {
+                        rx++;
+                        r++;
+                        out+="R";
+                    }
+                    else
+                    {
+                        hx++;
+                        h++;
+                        out+="H";
+                    }
+                }
+                else if(hx>rx)
+                {
+                    rx++;
+                    r++;
+                    out+="R";
+                }
+                else
+                {
+                    hx++;
+                    h++;
+                    out+="H";
+                }
+            }
+            else
+            {
+                if(hx==rx)
+                {
+                    if(h)
+                    {
+                        rx--;
+                        r++;
+                        out+="R";
+                    }
+                    else
+                    {
+                        hx--;
+                        h++;
+                        out+="H";
+                    }
+                }
+                else if(hx>rx)
+                {
+                    hx--;
+                    h++;
+                    out+="H";
+                }
+                else
+                {
+                    rx--;
+                    r++;
+                    out+="R";
+                }
+            }
         }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        if(hx==rx && hy==ry && h>0 && r>0 )
+        cout<<out<<endl;
+        else
+        PNO;
+    }   
 }   

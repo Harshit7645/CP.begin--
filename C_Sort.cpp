@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,42 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,q;
+        cin>>n>>q;
+        string s1,s2;
+        cin>>s1>>s2;
+        // cout<<"hi";
+        vector<vector<ll>>presum1(n+1,vector<ll>(27,0));
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            presum1[i+1]=presum1[i];
+            presum1[i+1][s1[i]-'a']++;
         }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
+        vector<vector<ll>>presum2(n+1,vector<ll>(27,0));
         rep(i,0,n)
         {
-            cout<<v[i]<<" ";
+            presum2[i+1]=presum2[i];
+            presum2[i+1][s2[i]-'a']++;
         }
-        cout<<endl;
-    }
+        while(q--)
+        {
+            ll l,r;
+            cin>>l>>r;
+            l--;
+            r--;
+            vector<ll>temp1=presum1[r+1];
+            vector<ll>temp2=presum2[r+1];
+            rep(i,0,26)
+            {
+                temp1[i]-=presum1[l][i];
+                temp2[i]-=presum2[l][i];
+            }
+            ll ans=0;
+            rep(i,0,26)
+            {
+                ans+=abs(temp1[i]-temp2[i]);
+            }
+            cout<<ans/2<<endl;
+        }
+    }   
 }   

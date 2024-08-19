@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -157,29 +158,23 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    // cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        string s;
+        cin>>s;
+        ll n=(ll)s.length();
+        ll u=0;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if((ll)s[i]>=65 && (ll)s[i]<=90)
+            u++;
         }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        // cout<<u<<" "<<n-u;
+        if(u>n-u)
+        transform(s.begin(),s.end(),s.begin(),::toupper);
+        else
+        transform(s.begin(),s.end(),s.begin(),::tolower);
+        cout<<s;
+    }   
 }   

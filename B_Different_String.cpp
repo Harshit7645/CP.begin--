@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,25 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
+        string s;
+        cin>>s;
+        string t=s;
+        sort(t.begin(),t.end());
+        if(t[0]==t[t.length()-1])
         {
-            v[i]=c;
-            c++;
-            i++;
+            PNO;
+            continue;
         }
-        rep(i,1,n)
+        else
         {
-            v[i]=c;
-            c++;
-            i++;
+            PYES;
+            if(s!=t)
+            cout<<t<<endl;
+            else
+            {
+                reverse(t.begin(),t.end());
+                cout<<t<<endl;
+            }
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+    }   
 }   

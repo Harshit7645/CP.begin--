@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -152,7 +153,22 @@ vector<pair<int,int>> generatePrimeFactors(int N)
     }
     return v;
 }
+ll dfsf(ll node,vector<ll>&f,vector<vector<ll>>&adj)
+{
+    if(adj[node].size()==0)
+    return 0;
+    ll fval=0;
+    for(auto child:adj[node])
+    {
+        fval+=dfsf(child,f,adj)+1;
+    }
+    return f[node]=fval;
+}
 
+bool bad()
+{
+
+}
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
@@ -160,26 +176,58 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,q;
+        cin>>n>>q;
+        ll a[n];
+        rep(i,2,n+1)
+        {
+            cin>>a[i];
+        }
+        ll p[n];
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>p[i];
         }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
+        ll inv[n];
         rep(i,0,n)
         {
-            cout<<v[i]<<" ";
+            inv[i]=n+1-p[i];
         }
-        cout<<endl;
-    }
+        ll b=0,g=0;
+        vector<set<ll>>v(n);
+        vector<ll>f(n+1,0);
+        vector<vector<ll>>adj(n+1);
+        rep(i,1,n/2+1)
+        {
+            adj[i].push_back(i*2);
+            adj[i].push_back(i*2+1);
+        }
+        dfsf(1,f,adj);
+        rep(i,1,n+1)
+        {
+            cout<<f[i]<<" ";
+        }
+        rep(i,1,n+1)
+        {
+            cout<<i<<": ";
+            for(auto child:adj[i])
+            {
+                cout<<child<<" ";
+            }
+            cout<<endl;
+        }
+        rep(i,0,q)
+        {
+            ll x,y;
+            cin>>x>>y;
+            x--,y--;
+            swap(p[x],p[y]);
+            inv[x]=n+1-p[x];
+            inv[y]=n+1-p[y];
+            if(b==0)
+            PYES;
+            else
+            PNO;
+        }
+    }   
 }   

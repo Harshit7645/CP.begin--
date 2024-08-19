@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,101 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
+        ll num;
+        cin>>num;
+        string s;
+        cin>>s;
+        ll b=0,a=0,c=0,k=0;
+        rep(i,0,num)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if(s[i]=='b')
+            b++;
+            else if(s[i]=='a')
+            {
+                if(b>0)
+                {
+                    b--;
+                    a++;
+                }
+            }
+            else if(s[i]=='c')
+            {
+                if(a>0)
+                {
+                    c++;
+                    a--;
+                }
+            }
+            else if(s[i]=='k')
+            {
+                if(c>0)
+                {
+                    k++;
+                    c--;
+                }
+            }
         }
-        rep(i,1,n)
+        ll back=k,front=0;
+        ll f=0,r=0,o=0,n=0,t=0;
+        rep(i,0,num)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if(s[i]=='f')
+            f++;
+            else if(s[i]=='r')
+            {
+                if(f>0)
+                {
+                    f--;
+                    r++;
+                }
+            }
+            else if(s[i]=='o')
+            {
+                if(r>0)
+                {
+                    o++;
+                    r--;
+                }
+            }
+            else if(s[i]=='n')
+            {
+                if(o>0)
+                {
+                    n++;
+                    o--;
+                }
+            }
+            else if(s[i]=='t')
+            {
+                if(n>0)
+                {
+                    t++;
+                    n--;
+                }
+            }
         }
-        rep(i,0,n)
+        front=t;
+        // cout<<front<<" "<<back<<" ";
+        ll backfin=back,rem1=0;
+        ll tmpback=back,tmpfront=front;
+        while(tmpback>0)
         {
-            cout<<v[i]<<" ";
+            if(tmpback<4)
+            rem1=tmpback;
+            tmpback/=4;
+            backfin+=tmpback;
         }
-        cout<<endl;
-    }
+        // cout<<backfin<<" ";
+        ll frontfin=front,rem2=0;
+        while(tmpfront>0)
+        {
+            if(tmpfront<5)
+            rem2=tmpfront;
+            tmpfront/=5;
+            frontfin+=tmpfront;
+        }
+        // cout<<frontfin<<"\n";
+        // cout<<"rem:"<<rem1<<" "<<rem2<<"\n";
+        cout<<num-4*back-5*front+rem1+rem2<<endl;
+    }   
 }   

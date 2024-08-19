@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -162,24 +163,62 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll arr[n];
+        map<ll,vector<ll>>mp;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>arr[i];
+            mp[arr[i]].push_back(i);
         }
-        rep(i,1,n)
+        ll m;
+        cin>>m;
+        rep(i,0,m)
         {
-            v[i]=c;
-            c++;
-            i++;
+            string s;
+            cin>>s;
+            if(s.length()!=n)
+            {
+                PNO;
+                continue;
+            }
+            ll flag=1;
+            for(auto x:mp)
+            {
+                // cout<<x<<" ";
+                rep(j,0,x.second.size()-1)
+                {
+                    if(s[x.second[j]]!=s[x.second[j+1]])
+                    {
+                        flag=0;
+                        break;
+                    }
+                }
+            }
+            // if(flag==0)
+            // {
+            //     PNO;
+            //     continue;
+            // }
+            map<char,vector<ll>>cmap;
+            rep(i,0,s.length())
+            {
+                cmap[s[i]].push_back(i);
+            }
+            for(auto x:cmap)
+            {
+                rep(j,0,x.second.size()-1)
+                {
+                    if(arr[x.second[j]]!=arr[x.second[j+1]])
+                    {
+                        flag=0;
+                        break;
+                    }
+                }
+            }
+            if(flag)
+            PYES;
+            else
+            PNO;
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+    }   
 }   

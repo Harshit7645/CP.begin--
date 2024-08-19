@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -158,28 +159,51 @@ int main()
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
     cin>>tt;
+    map<ll,ll>m;
+    ll c=0;
+    for(ll i=1;i<2*1e5;i*=3)
+    {
+        m[i]=c;
+        c++;
+    }
+    for(auto x:m)
+    {
+        cout<<x.first<<" "<<x.second<<"     ";
+    }
+    cout<<"\n\n";
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
+        ll l,r;
+        cin>>l>>r;
+        ll ans=0;
+        ll tmp=l;
+        while(tmp>0)
         {
-            v[i]=c;
-            c++;
-            i++;
+            ans+=2;
+            tmp/=3;
         }
-        rep(i,1,n)
+        // rep(i,l+1,r+1)
+        // {
+        //     ll tmp=i;
+        //     while(tmp>0)
+        //     {
+        //         tmp/=3;
+        //         ans++;
+        //     }
+        // }
+        ll flag=0;
+        for(auto x:m)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if(x.first>=l && flag==0) 
+            {
+                flag=1;
+                ans+=(x.first-l)*x.second;
+            }  
+            else if(x.first*3<r)
+            {
+                ans+=((x.first*3)-x.first+1)*x.second;
+            }
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        cout<<ans<<endl;
+    }   
 }   

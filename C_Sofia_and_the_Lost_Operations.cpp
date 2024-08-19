@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -162,24 +163,49 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll a[n],b[n];
+        multiset<ll>pehla;
+        set<ll>dusra;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>a[i];
         }
         rep(i,0,n)
         {
-            cout<<v[i]<<" ";
+            cin>>b[i];
+            if(a[i]!=b[i])
+            pehla.insert(b[i]);
+            dusra.insert(b[i]);
         }
-        cout<<endl;
-    }
+        ll m;
+        cin>>m;
+        vector<ll>d(m);
+        rep(i,0,m)
+        {
+            cin>>d[i];
+        }
+        ll f=0,g=0,h=0;
+        rep(i,0,m)
+        {
+            if(pehla.find(d[i])!=pehla.end())
+            {
+                g=1-g;
+                auto it=pehla.find(d[i]);
+                pehla.erase(it);
+            }
+            if(dusra.find(d[i])!=dusra.end())
+            {
+                if(f==1)
+                f=0;
+                continue;
+            }
+            if(pehla.empty())
+            f=1;
+            h=1-h;
+        }
+        if(pehla.empty() && !f)
+        PYES;
+        else
+        PNO;
+    }   
 }   

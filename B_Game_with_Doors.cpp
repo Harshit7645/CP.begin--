@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +161,19 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,1,n)
-        {
-            v[i]=c;
-            c++;
-            i++;
-        }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        ll l1,r1,l2,r2;
+        cin>>l1>>r1>>l2>>r2;
+        ll ans=0;
+        if(max(l1,l2)>min(r1,r2))
+        ans=1;
+        else if(l1==l2 && r1==r2)
+        ans=r1-l1;
+        else if(l1==l2)
+        ans=min(r1,r2)-l1+1;
+        else if(r1==r2)
+        ans=r1-max(l1,l2)+1;
+        else
+        ans=min(r1,r2)-max(l1,l2)+2;
+        cout<<ans<<endl;
+    }       
 }   

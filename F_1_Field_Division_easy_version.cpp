@@ -7,6 +7,9 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
+#define F first
+#define S second
 int M=1e9+7;
 
 ll fact(ll n)
@@ -160,26 +163,38 @@ int main()
     cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
-        rep(i,0,n)
+        ll n,m,k;
+        cin>>n>>m>>k;
+        vector<pair<ll,ll>>v(k);
+        map<pair<ll,ll>,ll>idx;
+        rep(i,0,k)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>v[i].F>>v[i].S;
+            idx[v[i]]=i;
         }
-        rep(i,1,n)
+        ll maxr=m+1,ans=0,last=n;
+        vector<ll>fans(k);
+        sort(v.begin(),v.end(),[](auto &u,auto &v){
+            if(u.F== v.F)
+            return u.S<=v.S;
+            return u.F>v.F;
+        });
+        rep(i,0,k)
         {
-            v[i]=c;
-            c++;
-            i++;
+            if(maxr>v[i].S)
+            {
+                fans[idx[v[i]]]=1;
+                ans+=(maxr-1)*(last-v[i].F);
+                last=v[i].F;
+                maxr=v[i].S;
+            }
         }
-        rep(i,0,n)
+        ans+=last*(maxr-1);
+        cout<<ans<<endl;
+        rep(i,0,k)
         {
-            cout<<v[i]<<" ";
+            cout<<fans[i]<<" ";
         }
         cout<<endl;
-    }
+    }   
 }   

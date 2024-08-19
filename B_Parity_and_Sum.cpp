@@ -7,6 +7,7 @@ typedef long long ll;
 #define PNO cout<<"NO\n"
 #define PYES cout<<"YES\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -162,24 +163,50 @@ int main()
     {
         ll n;
         cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll arr[n],odd=0,maxm=0,even=0;
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cin>>arr[i];
+            if(arr[i]%2)
+            {
+                odd++;
+                maxm=max(maxm,arr[i]);
+            }
+            else
+            even++;
         }
-        rep(i,1,n)
+        if(odd==0 || even==0)
         {
-            v[i]=c;
-            c++;
-            i++;
+            cout<<"0\n";
+            continue;
         }
+        sort(arr,arr+n);
+        ll ans=0;
+        // rep(i,0,n)
+        // {
+        //     cout<<arr[i]<<" ";
+        // }
+        // cout<<endl;
+        ll f=0;
         rep(i,0,n)
         {
-            cout<<v[i]<<" ";
+            // cout<<maxm<<"   ";
+            if(arr[i]%2==0 && arr[i]<=maxm)
+            {
+                ans++;
+                maxm=max(maxm,arr[i]+maxm);
+            }
+            else if(arr[i]%2==0)
+            {
+                f=1;
+                ans++;
+            }
+            // cout<<"flag:"<<f<<"     ";
         }
-        cout<<endl;
-    }
+        // cout<<endl;
+        if(f)
+        cout<<ans+1<<endl;
+        else
+        cout<<ans<<endl;
+    }   
 }   

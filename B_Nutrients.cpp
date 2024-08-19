@@ -4,9 +4,10 @@ using namespace std;
 typedef long long ll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define repr(i,a,b) for(ll i=a;i>=b;i--)
-#define PNO cout<<"NO\n"
-#define PYES cout<<"YES\n"
+#define PNO cout<<"No\n"
+#define PYES cout<<"Yes\n"
 #define vll vector<ll>;
+#define all(x) x.begin(),x.end()
 int M=1e9+7;
 
 ll fact(ll n)
@@ -157,29 +158,41 @@ int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     ll tt=1;
-    cin>>tt;
+    // cin>>tt;
     while(tt--)
     {
-        ll n;
-        cin>>n;
-        vector<ll>v(n);
-        ll c=1;
+        ll n,m;
+        cin>>n>>m;
+        ll req[m];
+        rep(i,0,m)
+        {
+            cin>>req[i];
+        }
+        ll arr[n][m];
         rep(i,0,n)
         {
-            v[i]=c;
-            c++;
-            i++;
+            rep(j,0,m)
+            {
+                cin>>arr[i][j];
+            }
         }
-        rep(i,1,n)
+        ll f=0;
+        rep(j,0,m)
         {
-            v[i]=c;
-            c++;
-            i++;
+            ll sum=0;
+            rep(i,0,n)
+            {
+                sum+=arr[i][j];
+            }
+            if(sum<req[j])
+            {
+                f=1;
+                break;
+            }
         }
-        rep(i,0,n)
-        {
-            cout<<v[i]<<" ";
-        }
-        cout<<endl;
-    }
+        if(f)
+        PNO;
+        else
+        PYES;
+    }   
 }   
